@@ -17,6 +17,10 @@ module inert_intf_tb();
 	initial begin
 		rst_n = 0;
 		
+		@(posedge clk); // wait a clock cycle;
+		@(negedge clk) rst_n = 1; // deassert reset
+		
+		// check that NEMO_setup gets asserted in a reasonable time
 		fork
 			begin : timeout
 				repeat(70000)@(posedge clk);
@@ -29,9 +33,11 @@ module inert_intf_tb();
 			end
 		join
 	
+		// assert strt_cal for 1 clock cycle
 		@(posedge clk) strt_cal = 1;
 		@(posedge clk) strt_cal = 0;
 		
+		// check that cal_done is asserted in a reasonable time
 		fork
 			begin : timeout1
 				repeat(1000000)@(posedge clk);
@@ -44,12 +50,14 @@ module inert_intf_tb();
 			end
 		join
 		
+		// run for 8 million clocks
 		repeat(8000000) @(posedge clk);
 		
 		$stop;
 		
 	end
 	
+	// clock
 	always
 		#5 clk = ~clk;
 endmodule
