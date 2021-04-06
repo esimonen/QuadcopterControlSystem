@@ -30,6 +30,7 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
     reg [15:0] shift_reg; // shift register for transmission
 
     reg set_done; // sets the SR flop that controls the done signal
+    reg set_SS_n_low, clear_SS_n_high;
 
     // 4 bit counter used to generate SCLK
     // SCLK freq = 1/16 of freq of clk
@@ -91,7 +92,8 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
     always_comb begin
         next_state = state;
         // default signals to prevent latches
-        SS_n = 1'b1;        // SPI convention for this module specifies high SS_n as default
+        clear_SS_n_high = 1'b1;        // SPI convention for this module specifies high SS_n as default
+        set_SS_n_low = 1'b0;
         ld_SCLK = 1'b1;     // default this high to minimze power consumption by SCLK_div counter
         init = 1'b0;
         set_done = 1'b0;
@@ -103,7 +105,8 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
                 end
             end
             TRANSMIT: begin
-                SS_n = 1'b0; // low for entire txn
+                set_SS_n_low = 1'b1; // low for entire txn
+                clear_SS_n_high = 1'b0;
                 ld_SCLK = 1'b0;
                 // wait until 16 bits have been transmitted
                 if (done16) begin
@@ -113,7 +116,8 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
             default: begin // BACK_PORCH
                 // back porch should keep SS_n low a little longer after txn finishes
                 // so that monarch and serf can settle
-                SS_n = 1'b0; // low for entire txn
+                set_SS_n_low = 1'b1; // low for entire txn
+                clear_SS_n_high = 1'b0;
                 ld_SCLK = 1'b0;
 
                 // wait until E because SCLK will be high when txn finishes,
@@ -125,5 +129,14 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
             end
         endcase
     end
+
+    // SR flop for SS_n to prevent glitching on outputs
+    always_ff @(posedge clk, negedge rst_n)
+        if (!rst_n)
+            SS_n <= 1'b1;
+        else if (set_SS_n_low)
+            SS_n <= 1'b0;
+        else if (clear_SS_n_high)
+            SS_n <= 1'b1;
 
 endmodule
