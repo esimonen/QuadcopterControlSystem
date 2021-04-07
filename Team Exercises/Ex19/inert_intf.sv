@@ -16,8 +16,14 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     ////////////////////////////////////////////
     // Declare any needed internal registers //
     //////////////////////////////////////////
-    reg signed [15:0] ptch_rt,roll_rt,yaw_rt;	    // feeds inertial_integrator
-    reg signed [15:0] ax,ay;						// accel data to inertial_integrator
+    wire signed [15:0] ptch_rt,roll_rt,yaw_rt;	    // feeds inertial_integrator
+    wire signed [15:0] ax,ay;						// accel data to inertial_integrator
+
+    reg [7:0] ptch_rt_H, ptch_rt_L;
+    reg [7:0] roll_rt_H, roll_rt_L;
+    reg [7:0] yaw_rt_H, yaw_rt_L;
+    reg [7:0] ax_H, ax_L;
+    reg [7:0] ay_H, ay_L;
 
     reg INT_f1, INT_f2;   // single- and double-flopped values of INT for metastability
     reg [15:0] timer;     // used to let sensor perform it's own init process
@@ -102,12 +108,12 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
             INIT_ROUNDING: begin
                 cmd = 16'h1460;
                 if(done) begin
-                    next_state = VLD;
+                    next_state = VLD;//IDLE;
                     wrt = 1;
                 end
             end
             R_pitchL: begin
-                cmd = 16'hA2xx;
+                cmd = 16'hA3xx;
                 if (done) begin
                     next_state = R_pitchH;
                     C_P_L = 1;
@@ -115,7 +121,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_pitchH: begin
-                cmd = 16'hA3xx;
+                cmd = 16'hA4xx;
                 if (done) begin
                     next_state = R_rollL;
                     C_P_H = 1;
@@ -123,7 +129,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end    
             R_rollL: begin
-                cmd = 16'hA4xx;
+                cmd = 16'hA5xx;
                 if (done) begin
                     next_state = R_rollH;
                     C_R_L = 1;
@@ -131,7 +137,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_rollH: begin
-                cmd = 16'hA5xx;
+                cmd = 16'hA6xx;
                 if (done) begin
                     next_state = R_yawL;
                     C_R_H = 1;
@@ -139,7 +145,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_yawL: begin
-                cmd = 16'hA6xx;
+                cmd = 16'hA7xx;
                 if (done) begin
                     next_state = R_yawH;
                     C_Y_L = 1;
@@ -147,7 +153,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_yawH: begin
-                cmd = 16'hA7xx;
+                cmd = 16'hA8xx;
                 if (done) begin
                     next_state = R_axL;
                     C_Y_H = 1;
@@ -155,7 +161,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_axL: begin
-                cmd = 16'hA8xx;
+                cmd = 16'hA9xx;
                 if (done) begin
                     next_state = R_axH;
                     C_AX_L = 1;
@@ -163,7 +169,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_axH: begin
-                cmd = 16'hA9xx;
+                cmd = 16'hAAxx;
                 if (done) begin
                     next_state = R_ayL;
                     C_AX_H = 1;
@@ -171,7 +177,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_ayL: begin
-                cmd = 16'hAAxx;
+                cmd = 16'hABxx;
                 if (done) begin
                     next_state = R_ayH;
                     C_AY_L = 1;
@@ -179,11 +185,10 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             R_ayH: begin
-                cmd = 16'hABxx;
                 if (done) begin
-                    next_state = VLD;
+                    next_state = IDLE;
                     C_AY_H = 1;
-                    wrt = 1;
+                    vld = 1;
                 end
             end
             VLD: begin
@@ -193,8 +198,9 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 end
             end
             default: begin // IDLE state to wait in between new sensor readings
-                if(INT_f2 && done) begin
+                if(INT_f2) begin
                     next_state = R_pitchL;
+                    cmd = 16'hA2xx;
                     wrt = 1;
                 end
             end
@@ -220,63 +226,63 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     // pitch low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ptch_rt[7:0] <= 8'h00;
+            ptch_rt_L <= 8'h00;
         else if (C_P_L)
-            ptch_rt[7:0] <= inert_data[7:0];
+            ptch_rt_L <= inert_data[7:0];
     // pitch high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ptch_rt[15:8] <= 8'h00;
+            ptch_rt_H <= 8'h00;
         else if (C_P_H)
-            ptch_rt[15:8] <= inert_data[7:0];
+            ptch_rt_H <= inert_data[7:0];
     // roll low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            roll_rt[7:0] <= 8'h00;
-        else if (C_P_L)
-            roll_rt[7:0] <= inert_data[7:0];
+            roll_rt_L <= 8'h00;
+        else if (C_R_L)
+            roll_rt_L <= inert_data[7:0];
     // roll high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            roll_rt[15:8] <= 8'h00;
-        else if (C_P_H)
-            roll_rt[15:8] <= inert_data[7:0];
+            roll_rt_H <= 8'h00;
+        else if (C_R_H)
+            roll_rt_H <= inert_data[7:0];
     // yaw low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            yaw_rt[7:0] <= 8'h00;
-        else if (C_P_L)
-            yaw_rt[7:0] <= inert_data[7:0];
+            yaw_rt_L <= 8'h00;
+        else if (C_Y_L)
+            yaw_rt_L <= inert_data[7:0];
     // yaw high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            yaw_rt[15:8] <= 8'h00;
-        else if (C_P_H)
-            yaw_rt[15:8] <= inert_data[7:0];
+            yaw_rt_H <= 8'h00;
+        else if (C_Y_H)
+            yaw_rt_H <= inert_data[7:0];
     // ax low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ax[7:0] <= 8'h00;
-        else if (C_P_L)
-            ax[7:0] <= inert_data[7:0];
+            ax_L <= 8'h00;
+        else if (C_AX_L)
+            ax_L <= inert_data[7:0];
     // ax high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ax[15:8] <= 8'h00;
-        else if (C_P_H)
-            ax[15:8] <= inert_data[7:0];
+            ax_H <= 8'h00;
+        else if (C_AX_H)
+            ax_H <= inert_data[7:0];
     // ay low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ay[7:0] <= 8'h00;
-        else if (C_P_L)
-            ay[7:0] <= inert_data[7:0];
+            ay_L <= 8'h00;
+        else if (C_AY_L)
+            ay_L <= inert_data[7:0];
     // ay high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            ay[15:8] <= 8'h00;
-        else if (C_P_H)
-            ay[15:8] <= inert_data[7:0];
+            ay_H <= 8'h00;
+        else if (C_AY_H)
+            ay_H <= inert_data[7:0];
 
     // 16 bit timer, used to waiting out sensor init
     always_ff @(posedge clk, negedge rst_n)
@@ -295,6 +301,12 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
             INT_f1 <= INT;
             INT_f2 <= INT_f1;
         end
+
+    assign ptch_rt = { ptch_rt_H, ptch_rt_L };
+    assign roll_rt = { roll_rt_H, roll_rt_L };
+    assign yaw_rt = { yaw_rt_H, yaw_rt_L };
+    assign ax = { ax_H, ax_L };
+    assign ay = { ay_H, ax_L };
 
   
 endmodule

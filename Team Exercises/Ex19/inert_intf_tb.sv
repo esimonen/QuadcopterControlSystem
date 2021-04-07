@@ -15,10 +15,11 @@ module inert_intf_tb();
                   .MOSI(MOSI),.MISO(MISO),.INT(INT));
 
 	initial begin
-		rst_n = 0;
+		rst_n = 1;
 		clk = 0;
+		strt_cal = 0;
 		
-		@(posedge clk); // wait a clock cycle;
+		@(posedge clk); rst_n = 0; // wait a clock cycle;
 		@(negedge clk) rst_n = 1; // deassert reset
 		
 		// check that NEMO_setup gets asserted in a reasonable time
