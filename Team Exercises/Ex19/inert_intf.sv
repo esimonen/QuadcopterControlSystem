@@ -79,6 +79,9 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
         vld = 0;
         cmd = 16'hxxxx;
 
+        // cmd in each state is { R/~W, ADDR, DATA } for the next state
+        // this way, we are reading/writing the data in each state that 
+        // corresponds to the name of the state
         case (state)
             // init sensor to enable interrupt on data ready
             INIT_INTERRUPT: begin
