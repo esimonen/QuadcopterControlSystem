@@ -22,6 +22,9 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     reg INT_f1, INT_f2;   // single- and double-flopped values of INT for metastability
     reg [15:0] timer;     // used to let sensor perform it's own init process
 
+    wire [15:0] inert_data;
+    wire done;            // Done signal asserted when SPI has completed transmission
+
   
     //////////////////////////////////////
     // Outputs of SM are of type logic //
@@ -33,14 +36,13 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     reg C_AY_L, C_AY_H;  // capture acceleration y direction low, high
     reg wrt;             // high to tell SPI_mnrch to send data to the sensor
     reg [15:0] cmd;      // data to send through the SPI_mnrch
-    reg done;            // Done signal asserted when SPI has completed transmission
     
   
     ///////////////////////////////////////
     // Create enumerated type for state //
     /////////////////////////////////////
     typedef enum reg [3:0] {  INIT_INTERRUPT, INIT_ACCEL, INIT_GYRO, INIT_ROUNDING, 
-                            R_pitchL, R_pitchH, R_rollL, R_rollH, R_yawL, R_yawH, R_axL, R_axH, R_ayL, R_ayH, IDLE } state_t;
+                            R_pitchL, R_pitchH, R_rollL, R_rollH, R_yawL, R_yawH, R_axL, R_axH, R_ayL, R_ayH, VLD, IDLE } state_t;
     state_t next_state, state;
     
     // FSM state register
@@ -67,9 +69,8 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
         C_AX_H = 0;
         C_AY_L = 0;
         C_AY_H = 0;
-        done = 0;
-        vld = 0;
         wrt = 0;
+        vld = 0;
         cmd = 16'hxxxx;
 
         case (state)
@@ -101,7 +102,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
             INIT_ROUNDING: begin
                 cmd = 16'h1460;
                 if(done) begin
-                    next_state = IDLE;
+                    next_state = VLD;
                     wrt = 1;
                 end
             end
@@ -180,13 +181,18 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
             R_ayH: begin
                 cmd = 16'hABxx;
                 if (done) begin
-                    next_state = IDLE;
+                    next_state = VLD;
                     C_AY_H = 1;
                     wrt = 1;
                 end
             end
-            //IDLE state to wait in between new sensor readings
-            default: begin //IDLE STATE
+            VLD: begin
+                if (done) begin
+                    vld = 1;
+                    next_state = IDLE;
+                end
+            end
+            default: begin // IDLE state to wait in between new sensor readings
                 if(INT_f2 && done) begin
                     next_state = R_pitchL;
                     wrt = 1;
@@ -201,7 +207,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     //////////////////////////////////////////////////////////
     SPI_mnrch iSPI(.clk(clk),.rst_n(rst_n),.SS_n(SS_n),.SCLK(SCLK),.MISO(MISO),.MOSI(MOSI),
                  .wrt(wrt),.done(done),.rd_data(inert_data),.wt_data(cmd));
-				  
+
     ////////////////////////////////////////////////////////////////////
     // Instantiate Angle Engine that takes in angular rate readings  //
     // and acceleration info and produces ptch,roll, & yaw readings //
@@ -216,61 +222,61 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
         if (!rst_n)
             ptch_rt[7:0] <= 8'h00;
         else if (C_P_L)
-            ptch_rt[7:0] <= inert_data;
+            ptch_rt[7:0] <= inert_data[7:0];
     // pitch high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             ptch_rt[15:8] <= 8'h00;
         else if (C_P_H)
-            ptch_rt[15:8] <= inert_data;
+            ptch_rt[15:8] <= inert_data[7:0];
     // roll low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             roll_rt[7:0] <= 8'h00;
         else if (C_P_L)
-            roll_rt[7:0] <= inert_data;
+            roll_rt[7:0] <= inert_data[7:0];
     // roll high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             roll_rt[15:8] <= 8'h00;
         else if (C_P_H)
-            roll_rt[15:8] <= inert_data;
+            roll_rt[15:8] <= inert_data[7:0];
     // yaw low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             yaw_rt[7:0] <= 8'h00;
         else if (C_P_L)
-            yaw_rt[7:0] <= inert_data;
+            yaw_rt[7:0] <= inert_data[7:0];
     // yaw high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             yaw_rt[15:8] <= 8'h00;
         else if (C_P_H)
-            yaw_rt[15:8] <= inert_data;
+            yaw_rt[15:8] <= inert_data[7:0];
     // ax low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             ax[7:0] <= 8'h00;
         else if (C_P_L)
-            ax[7:0] <= inert_data;
+            ax[7:0] <= inert_data[7:0];
     // ax high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             ax[15:8] <= 8'h00;
         else if (C_P_H)
-            ax[15:8] <= inert_data;
+            ax[15:8] <= inert_data[7:0];
     // ay low
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             ay[7:0] <= 8'h00;
         else if (C_P_L)
-            ay[7:0] <= inert_data;
+            ay[7:0] <= inert_data[7:0];
     // ay high
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
             ay[15:8] <= 8'h00;
         else if (C_P_H)
-            ay[15:8] <= inert_data;
+            ay[15:8] <= inert_data[7:0];
 
     // 16 bit timer, used to waiting out sensor init
     always_ff @(posedge clk, negedge rst_n)
