@@ -108,7 +108,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
             INIT_ROUNDING: begin
                 cmd = 16'h1460;
                 if(done) begin
-                    next_state = VLD;//IDLE;
+                    next_state = IDLE;
                     wrt = 1;
                 end
             end
@@ -191,14 +191,8 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                     vld = 1;
                 end
             end
-            VLD: begin
-                if (done) begin
-                    vld = 1;
-                    next_state = IDLE;
-                end
-            end
             default: begin // IDLE state to wait in between new sensor readings
-                if(INT_f2) begin
+                if(INT_f2 && done) begin
                     next_state = R_pitchL;
                     cmd = 16'hA2xx;
                     wrt = 1;
