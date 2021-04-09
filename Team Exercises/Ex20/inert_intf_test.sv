@@ -1,5 +1,6 @@
-module inert_intf_test(NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
+module inert_intf_test(clk, NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
 
+    input clk;
     // push button inputs
     input NEXT;
     input RST_n;
