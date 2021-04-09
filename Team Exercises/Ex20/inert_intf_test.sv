@@ -37,8 +37,8 @@ module inert_intf_test(NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
     reg stat;
 
     // modules to interface with the FPGA push buttons
-    next_btn PB_release(.clk(clk), .rst_n(rst_n), .PB(NEXT), .released(next));
-    rst_btn reset_synch(.clk(clk), .RST_n(RST_n), .rst_n(rst_n));
+    PB_release next_btn(.clk(clk), .rst_n(rst_n), .PB(NEXT), .released(next));
+    reset_synch reset_btn(.clk(clk), .RST_n(RST_n), .rst_n(rst_n));
 
     // instantiate inert_intf
     inert_intf inert_intf(.clk(clk), .rst_n(rst_n), .ptch(pit), .roll(roll), .yaw(yaw), .strt_cal(strt_cal),
