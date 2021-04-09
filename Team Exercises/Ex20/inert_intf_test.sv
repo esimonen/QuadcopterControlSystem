@@ -65,6 +65,7 @@ module inert_intf_test(NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
         // default outputs to prevent latches
         sel = SEL_IDLE;
         strt_cal = 0;
+        stat = 0;
         case(state)
             IDLE: begin
                 if(next) begin
