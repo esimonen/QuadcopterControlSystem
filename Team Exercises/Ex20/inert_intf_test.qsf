@@ -67,8 +67,8 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to INT
 #============================================================
 
 
-set_global_assignment -name SYSTEMVERILOG_FILE SPI_mstr16.sv
-set_global_assignment -name VERILOG_FILE reset_synch.v
+set_global_assignment -name SYSTEMVERILOG_FILE SPI_mnrch.sv
+set_global_assignment -name SYSTEMVERILOG_FILE reset_synch.sv
 set_global_assignment -name SYSTEMVERILOG_FILE inertial_integrator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE inert_intf_test.sv
 set_global_assignment -name SYSTEMVERILOG_FILE inert_intf.sv
