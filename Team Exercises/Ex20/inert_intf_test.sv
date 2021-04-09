@@ -1,5 +1,6 @@
-module inert_intf_test(NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
+module inert_intf_test(clk, NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
 
+    input clk;
     // push button inputs
     input NEXT;
     input RST_n;
@@ -41,7 +42,7 @@ module inert_intf_test(NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
     reset_synch reset_btn(.clk(clk), .RST_n(RST_n), .rst_n(rst_n));
 
     // instantiate inert_intf
-    inert_intf inert_intf(.clk(clk), .rst_n(rst_n), .ptch(pit), .roll(roll), .yaw(yaw), .strt_cal(strt_cal),
+    inert_intf inert_intf(.clk(clk), .rst_n(rst_n), .ptch(pitch), .roll(roll), .yaw(yaw), .strt_cal(strt_cal),
                           .cal_done(cal_done), .vld(), .SS_n(SS_n), .SCLK(SCLK), .MOSI(MOSI), .MISO(MISO), .INT(INT));
 
     // enum to describe our FSM's states
