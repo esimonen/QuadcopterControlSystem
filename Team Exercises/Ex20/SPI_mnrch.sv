@@ -32,6 +32,8 @@ module SPI_mnrch(clk, rst_n, wrt, SS_n, SCLK, MOSI, MISO, wt_data, done, rd_data
     reg set_done; // sets the SR flop that controls the done signal
     reg set_SS_n_low, clear_SS_n_high;
 
+    wire done16;
+
     // 4 bit counter used to generate SCLK
     // SCLK freq = 1/16 of freq of clk
     always_ff @(posedge clk)
