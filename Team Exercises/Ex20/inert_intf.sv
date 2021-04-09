@@ -304,7 +304,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     assign roll_rt = { roll_rt_H, roll_rt_L };
     assign yaw_rt = { yaw_rt_H, yaw_rt_L };
     assign ax = { ax_H, ax_L };
-    assign ay = { ay_H, ax_L };
+    assign ay = { ay_H, ay_L };
 
   
 endmodule
