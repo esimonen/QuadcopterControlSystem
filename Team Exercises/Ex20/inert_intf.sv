@@ -9,7 +9,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     input strt_cal;				// from comand config.  Indicates we should start calibration
   
     output signed [15:0] ptch,roll,yaw;	// fusion corrected angles
-    output cal_done;						// indicates calibration is done
+    output cal_done;					// indicates calibration is done
     output reg vld;						// goes high for 1 clock when new outputs available
     output SS_n,SCLK,MOSI;				// SPI outputs
 

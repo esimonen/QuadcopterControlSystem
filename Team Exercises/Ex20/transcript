@@ -1,0 +1,13 @@
+# Reading pref.tcl
+# Loading project Ex19
+# reading C:/intelFPGA/20.1/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project Ex20
+# Compile of inert_intf.sv was successful.
+# Compile of inert_intf_test.sv failed with 3 errors.
+# Compile of PB_release.sv was successful.
+# Compile of reset_synch.sv failed with 1 errors.
+# Compile of SPI_mnrch.sv was successful.
+# 5 compiles, 2 failed with 4 errors.
+# Compile of inert_intf_test.sv failed with 3 errors.
+# Compile of reset_synch.sv was successful.
+# 2 compiles, 1 failed with 3 errors.
