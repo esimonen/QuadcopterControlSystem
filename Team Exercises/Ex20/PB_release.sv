@@ -18,14 +18,14 @@ module PB_release(clk, rst_n, PB, released);
 		if (!rst_n)
 			pre2 <= 1'b0;
 		else
-			pre2 <= PB;
+			pre2 <= pre1;
 	end
 	
 	always @(posedge clk, negedge rst_n) begin
 		if (!rst_n)
 			pre3 <= 1'b0;
 		else
-			pre3 <= PB;
+			pre3 <= pre2;
 	end
 	
 	// assign the released signal to determine posedge from button
