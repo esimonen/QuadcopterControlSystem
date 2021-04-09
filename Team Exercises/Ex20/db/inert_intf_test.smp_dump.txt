@@ -1,0 +1,38 @@
+
+State Machine - |inert_intf_test|state
+Name state.ROLL state.PITCH state.CAL state.IDLE state.YAW 
+state.IDLE 0 0 0 0 0 
+state.CAL 0 0 1 1 0 
+state.PITCH 0 1 0 1 0 
+state.ROLL 1 0 0 1 0 
+state.YAW 0 0 0 1 1 
+
+State Machine - |inert_intf_test|inert_intf:inert_intf|state
+Name state.IDLE state.R_ayH state.R_ayL state.R_axH state.R_axL state.R_yawH state.R_yawL state.R_rollH state.R_rollL state.R_pitchH state.R_pitchL state.INIT_ROUNDING state.INIT_GYRO state.INIT_ACCEL state.INIT_INTERRUPT 
+state.INIT_INTERRUPT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.INIT_ACCEL 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.INIT_GYRO 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.INIT_ROUNDING 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.R_pitchL 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.R_pitchH 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.R_rollL 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.R_rollH 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.R_yawL 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.R_yawH 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.R_axL 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.R_axH 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.R_ayL 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.R_ayH 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.IDLE 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |inert_intf_test|inert_intf:inert_intf|inertial_integrator:iINT|state
+Name state.IDLE state.RUNNING state.CALIBRATING 
+state.IDLE 0 0 0 
+state.CALIBRATING 1 0 1 
+state.RUNNING 1 1 0 
+
+State Machine - |inert_intf_test|inert_intf:inert_intf|SPI_mnrch:iSPI|state
+Name state.IDLE state.BACK_PORCH state.TRANSMIT 
+state.IDLE 0 0 0 
+state.TRANSMIT 1 0 1 
+state.BACK_PORCH 1 1 0 
