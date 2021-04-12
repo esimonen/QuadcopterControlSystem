@@ -1,0 +1,63 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/darco/Desktop/ECE551/Ex19
+vcmd_cfg
+!s105 cmd_cfg_sv_unit
+DXx4 work 15 cmd_cfg_sv_unit 0 22 =[OH<AGehY2cPQOM^WeMl0
+Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z1 !s110 1618242817
+!i10b 1
+!s100 _2=08ancRI[WQB>gX0MhV1
+!s11b Dg1SIo80bB@j0V0VzS_@n1
+IKg9RFWW@UWN=eN?[`ig`U1
+VDg1SIo80bB@j0V0VzS_@n1
+S1
+Z2 dC:/Users/darco/Desktop/QuadcopterControlSystem/Team Exercises/Ex21
+Z3 w1618242814
+Z4 8C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv
+Z5 FC:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv
+!i122 0
+L0 9 200
+Z6 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z7 !s108 1618242817.000000
+!s107 C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
+Z8 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
+!i113 1
+Z9 o-work work -sv
+Z10 tCvgOpt 0
+Xcmd_cfg_sv_unit
+R0
+R1
+V=[OH<AGehY2cPQOM^WeMl0
+r1
+!s85 0
+!i10b 1
+!s100 ^0@ELV4?4AXUbEJ:4i[L[2
+I=[OH<AGehY2cPQOM^WeMl0
+!i103 1
+S1
+R2
+R3
+R4
+R5
+!i122 0
+L0 211 0
+R6
+31
+R7
+Z11 !s107 C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
+R8
+!i113 1
+R9
+R10

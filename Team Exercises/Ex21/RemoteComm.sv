@@ -8,7 +8,7 @@ module RemoteComm(clk, rst_n, RX, TX, cmd, data, send_cmd, cmd_sent, resp_rdy, r
 	input clr_resp_rdy;		// asserted in test bench to knock down resp_rdy
 
 	output TX;				// serial data output
-	output logic cmd_sent;		// indicates transmission of command complete
+	output logic cmd_sent;	// indicates transmission of command complete
 	output resp_rdy;		// indicates 8-bit response has been received
 	output [7:0] resp;		// 8-bit response from DUT
 
