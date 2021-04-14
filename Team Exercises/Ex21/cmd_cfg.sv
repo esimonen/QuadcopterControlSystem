@@ -77,6 +77,7 @@ module cmd_cfg(
         case (state)
             // state to get motors up to speed while calibrating
             RAMP_MOTORS: begin
+                clr_tmr = 0;
                 if (timer_full) begin
                     strt_cal_comb = 1;
                     next_state = CAL;
@@ -190,6 +191,8 @@ module cmd_cfg(
             strt_cal <= 1'b0;
         else if (strt_cal_comb)
             strt_cal <= 1'b1;
+        else
+            strt_cal <= 1'b0;
 
     // SR flop for mototrs off
     always_ff @(posedge clk, negedge rst_n)
@@ -200,11 +203,11 @@ module cmd_cfg(
         else if (inertial_cal)
             motors_off <= 1'b0;
 
-endmodule
+    // to improve readability in FSM comb logic
+    task acknowledge();
+        resp = 8'hA5;
+        send_resp = 1'b1;
+        clr_cmd_rdy = 1'b1;
+    endtask
 
-// to improve readability in FSM comb logic
-task acknowledge(output [7:0] resp, output send_resp, output clr_cmd_rdy);
-    resp = 8'hA5;
-    send_resp = 1'b1;
-    clr_cmd_rdy = 1'b1;
-endtask
+endmodule

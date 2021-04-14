@@ -1,5 +1,48 @@
 # Reading pref.tcl
-# Loading project HW5_Prob1
-# reading C:/intelFPGA/20.1/modelsim_ase/win32aloem/../modelsim.ini
-# Loading project Ex 21
-# 0 compiles, 4 failed with no errors.
+# Loading project Ex21
+vsim -gui work.cmd_cfg_tb
+# vsim -gui work.cmd_cfg_tb 
+# Start time: 12:07:46 on Apr 14,2021
+# Loading sv_std.std
+# Loading work.cmd_cfg_tb_sv_unit
+# Loading work.cmd_cfg_tb
+# Loading work.RemoteComm
+# Loading work.uart
+# Loading work.uart_tx
+# Loading work.uart_rcv
+# Loading work.UART_comm
+# Loading work.cmd_cfg
+add wave -position insertpoint sim:/cmd_cfg_tb/iUART/*
+add wave -position insertpoint sim:/cmd_cfg_tb/iRemote/*
+add wave -position insertpoint  \
+sim:/cmd_cfg_tb/snd_cmd
+restart
+run -all
+# CALIBRATE
+# Set Pitch
+# Set Roll
+# Set Yaw
+# Set Thrust
+# Emergency Land
+# Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'A5, instead recieved xx
+# ** Note: $stop    : tb_tasks.sv(142)
+#    Time: 10328085 ps  Iteration: 3  Instance: /cmd_cfg_tb
+# Break in Task check_cmd_cfg_outputs at tb_tasks.sv line 142
+add wave -position insertpoint sim:/cmd_cfg_tb/icmd_cfg/*
+run -all
+# Motors Off
+
+restart -f
+run -all
+# CALIBRATE
+# Set Pitch
+# Set Roll
+# Set Yaw
+# Set Thrust
+# Emergency Land
+# Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'A5, instead recieved xx
+# ** Note: $stop    : tb_tasks.sv(142)
+#    Time: 10328085 ps  Iteration: 3  Instance: /cmd_cfg_tb
+# Break in Task check_cmd_cfg_outputs at tb_tasks.sv line 142
+# End time: 12:09:52 on Apr 14,2021, Elapsed time: 0:02:06
+# Errors: 0, Warnings: 1
