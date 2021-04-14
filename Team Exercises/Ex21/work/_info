@@ -11,53 +11,101 @@ cModel Technology
 dC:/Users/darco/Desktop/ECE551/Ex19
 vcmd_cfg
 !s105 cmd_cfg_sv_unit
-DXx4 work 15 cmd_cfg_sv_unit 0 22 =[OH<AGehY2cPQOM^WeMl0
+DXx4 work 15 cmd_cfg_sv_unit 0 22 UI^=gRha7@V>b`e265IDI1
 Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z1 !s110 1618242817
+Z1 !s110 1618362420
 !i10b 1
-!s100 _2=08ancRI[WQB>gX0MhV1
-!s11b Dg1SIo80bB@j0V0VzS_@n1
-IKg9RFWW@UWN=eN?[`ig`U1
-VDg1SIo80bB@j0V0VzS_@n1
+!s100 1c@S4G3_LC6e[LU4_kmDB2
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I6P0CI>k9f]Sb3hOj>^O[d0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 S1
-Z2 dC:/Users/darco/Desktop/QuadcopterControlSystem/Team Exercises/Ex21
-Z3 w1618242814
-Z4 8C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv
-Z5 FC:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv
-!i122 0
-L0 9 200
-Z6 OV;L;2020.1;71
+Z4 dC:/Users/tthor/OneDrive - UW-Madison/sophomore/spring/ece551/QuadcopterControlSystem/Team Exercises/Ex21
+Z5 w1618362411
+Z6 8cmd_cfg.sv
+Z7 Fcmd_cfg.sv
+!i122 9
+L0 9 195
+Z8 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z7 !s108 1618242817.000000
-!s107 C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
-Z8 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
+Z9 !s108 1618362420.000000
+!s107 cmd_cfg.sv|
+Z10 !s90 cmd_cfg.sv|
 !i113 1
-Z9 o-work work -sv
-Z10 tCvgOpt 0
+Z11 tCvgOpt 0
 Xcmd_cfg_sv_unit
 R0
 R1
-V=[OH<AGehY2cPQOM^WeMl0
+VUI^=gRha7@V>b`e265IDI1
 r1
 !s85 0
 !i10b 1
-!s100 ^0@ELV4?4AXUbEJ:4i[L[2
-I=[OH<AGehY2cPQOM^WeMl0
+!s100 Dc>2P6dOlB43EO^_h7;Uc0
+IUI^=gRha7@V>b`e265IDI1
 !i103 1
 S1
-R2
-R3
 R4
 R5
-!i122 0
-L0 211 0
 R6
-31
 R7
-Z11 !s107 C:\Users\darco\Desktop\QuadcopterControlSystem\Team Exercises\Ex21\cmd_cfg.sv|
+!i122 9
+L0 206 0
 R8
-!i113 1
+31
 R9
+Z12 !s107 cmd_cfg.sv|
 R10
+!i113 1
+R11
+vRemoteComm
+R0
+Z13 !s110 1618355509
+!i10b 1
+!s100 7`>^nB]^[9jh3zKzF;ONV2
+R2
+IBI@`l^QKK;YbT]27KJSi52
+R3
+S1
+R4
+Z14 w1618243082
+8RemoteComm.sv
+FRemoteComm.sv
+!i122 5
+L0 1 114
+R8
+r1
+!s85 0
+31
+Z15 !s108 1618355509.000000
+Z16 !s107 UART_comm.sv|RemoteComm.sv|cmd_cfg_tb.sv|cmd_cfg.sv|
+Z17 !s90 cmd_cfg.sv|cmd_cfg_tb.sv|RemoteComm.sv|UART_comm.sv|
+!i113 1
+R11
+n@remote@comm
+vUART_comm
+R0
+R13
+!i10b 1
+!s100 MZ]_kBVGHBh^aToLUTWmm1
+R2
+IRVan6MCIGjPKXB0kPcLGm3
+R3
+S1
+R4
+R14
+8UART_comm.sv
+FUART_comm.sv
+!i122 5
+L0 1 140
+R8
+r1
+!s85 0
+31
+R15
+R16
+R17
+!i113 1
+R11
+n@u@a@r@t_comm

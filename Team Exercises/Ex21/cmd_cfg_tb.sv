@@ -34,7 +34,7 @@ reg motors_off;         // goes to ESC, shuts off motors
 // instantiate DUTs
 RemoteComm iRemote(.clk(clk), .rst_n(rst_n), .RX(RX_TX), .TX(TX_RX), .cmd(cmd_in), .data(data_in), .send_cmd(send_cmd), .cmd_sent(cmd_sent), .resp_rdy(), .resp(), .clr_resp_rdy());
 UART_comm iUART(.clk(clk), .rst_n(rst_n), .RX(TX_RX), .TX(RX_TX), .resp(resp), .send_resp(send_resp), .resp_sent(), .cmd_rdy(cmd_rdy), .cmd(cmd), .data(data), .clr_cmd_rdy(clr_cmd_rdy));
-cmd_cfg icmd_cfg(.clk(clk), .rst_n(rst_n), .cmd_rdy(cmd_rdy), .cmd(cmd), .data(data), .clr_cmd_rdy(clr_cmd_rdy), .resp(resp), .send_resp(send_resp), .d_roll(d_roll), .d_yaw(d_yaw), .d_ptch(d_ptch), .thrst(thrst), .strt_cal(strt_cal), .inertial_cal(inertial_cal), .cal_done(cal_done), .motors_off(motors_off);
+cmd_cfg icmd_cfg(.clk(clk), .rst_n(rst_n), .cmd_rdy(cmd_rdy), .cmd(cmd), .data(data), .clr_cmd_rdy(clr_cmd_rdy), .resp(resp), .send_resp(send_resp), .d_roll(d_roll), .d_yaw(d_yaw), .d_ptch(d_ptch), .thrst(thrst), .strt_cal(strt_cal), .inertial_cal(inertial_cal), .cal_done(cal_done), .motors_off(motors_off));
 
 logic error;
 

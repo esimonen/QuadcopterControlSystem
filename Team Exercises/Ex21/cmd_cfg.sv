@@ -7,22 +7,22 @@
  */
 
 module cmd_cfg(
-    input       clk,             // Clock signal
-    input       rst_n,           // Asynch active low reset
-    input       cmd_rdy,         // New command valid from UART_wrapper
-    input       [7:0] cmd,       // Command opcode
-    input       [15:0] data,     // the data read from the UART_comm   
-    output reg  clr_cmd_rdy,     // asserted when we want to clear the command ready signal from UART
-    output reg  [7:0] resp,      // the response that is being sent to the UART_Comm
-    output reg  send_resp,       // asserted when sending the response
-    output reg  [15:0] d_roll,   // Holding register for desired roll
-    output reg  [15:0]  d_yaw,   // Holding register for desired yaw
-    output reg  [15:0] d_ptch,   // Holding register for desired pitch
-    output reg  [8:0]  thrst,    // Holding register for thrust
-    output reg  strt_cal,        // Asserted when we want to start the calabration from the inertial integrator
-    output reg  inertial_cal,    // Held high during duration of calibration
-    input       cal_done,        // indicates the calibration is complete
-    output reg  motors_off       // goes to ESC, shuts off motors.
+    input      clk,             // Clock signal
+    input      rst_n,           // Asynch active low reset
+    input      cmd_rdy,         // New command valid from UART_wrapper
+    input      [7:0] cmd,       // Command opcode
+    input      [15:0] data,     // the data read from the UART_comm   
+    output reg clr_cmd_rdy,     // asserted when we want to clear the command ready signal from UART
+    output reg [7:0] resp,      // the response that is being sent to the UART_Comm
+    output reg send_resp,       // asserted when sending the response
+    output reg [15:0] d_roll,   // Holding register for desired roll
+    output reg [15:0]  d_yaw,   // Holding register for desired yaw
+    output reg [15:0] d_ptch,   // Holding register for desired pitch
+    output reg [8:0]  thrst,    // Holding register for thrust
+    output reg strt_cal,        // Asserted when we want to start the calabration from the inertial integrator
+    output reg inertial_cal,    // Held high during duration of calibration
+    input      cal_done,        // indicates the calibration is complete
+    output reg motors_off       // goes to ESC, shuts off motors.
     );
 
     // 1 to reduce register sizes that will make simulation run faster
@@ -38,11 +38,13 @@ module cmd_cfg(
     localparam MTRS_OFF     = 8'h08;
 
     // Signals
-    reg wpitch, wroll, wyaw, wthrust;   // write to desired pitch, roll, yaw, thrust registers
-    reg clr_motors;                     // high to assert motors_off sig thru SR flop
-    reg emergency_land;                 // high when we want to emergency land
-    wire timer_full;                    // high when done waiting for motors to ramp up to calibration speed
+    reg wpitch, wroll, wyaw, wthrust;           // write to desired pitch, roll, yaw, thrust registers
+    reg clr_motors;                             // high to assert motors_off sig thru SR flop
+    reg emergency_land;                         // high when we want to emergency land
+    wire timer_full;                            // high when done waiting for motors to ramp up to calibration speed
     reg clr_tmr;
+    reg [(8*FAST_SIM + 25*!FAST_SIM):0] timer;  // 9 or 26 bit timer depending on FAST_SIM
+    reg strt_cal_comb;                          // feeds into flop that outputs strt_cal, flop used to prevent output from glitching
 
     // State Machine
     typedef enum reg [1:0] {IDLE, RAMP_MOTORS, CAL} state_t;
@@ -65,21 +67,23 @@ module cmd_cfg(
         clr_cmd_rdy = 1'b0;
         resp = 8'hxx;
         clr_motors = 1'b0;
-        strt_cal = 1'b0;
+        strt_cal_comb = 1'b0;
         emergency_land = 1'b0;
         wpitch = 1'b0;
         wroll = 1'b0;
         wyaw = 1'b0;
         wthrust = 1'b0;
+        inertial_cal = 1'b0;
         case (state)
-            // state to 
+            // state to get motors up to speed while calibrating
             RAMP_MOTORS: begin
                 if (timer_full) begin
-                    strt_cal = 1;
+                    strt_cal_comb = 1;
                     next_state = CAL;
                 end
                 inertial_cal = 1'b1;
             end
+            // state to wait for calibration
             CAL: begin
                 if (cal_done) begin
                     resp = 8'hA5;
@@ -88,6 +92,7 @@ module cmd_cfg(
                 end
                 inertial_cal = 1'b1;
             end
+            // IDLE handles reading all cmds and and responding
             default: begin // IDLE
                 if (cmd_rdy) begin
                     case (cmd)
@@ -170,31 +175,21 @@ module cmd_cfg(
     end     
 
     // timer
-    generate
-        if (FAST_SIM) begin
-            reg [8:0] timer;
-            always_ff @(posedge clk, negedge rst_n)
-                if (!rst_n)
-                    timer <= 9'h000;
-                else if (clr_tmr)
-                    timer <= 9'h000;
-                else
-                    timer <= timer + 9'h001;
-            assign timer_full = &timer;
-        end
-        else begin
-            reg [25:0] timer;
-            always_ff @(posedge clk, negedge rst_n)
-                if (!rst_n)
-                    timer <= 26'h000000;
-                else if (clr_tmr)
-                    timer <= 26'h000000;
-                else
-                    timer <= timer + 26'h000001;
-            assign timer_full = &timer; 
-        end
-        
-    endgenerate
+    always_ff @(posedge clk, negedge rst_n)
+        if (!rst_n)
+            timer <= 0;
+        else if (clr_tmr)
+            timer <= 0;
+        else
+            timer <= timer + 1;
+    assign timer_full = &timer;
+
+    // strt_cal flop to make sure is high for exactly one clock cycle
+    always_ff @(posedge clk, negedge rst_n)
+        if (!rst_n)
+            strt_cal <= 1'b0;
+        else if (strt_cal_comb)
+            strt_cal <= 1'b1;
 
     // SR flop for mototrs off
     always_ff @(posedge clk, negedge rst_n)
@@ -213,4 +208,3 @@ task acknowledge(output [7:0] resp, output send_resp, output clr_cmd_rdy);
     send_resp = 1'b1;
     clr_cmd_rdy = 1'b1;
 endtask
-
