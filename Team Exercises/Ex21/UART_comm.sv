@@ -42,7 +42,7 @@ module UART_comm(clk, rst_n, RX, TX, resp, send_resp, resp_sent, cmd_rdy, cmd, d
 	///////////////////////////////////////////////
 	// Instantiate basic 8-bit UART transceiver //
 	/////////////////////////////////////////////
-	UART iUART(.clk(clk), .rst_n(rst_n), .RX(RX), .TX(TX), .tx_data(resp), .trmt(send_resp),
+	uart iUART(.clk(clk), .rst_n(rst_n), .RX(RX), .TX(TX), .tx_data(resp), .trmt(send_resp),
 			   .tx_done(resp_sent), .rx_data(rx_data), .rx_rdy(rx_rdy), .clr_rx_rdy(1'b0));
 		
 	////////////////////////////////
