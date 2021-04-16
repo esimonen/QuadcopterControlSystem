@@ -137,8 +137,8 @@ task check_cmd_cfg_outputs;
                     $display("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for thrst, instead recieved %3h", cmd_cfg_tb.thrst);
                     $stop();
                 end
-                if(cmd_cfg_tb.resp !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp);
+                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
+                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'hA5, instead recieved %2h", cmd_cfg_tb.resp);
                     $stop();
                 end
             end

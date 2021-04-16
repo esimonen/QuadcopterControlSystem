@@ -131,6 +131,8 @@ initial begin
     send_packet();
     check_cmd_cfg_outputs();
 
+    $stop;
+
 end
 
 
