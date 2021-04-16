@@ -15,7 +15,7 @@ task send_packet;
             // wait until the command is received in the UART
             begin: timeout_cmd_rdy
                 repeat (1000000) @(posedge cmd_cfg_tb.clk);
-                $display("Task 'send_packet' Failed: Waiting for cmd_rdy, never saw posedge");
+                $error("Task 'send_packet' Failed: Waiting for cmd_rdy, never saw posedge");
                 $stop;
             end
             begin
@@ -29,7 +29,7 @@ task send_packet;
             fork
                 begin: timeout_cal
                     repeat (1000000) @(posedge cmd_cfg_tb.clk);
-                    $display("Task 'send_packet' Failed: Waiting for calibration to finish");
+                    $error("Task 'send_packet' Failed: Waiting for calibration to finish");
                     $stop;
                 end
                 begin
@@ -43,7 +43,7 @@ task send_packet;
         fork
             begin: timeout_resp_rdy
                 repeat (1000000) @(posedge cmd_cfg_tb.clk);
-                $display("Task 'send_packet' Failed: Waiting for response at RemoteComm to be ready");
+                $error("Task 'send_packet' Failed: Waiting for response at RemoteComm to be ready");
                 $stop;
             end
             begin
@@ -52,8 +52,9 @@ task send_packet;
             end
         join
         // response is now ready
-        if (cmd_cfg_tb.resp_out !== 8'hA5) begin
-            $display("Task 'send_packet' Failed: Received incorrect response. Received %h, but expected %h.", cmd_cfg_tb.resp, 8'hA5);
+        assert(cmd_cfg_tb.resp_out === 8'hA5)
+        else begin
+            $error("Task 'send_packet' Failed: Received incorrect response. Received %h, but expected %h.", cmd_cfg_tb.resp, 8'hA5);
             $stop;
         end
     end
@@ -73,43 +74,51 @@ task check_cmd_cfg_outputs;
     begin
         
         case (cmd_cfg_tb.cmd2send)
-            SET_PTCH : begin
-                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
+            SET_PTCH : begin 
+                assert(cmd_cfg_tb.resp_out === 8'hA5)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
                     $stop();
                 end
-                if(cmd_cfg_tb.d_ptch !== cmd_cfg_tb.data2send) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_ptch);
+                assert(cmd_cfg_tb.d_ptch === cmd_cfg_tb.data2send)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_ptch);
                     $stop();
                 end
             end
             SET_ROLL : begin
-                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
+                assert(cmd_cfg_tb.resp_out === 8'hA5)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
                     $stop();
                 end
-                if(cmd_cfg_tb.d_roll !== cmd_cfg_tb.data2send) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_roll);
+                assert(cmd_cfg_tb.d_roll === cmd_cfg_tb.data2send)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_roll);
                     $stop();
                 end
             end
             SET_YAW : begin
-                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
+                assert(cmd_cfg_tb.resp_out === 8'hA5)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
                     $stop();
                 end
-                if(cmd_cfg_tb.d_yaw !== cmd_cfg_tb.data2send) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_yaw);
+                assert(cmd_cfg_tb.d_yaw === cmd_cfg_tb.data2send)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of %4h from data_in, instead recieved %4h", cmd_cfg_tb.data2send, cmd_cfg_tb.d_yaw);
                     $stop();
                 end
             end
             SET_THRST : begin
-                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
+                assert(cmd_cfg_tb.resp_out === 8'hA5) 
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of 8'A5, instead recieved %2h", cmd_cfg_tb.resp_out);
                     $stop();
                 end
-                if(cmd_cfg_tb.thrst !== cmd_cfg_tb.data2send) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of %3h from data_in, instead recieved %3h", cmd_cfg_tb.data2send[8:0], cmd_cfg_tb.thrst);
+                assert (cmd_cfg_tb.thrst === cmd_cfg_tb.data2send)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of %3h from data_in, instead recieved %3h", cmd_cfg_tb.data2send[8:0], cmd_cfg_tb.thrst);
                     $stop();
                 end
             end
@@ -121,32 +130,38 @@ task check_cmd_cfg_outputs;
 
             // all values should be zero to stop quadcopter
             EMER_LAND : begin
-                if(cmd_cfg_tb.d_ptch !== 16'h0000) begin
-                    $display("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_ptch, instead recieved %4h", cmd_cfg_tb.d_ptch);
+                assert(cmd_cfg_tb.d_ptch === 16'h0000)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_ptch, instead recieved %4h", cmd_cfg_tb.d_ptch);
                     $stop();
                 end
-                if(cmd_cfg_tb.d_roll !== 16'h0000) begin
-                    $display("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_roll, instead recieved %4h", cmd_cfg_tb.d_roll);
+                assert(cmd_cfg_tb.d_roll === 16'h0000)
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_roll, instead recieved %4h", cmd_cfg_tb.d_roll);
                     $stop();
                 end
-                if(cmd_cfg_tb.d_yaw !== 16'h0000) begin
-                    $display("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_yaw, instead recieved %4h", cmd_cfg_tb.d_yaw);
+                assert(cmd_cfg_tb.d_yaw === 16'h0000) 
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_yaw, instead recieved %4h", cmd_cfg_tb.d_yaw);
                     $stop();
                 end
-                if(cmd_cfg_tb.thrst !== 9'h000) begin
-                    $display("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for thrst, instead recieved %3h", cmd_cfg_tb.thrst);
+                assert(cmd_cfg_tb.thrst === 9'h000) 
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for thrst, instead recieved %3h", cmd_cfg_tb.thrst);
                     $stop();
                 end
-                if(cmd_cfg_tb.resp_out !== 8'hA5) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'hA5, instead recieved %2h", cmd_cfg_tb.resp);
+                assert(cmd_cfg_tb.resp_out === 8'hA5) 
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'hA5, instead recieved %2h", cmd_cfg_tb.resp);
                     $stop();
                 end
             end
 
             // the motors off signal should be one
             MTRS_OFF : begin
-                if(cmd_cfg_tb.motors_off !== 1'b1) begin
-                    $display("Task 'check_cmd_cfg_outputs' Failed: Motors off, expected response of 1'b1, instead received %1h", cmd_cfg_tb.motors_off);
+                assert (cmd_cfg_tb.motors_off === 1'b1) 
+                else begin
+                    $error("Task 'check_cmd_cfg_outputs' Failed: Motors off, expected response of 1'b1, instead received %1h", cmd_cfg_tb.motors_off);
                     $stop();
                 end
             end
