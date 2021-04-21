@@ -1,23 +1,7 @@
 #
 #Read in verilog files
 #
-read_file -format sverilog { \
-./QuadCopter.sv \
-./UART_comm.sv \
-./UART.sv \
-./UART_tx.sv \
-./UART_rcv.sv \
-./cmd_cfg.sv \
-./inert_intf.sv \
-./flght_cntrl.sv \
-./reset_synch.sv \
-./PB_release.sv \
-./ESCs.sv \
-./ESC_interface.sv \
-./PD_math.sv \
-./inertial_integrator.sv \
-./SPI_mnrch.sv
-}
+read_file -format sverilog { ./UART_comm.sv ./UART.sv ./UART_tx.sv ./UART_rcv.sv ./cmd_cfg.sv ./inert_intf.sv ./flght_cntrl.sv ./reset_synch.sv ./PB_release.sv ./ESCs.sv ./ESC_interface.sv ./PD_math.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./QuadCopter.sv}
 
 #
 #set current design to top level
@@ -25,10 +9,13 @@ read_file -format sverilog { \
 
 set current_design QuadCopter
 
+link
+
 #create the clock
 #3.75ns
 
-create_clock -name "clk" -period 3.75 {clk} # TODO: double check if default to 50% duty cycle
+ # TODO: double check if default to 50% duty cycle
+create_clock -name "clk" -period 3.75 -waveform { 0 1.875 } { clk }
 
 # remove synopsis' ability to buffer clk
 
@@ -42,8 +29,7 @@ set_input_delay -clock clk 0.25 $prim_inputs
 
 # set the strength of the driving cell, which is used to simulate the input strength
 
-set_driving_cell -lib_cell NAND2X2_RVT -library\
- saed32rvt_tt0p85v25c $prim_inputs
+set_driving_cell -lib_cell NAND2X2_RVT -library saed32rvt_tt0p85v25c $prim_inputs
 
 # TODO: is this necessary? ask john and/or eric
 ## rst_n is a strong signal, so we will drive it seperately
@@ -119,4 +105,4 @@ write_sdc QuadCopter.sdc
 # write out resulting synthesized netlist
 #
 
-write -format verilog QuadCopter output QuadCopter.vg
+write -format verilog QuadCopter -output QuadCopter.vg

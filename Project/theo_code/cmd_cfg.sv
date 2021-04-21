@@ -168,9 +168,9 @@ module cmd_cfg(
     // thrust
     always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n)
-            thrst = 9'h000;
+            thrst <= 9'h000;
         else if (emergency_land)
-            thrst = 9'h000;
+            thrst <= 9'h000;
         else if (wthrust)
             thrst <= data[8:0];
     end     
