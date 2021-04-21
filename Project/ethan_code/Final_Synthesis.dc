@@ -1,7 +1,7 @@
 #
 #Read in verilog files
 #
-read_file -format sverilog { ./UART_comm.sv ./UART.sv ./UART_tx.sv ./UART_rcv.sv ./cmd_cfg.sv ./inert_intf.sv ./flght_cntrl.sv ./reset_synch.sv ./PB_release.sv ./ESCs.sv ./ESC_interface.sv ./PD_math.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./QuadCopter.sv}
+read_file -format sverilog { ./UART_comm.sv ./UART.sv ./UART_tx.sv ./UART_rcv.sv ./cmd_cfg.sv ./inert_intf.sv ./flght_cntrl.sv ./reset_synch.sv ./PB_release.sv ./ESCs.sv ./ESC_interface.sv ../theo_code/PD_math.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./QuadCopter.sv}
 
 #
 #set current design to top level

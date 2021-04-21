@@ -62,7 +62,7 @@ module UART_comm(clk, rst_n, RX, TX, resp, send_resp, resp_sent, cmd_rdy, cmd, d
 			//if we reset, return to idle
 			if (!rst_n)
 				state <= CMD_RX;
-			if (clk)
+			else
 				state <= nxt_state;
 		end
 
