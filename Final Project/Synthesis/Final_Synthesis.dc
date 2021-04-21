@@ -1,0 +1,103 @@
+#
+#Read in verilog files
+#
+read_file -format sverilog { \
+./UART_tx.sv \
+./UART_rcv.sv \
+./UART_erics.sv}
+
+#
+#set current design to top level
+#
+
+set current_design UART
+
+#create the clock
+#2ns
+
+create_clock -name "clk" -period 2 -waveform {0 1} {clk}
+
+# remove synopsis' ability to buffer clk
+
+set_dont_touch_network [find port clk]
+
+# add input delays to all signals except clock for realism
+
+set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
+
+set_input_delay -clock clk 0.4 $prim_inputs
+
+# set the strength of the driving cell, which is used to simulate the input strength
+
+set_driving_cell -lib_cell NAND2X2_RVT -library\
+ saed32rvt_tt0p85v25c $prim_inputs
+
+# rst_n is a strong signal, so we will drive it seperately
+
+set_drive 0.1 rst_n
+
+# set output delay to model the timing parameters
+# our delay is 0.4 ns
+set_output_delay -clock clk 0.4 [all_outputs]
+
+# now we tell synopsis our load. Higher load = slower gate (capacitance)
+# 0.1 pF load
+
+set_load 0.1 [all_outputs]
+
+# we can set the "parasitic routing capacitances"
+# we can't really know these, so synopsys estimates what it will be - guess
+
+set_wire_load_model -name 16000 -library saed32rvt_tt0p85v25c
+
+# we now want to set a transition time that is above a certain time to avoid
+# "hot electron" issue, which will damage gates over time.
+# 0.15 ns
+
+set_max_transition 0.15 [current_design]
+
+#adding clock uncertainty - it could be anywhere within 0.2 ns +-
+
+#set_clock_uncertainty 0.20 clk
+
+# by default, synopsis does not fix our clock uncertainty problems unless asked:
+
+#set_fix_hold clk
+
+# now we want to drive the undriven port Bp (for some reason this actually hurts our design, ignored for now)
+
+#set_drive 3 [find port Bp]
+
+
+#
+# compile the design
+#
+
+compile -map_effort medium
+
+# flatten design
+
+ungroup -all -flatten
+
+# compile again
+
+compile -map_effort medium
+
+# timing reports
+
+report_timing -delay min
+report_timing -delay max
+
+# area report
+
+report_area
+
+# report sdc file
+
+write_sdc UART.sdc
+
+#
+# write out resulting synthesized netlist
+#
+
+write -format verilog UART -output UART.vg
