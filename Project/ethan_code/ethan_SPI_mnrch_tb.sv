@@ -1,4 +1,4 @@
-module SPI_mnrch_tb();
+module ethan_SPI_mnrch_tb();
 
 //Signals
     logic            clk;   // clk signal 50MHz

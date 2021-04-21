@@ -1,4 +1,4 @@
-module UART_tb();
+module scott_UART_tb();
 
 	logic clk, rst_n, trmt; // 50 MHz clk, active low asynch reset, transmit signal
 	logic [7:0] tx_data; // serial data to be transmitted

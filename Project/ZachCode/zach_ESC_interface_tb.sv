@@ -1,4 +1,4 @@
-module ESC_interface_tb();
+module zach_ESC_interface_tb();
 
 	logic clk;
 	logic rst_n;

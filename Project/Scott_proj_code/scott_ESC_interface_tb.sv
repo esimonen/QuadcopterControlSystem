@@ -1,4 +1,4 @@
-module ESC_interface_tb();
+module scott_ESC_interface_tb();
 	
 	logic clk, rst_n; // clock and active low reset
 	logic wrt; // initiates new pulse

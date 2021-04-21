@@ -1,4 +1,4 @@
-module flght_cntrl_chk_tb();
+module scott_flght_cntrl_chk_tb();
 
 	reg [107:0] stimMem [1999:0]; // stimulus memory bank
 	reg [43:0] respMem [1999:0]; // response reference memory bank

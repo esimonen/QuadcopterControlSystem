@@ -1,4 +1,4 @@
-module flght_cntrl_chk_tb();
+module zach_flght_cntrl_chk_tb();
 
 logic clk;
 logic rst_n;

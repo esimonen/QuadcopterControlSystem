@@ -1,4 +1,4 @@
-module SPI_mnrch_tb();
+module zach_SPI_mnrch_tb();
 
 	logic clk;
 	logic rst_n;

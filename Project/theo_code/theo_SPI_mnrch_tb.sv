@@ -1,7 +1,7 @@
 // Theo Hornung
 // ece 551
 // ex17
-module SPI_mnrch_tb();
+module theo_SPI_mnrch_tb();
 
     logic clk;
     logic rst_n;

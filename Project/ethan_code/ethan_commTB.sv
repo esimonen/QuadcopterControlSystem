@@ -1,4 +1,4 @@
-module CommTB();
+module ethan_CommTB();
 
   /////////////////////////////
   // stimulus declared next //

@@ -1,4 +1,4 @@
-module QuadCopter_tb();
+module zach_QuadCopter_tb();
 			
 //// Interconnects to DUT/support defined as type wire /////
 wire SS_n,SCLK,MOSI,MISO,INT;

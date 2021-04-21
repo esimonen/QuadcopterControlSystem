@@ -1,4 +1,4 @@
-module CommTB();
+module theo_CommTB();
 
   /////////////////////////////
   // stimulus declared next //

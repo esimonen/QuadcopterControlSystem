@@ -1,7 +1,7 @@
 // Theo Hornung
 // ece 551
 // ex16
-module flight_control_check_tb();
+module theo_flight_control_check_tb();
 
     reg [107:0] stim [0:1999];
     reg [43:0] resp [0:1999];

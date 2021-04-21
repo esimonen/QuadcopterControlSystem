@@ -1,4 +1,4 @@
-module PD_math_tb();
+module zach_PD_math_tb();
 
 	logic clk, rst_n;		// 50 MHz clk and reset
 	logic vld;				// new inertial sensor reading is valid

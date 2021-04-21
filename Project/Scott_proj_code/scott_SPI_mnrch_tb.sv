@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module SPI_mnrch_tb();
+module scott_SPI_mnrch_tb();
 	
 	logic clk, rst_n; // 50 MHz clock and asynchronous active low reset
 	logic [15:0] wt_data, rd_data; // data to write to nemo and data recieved from nemo

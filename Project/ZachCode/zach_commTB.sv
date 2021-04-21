@@ -1,4 +1,4 @@
-module CommTB();
+module zach_CommTB();
 
   /////////////////////////////
   // stimulus declared next //

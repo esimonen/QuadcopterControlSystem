@@ -1,4 +1,4 @@
-module inert_intf_tb();
+module theo_inert_intf_tb();
 	
 	logic clk, rst_n;
 	logic MISO;					// SPI input from inertial sensor

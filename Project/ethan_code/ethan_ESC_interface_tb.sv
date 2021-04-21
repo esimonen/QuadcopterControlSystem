@@ -1,4 +1,4 @@
-module ESC_interface_tb();
+module ethan_ESC_interface_tb();
 
     //signals for testbench
 

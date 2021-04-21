@@ -1,4 +1,4 @@
-module PD_math_tb();
+module ethan_PD_math_tb();
 	reg clk, rst_n, vld;
 	reg	signed [15:0] desired;
 	reg signed[15:0] actual;

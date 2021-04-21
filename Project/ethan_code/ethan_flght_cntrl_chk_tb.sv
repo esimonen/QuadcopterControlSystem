@@ -1,4 +1,4 @@
-module flght_cntrl_chk_tb();
+module ethan_flght_cntrl_chk_tb();
     
     reg [107:0] stim [1999:0];  //stimulus for pdmath
     reg [43:0]  resp [1999:0];  //the expected responses for pdmath

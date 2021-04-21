@@ -1,4 +1,4 @@
-module CommTB();
+module scott_CommTB();
 
   /////////////////////////////
   // stimulus declared next //

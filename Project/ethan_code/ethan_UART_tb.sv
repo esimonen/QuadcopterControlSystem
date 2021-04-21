@@ -1,4 +1,4 @@
-module UART_tb();
+module ethan_UART_tb();
     //testing signals
 
 

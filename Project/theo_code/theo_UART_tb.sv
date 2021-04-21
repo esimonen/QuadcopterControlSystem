@@ -1,7 +1,7 @@
 // Theo Hornung
 // ece 551
 // ex13
-module uart_tb();
+module theo_uart_tb();
 
 	logic clk, rst_n;
 	logic serial;

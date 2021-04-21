@@ -1,7 +1,7 @@
 // Theo Hornung
 // ece 551
 // ex11
-module ESC_interface_tb();
+module theo_ESC_interface_tb();
 
     reg clk, rst_n, wrt;
     reg [10:0] speed;

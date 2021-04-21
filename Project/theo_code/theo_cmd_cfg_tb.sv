@@ -6,7 +6,7 @@
  * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
  * Date:            4/12/2021
  */
-module cmd_cfg_tb();
+module theo_cmd_cfg_tb();
 
 reg clk;                // clock
 reg rst_n;              // active low asynch reset

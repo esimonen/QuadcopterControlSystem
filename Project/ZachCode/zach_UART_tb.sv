@@ -1,4 +1,4 @@
-module UART_tb();
+module zach_UART_tb();
 
 logic clk;
 logic rst_n;
