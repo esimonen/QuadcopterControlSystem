@@ -89,12 +89,15 @@ initial begin
         end
     join   
 
+
     // set pitch 
     $display("Set Pitch");
     cmd2send = STPTCH;
     data2send = 16'hBEEF;
     send_packet();
     check_cmd_cfg_outputs();
+
+    repeat (2000000)
 
     // set roll 
     $display("Set Roll");

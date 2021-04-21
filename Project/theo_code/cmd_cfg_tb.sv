@@ -89,6 +89,7 @@ initial begin
         end
     join   
 
+
     // set pitch 
     $display("Set Pitch");
     cmd2send = STPTCH;
