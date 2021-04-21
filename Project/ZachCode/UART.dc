@@ -1,0 +1,48 @@
+##read in design
+read_file -format sverilog { ./UART_tx.sv ./UART_rcv.sv ./UART.sv }
+
+## set current design
+set current_design UART
+
+link
+
+##create 500MHz clock
+create_clock -name "clk" -period 2 -waveform {0 1} {clk}
+
+##Perform set dont touch on clk
+set_dont_touch_network [find port clk]
+
+##all inputs but clk
+set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
+
+##defines input delays of 0.4ns on all inputs but clk
+set_input_delay -clock clk 0.4 $prim_inputs
+
+##defines driving strength of 2 input nand gate size 2 from library
+set_driving_cell -lib_cell NAND2X2_RVT -library saed32rvt_tt0p85v25c $prim_inputs
+
+##custom drive strength on rst_n
+set_drive 0.1 rst_n
+
+##defines output delay of 0.4ns on all outputs
+set_output_delay -clock clk 0.4 [all_outputs]
+
+##defines 0.1pf load on all outputs
+set_load 0.1 [all_outputs]
+
+##sets max transition time of .15ns on all nodes
+set_max_transition 0.15 [current_design]
+
+set_wire_load_model -name 16000 -library saed32rvt_tt85v25c
+
+##compile and flatten design
+compile -map_effort medium
+ungroup -all -flatten
+
+##recompile and print reports
+compile -map_effort medium
+report_timing -delay min
+report_timing -delay max
+report_area
+
+write -format verilog UART -output UART.vg
