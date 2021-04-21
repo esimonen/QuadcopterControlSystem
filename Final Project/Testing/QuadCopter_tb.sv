@@ -39,9 +39,20 @@ RemoteComm iREMOTE(.clk(clk), .rst_n(RST_n), .RX(TX), .TX(RX),
 					 .resp(resp), .clr_resp_rdy(clr_resp_rdy));
 
 initial begin
- 
-  /// your intellectual property goes here ///
+  clk = 0;
   
+  RST_n = 0;
+  @(negedge clk);
+  RST_n = 1;
+  @(negedge clk);
+  RST_n = 0;
+  @(negedge clk);
+
+  /*
+   * Test 1: 
+   *
+   */
+
 end
 
 always
