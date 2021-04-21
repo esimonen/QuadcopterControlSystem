@@ -23,7 +23,7 @@ end
 @(posedge clk) begin
 	if(dterm !=0 || pterm != 5) begin				
 		$display("error with pterm-1 or dterm-1");
-		$fail;
+		$fatal;
 	end
 end
 
@@ -35,7 +35,7 @@ end
 @(negedge clk) begin
 	if(dterm != 56 || pterm != 10) begin
 		$display("error with dterm 2 or pterm 2");
-		$fail;
+		$fatal;
 	end
 end
 
@@ -51,11 +51,11 @@ end
 @(posedge clk) begin
 	if(dterm != 12'hE40) begin				//satured err and D_diff
 		$display("error with dterm test 3");
-		$fail;
+		$fatal;
 	end
 	if(pterm != 10'h2C0) begin
 		$display("error with pterm test 3");
-		$fail;
+		$fatal;
 	end
 end
 
@@ -72,11 +72,11 @@ end
 @(negedge clk) begin
 	if(dterm != 12'h1B9) begin
 		$display("error with dterm test 4");
-		$fail;
+		$fatal;
 	end
 	if( pterm != 10'h13E) begin
 		$display("error with pterm test 4");
-		$fail;
+		$fatal;
 	end
 end
 
@@ -92,11 +92,11 @@ end
 @(negedge clk) begin 
 	if(dterm != 12'hFC8) begin
 		$display("error with dterm test 5");
-		$fail;
+		$fatal;
 	end
 	if(pterm != 10'h3FB) begin
 		$display("error with pterm test 5");
-		$fail;
+		$fatal;
 	end
 end
 
@@ -112,11 +112,11 @@ end
 @(negedge clk) begin
 	if(dterm != 0) begin
 		$display("error with dterm test 6");
-		$fail;
+		$fatal;
 	end
 	if(pterm != 0) begin
 		$display("error with pterm test 6");
-		$fail;
+		$fatal;
 	end
 end
 $display("YAHOO tests passed");

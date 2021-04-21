@@ -26,7 +26,7 @@ module scott_inert_intf_tb();
 			begin : timeout
 				repeat(70000)@(posedge clk);
 				$display("ERROR: timeout out waiting for NEMO_setup to assert");
-				$fail;
+				$fatal;
 			end
 			begin
 				@(posedge iNemo.NEMO_setup);
@@ -43,7 +43,7 @@ module scott_inert_intf_tb();
 			begin : timeout1
 				repeat(1000000)@(posedge clk);
 				$display("ERROR: timeout out waiting for cal_done to assert");
-				$fail;
+				$fatal;
 			end
 			begin
 				@(posedge cal_done);

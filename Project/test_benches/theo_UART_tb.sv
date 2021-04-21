@@ -41,7 +41,7 @@ module theo_uart_tb();
 			begin: timeout1;
 				repeat (100000) @(posedge clk);
 				$display("DID NOT RECEIVE POSEDGE RDY OR DID NOT RECEIVE POSEDGE TX_DONE");
-				$fail;
+				$fatal;
 			end
 			begin
 				// we don't *really* know which will come first,
@@ -67,7 +67,7 @@ module theo_uart_tb();
 		// sent data should equal received data
 		if (rx_data !== tx_data) begin
 			$display("FAIL. Read rx_data=%h but should have been tx_data=%h", rx_data, tx_data);
-			$fail;
+			$fatal;
 		end;
 		
 		// (4) test clr_rdy signal
@@ -78,7 +78,7 @@ module theo_uart_tb();
 		@(posedge clk); // wait for clr_rdy to propogate through SR flop
 		if (rdy === 1'b1) begin
 			$display("FAIL. clr_rdy behavior is incorrect, rdy should have gone to 0");
-			$fail;
+			$fatal;
 		end
 		
 		$display("ALL TESTS PASSED.");

@@ -27,7 +27,7 @@ module _ethaninert_intf_tb();
 			begin : timeout
 				repeat(210000)@(posedge clk);
 				$display("ERROR: timeout out waiting for NEMO_setup to assert");
-				$fail;
+				$fatal;
 			end
 			begin
 				@(posedge iNemo.NEMO_setup);
@@ -44,7 +44,7 @@ module _ethaninert_intf_tb();
 			begin : timeout1
 				repeat(1000000)@(posedge clk);
 				$display("ERROR: timeout out waiting for cal_done to assert");
-				$fail;
+				$fatal;
 			end
 			begin
 				@(posedge cal_done);

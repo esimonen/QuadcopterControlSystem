@@ -74,17 +74,17 @@ module ethan_CommTB();
       timeout += 1;
       if (timeout >= 500000) begin
         $display("Test 1: timeout, rdy not recieved after %6d clock cycles", timeout);
-        $fail();
+        $fatal();
       end
     end
 
     if (data2send !== data) begin
       $display("Test 1: data recieved failed. Expected %4h Recieved %4h", data2send, data);
-      $fail();
+      $fatal();
     end
     if (cmd2send !== cmd) begin
       $display("Test 1: cmd recieved failed. Expected %4h Recieved %4h", cmd2send, cmd);
-      $fail();
+      $fatal();
     end
 
 
@@ -114,17 +114,17 @@ module ethan_CommTB();
       timeout += 1;
       if (timeout >= 500000) begin
         $display("Test 2: timeout, rdy not recieved after %6d clock cycles", timeout);
-        $fail();
+        $fatal();
       end
     end
 
     if (data2send !== data) begin
       $display("Test 2: data recieved failed. Expected %4h Recieved %4h", data2send, data);
-      $fail();
+      $fatal();
     end
     if (cmd2send !== cmd) begin
       $display("Test 2: cmd recieved failed. Expected %4h Recieved %4h", cmd2send, cmd);
-      $fail();
+      $fatal();
     end
 
     while(!cmd_sent) @ (negedge clk);
@@ -152,13 +152,13 @@ module ethan_CommTB();
       timeout += 1;
       if (timeout >= 500000) begin
         $display("Test 3: timeout, resp_rdy not recieved after %6d clock cycles", timeout);
-        $fail();
+        $fatal();
       end
     end
 
     if (resp !== respRcvd) begin
       $display("Test 3: resp recieved failed. Expected %2h Recieved %2h", resp, respRcvd);
-      $fail();
+      $fatal();
     end
 
 
@@ -187,13 +187,13 @@ module ethan_CommTB();
       timeout += 1;
       if (timeout >= 500000) begin
         $display("Test 4: timeout, resp_rdy not recieved after %6d clock cycles", timeout);
-        $fail();
+        $fatal();
       end
     end
 
     if (resp !== respRcvd) begin
       $display("Test 4: resp recieved failed. Expected %2h Recieved %2h", resp, respRcvd);
-      $fail();
+      $fatal();
     end
 
 
@@ -229,17 +229,17 @@ module ethan_CommTB();
       timeout += 1;
       if (timeout >= 500000) begin
         $display("Test 5: timeout, rdy not recieved after %6d clock cycles", timeout);
-        $fail();
+        $fatal();
       end
     end
 
     if (data2send !== data) begin
       $display("Test 5: data recieved failed. Expected %4h Recieved %4h", data2send, data);
-      $fail();
+      $fatal();
     end
     if (cmd2send !== cmd) begin
       $display("Test 5: cmd recieved failed. Expected %4h Recieved %4h", cmd2send, cmd);
-      $fail();
+      $fatal();
     end
 
 
@@ -278,17 +278,17 @@ module ethan_CommTB();
           timeout += 1;
           if (timeout >= 500000) begin
             $display("Test 6: timeout, rdy not recieved after %6d clock cycles", timeout);
-            $fail();
+            $fatal();
           end
         end
 
         if (data2send !== data) begin
           $display("Test 6: data recieved failed. Expected %4h Recieved %4h", data2send, data);
-          $fail();
+          $fatal();
         end
         if (cmd2send !== cmd) begin
           $display("Test 6: cmd recieved failed. Expected %4h Recieved %4h", cmd2send, cmd);
-          $fail();
+          $fatal();
         end
       end
       begin
@@ -298,13 +298,13 @@ module ethan_CommTB();
           timeout2 += 1;
           if (timeout2 >= 500000) begin
             $display("Test 6: timeout, resp_rdy not recieved after %6d clock cycles", timeout);
-            $fail();
+            $fatal();
           end
         end
 
         if (resp !== respRcvd) begin
           $display("Test 6: resp recieved failed. Expected %2h Recieved %2h", resp, respRcvd);
-          $fail();
+          $fatal();
         end        
       end
     join

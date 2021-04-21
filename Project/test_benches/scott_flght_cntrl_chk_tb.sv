@@ -66,7 +66,7 @@ module scott_flght_cntrl_chk_tb();
 					$display("Expected Back Speed: %h, Recieved Back Speed: %h", bck_spd_resp, bck_spd);
 					$display("Expected Left Speed: %h, Recieved Left Speed: %h", lft_spd_resp, lft_spd);
 					$display("Expected Right Speed: %h, Recieved Right Speed: %h", rght_spd_resp, rght_spd);
-					$fail;
+					$fatal;
 				end
 			end
 		end

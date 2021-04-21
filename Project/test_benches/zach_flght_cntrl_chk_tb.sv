@@ -55,22 +55,22 @@ for(integer row = 0; row < 2000; row++) begin
 		if(frnt_spd !== resp[43:33]) begin
 			$display("front speed wrong in test %d", row);
 			$display("should be %d, was %d", resp[43:33], frnt_spd);
-			$fail;
+			$fatal;
 		end
 		if(bck_spd !== resp[32:22]) begin
 			$display("back speed wrong in test %d", row);
 			$display("should be %d, was %d", resp[32:22], bck_spd);
-			$fail;
+			$fatal;
 		end
 		if(lft_spd !== resp[21:11]) begin
 			$display("left speed wrong in test %d", row);
 			$display("should be %d, was %d", resp[21:11], lft_spd);
-			$fail;
+			$fatal;
 		end
 		if(rght_spd !== resp[10:0]) begin
 			$display("right speed wrong in test %d", row);
 			$display("should be %d, was %d", resp[10:0], rght_spd);
-			$fail;
+			$fatal;
 		end
 	end
 end

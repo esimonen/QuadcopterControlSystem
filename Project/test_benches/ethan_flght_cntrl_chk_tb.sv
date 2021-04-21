@@ -43,19 +43,19 @@ module ethan_flght_cntrl_chk_tb();
             #1;
             if(resp[i][43:33] !== frnt_spd) begin
                 $display("Time %4d: front speed was off, expected %3h, recieved %3h",i,resp[i][43:33],frnt_spd);
-                $fail();
+                $fatal();
             end
             if(resp[i][32:22] !== bck_spd ) begin
                 $display("Time %4d: back speed was off, expected %3h, recieved %3h",i,resp[i][32:22],bck_spd);
-                $fail();
+                $fatal();
             end
             if(resp[i][21:11] !== lft_spd ) begin
                 $display("Time %4d: left speed was off, expected %3h, recieved %3h",i,resp[i][21:11],lft_spd);
-                $fail();
+                $fatal();
             end
             if(resp[i][10:0]  !== rght_spd) begin
                 $display("Time %4d: right speed was off, expected %3h, recieved %3h",i,resp[i][10:0],rght_spd);
-                $fail();
+                $fatal();
             end
 
         end

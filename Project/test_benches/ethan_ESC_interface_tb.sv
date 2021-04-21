@@ -48,14 +48,14 @@ module ethan_ESC_interface_tb();
             @ (negedge clk);
             if (!PWM) begin
                 $display("Test 1 Failed at time %d PWM should have been asserted",$time);
-                $fail();
+                $fatal();
             end
         end
 
         @ (negedge clk);
         if (PWM) begin
             $display("Test 1 Failed at time %d PWM should have not been asserted",$time);
-            $fail();
+            $fatal();
         end
         $display("Test 1 Passed!            Baseline");
 
@@ -81,14 +81,14 @@ module ethan_ESC_interface_tb();
             @ (negedge clk);
             if (!PWM) begin
                 $display("Test 2 Failed at time %d PWM should have been asserted",$time);
-                $fail();
+                $fatal();
             end
         end
 
         @ (negedge clk);
         if (PWM) begin
             $display("Test 2 Failed at time %d PWM should have not been asserted",$time);
-            $fail();
+            $fatal();
         end
         $display("Test 2 Passed!            Maximum Speed");
 
@@ -112,14 +112,14 @@ module ethan_ESC_interface_tb();
             @ (negedge clk);
             if (!PWM) begin
                 $display("Test 3 Failed at time %d PWM should have been asserted",$time);
-                $fail();
+                $fatal();
             end
         end
 
         @ (negedge clk);
         if (PWM) begin
             $display("Test 3 Failed at time %d PWM should have not been asserted",$time);
-            $fail();
+            $fatal();
         end
         $display("Test 3 Passed!            Generic Speed");
 
@@ -143,7 +143,7 @@ module ethan_ESC_interface_tb();
             @ (negedge clk);
             if (!PWM) begin
                 $display("Test 4 Failed at time %d PWM should have been asserted",$time);
-                $fail();
+                $fatal();
             end
         end
 
@@ -155,7 +155,7 @@ module ethan_ESC_interface_tb();
 
         if (PWM) begin
             $display("Test 4 Failed at time %d PWM should have not been asserted",$time);
-            $fail();
+            $fatal();
         end
         $display("Test 4 Passed!            Reset During Opperation");
 

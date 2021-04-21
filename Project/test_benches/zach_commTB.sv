@@ -61,11 +61,11 @@ module zach_CommTB();
 	@(posedge cmd_rdy) begin
 		if(cmd !== cmd2send) begin
 			$display("ERROR: command did not send correctly");
-			$fail;
+			$fatal;
 		end
 		if(data !== data2send) begin
 			$display("ERROR: data did not send correctly");
-			$fail;
+			$fatal;
 		end
 	end
 	
@@ -77,7 +77,7 @@ module zach_CommTB();
 	@(posedge clk) begin
 		if(cmd_rdy !== 0) begin
 			$display("clr_command_rdy failed");
-			$fail;
+			$fatal;
 		end
 		else begin
 			$display("clr_cmd_rdy passed");
@@ -104,11 +104,11 @@ module zach_CommTB();
 	@(posedge cmd_rdy) begin
 		if(cmd !== cmd2send) begin
 			$display("ERROR: command did not send correctly for all 0's");
-			$fail;
+			$fatal;
 		end
 		if(data !== data2send) begin
 			$display("ERROR: data did not send correctly for all 0's");
-			$fail;
+			$fatal;
 		end
 		else begin
 			$display("sending all 0's passed");
@@ -135,11 +135,11 @@ module zach_CommTB();
 	@(posedge cmd_rdy) begin
 		if(cmd !== cmd2send) begin
 			$display("ERROR: command did not send correctlyfor all 1's");
-			$fail;
+			$fatal;
 		end
 		if(data !== data2send) begin
 			$display("ERROR: data did not send correctly for all 1's");
-			$fail;
+			$fatal;
 		end
 		else begin
 			$display("sending all 1's passed");
