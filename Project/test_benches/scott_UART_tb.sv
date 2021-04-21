@@ -114,7 +114,7 @@ module scott_UART_tb();
 		
 		if (!error)
 			$display("YAHOO!! test passed");
-		$stop;
+		$finish;
 	end
 	always
 		#5 clk = ~clk;

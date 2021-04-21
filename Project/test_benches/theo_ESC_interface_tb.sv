@@ -166,7 +166,7 @@ module theo_ESC_interface_tb();
 
         if (fail) $display("TEST(S) FAILED.");
         else $display("TESTS PASSED.");
-        $stop;
+        $finish;
     end
 
     // make clk shorter than #5 to reduce sim time

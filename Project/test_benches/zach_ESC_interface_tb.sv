@@ -59,7 +59,7 @@ module zach_ESC_interface_tb();
 		end
 		repeat(6250)@(posedge clk);
 		@(posedge clk);
-		$stop;
+		$finish;
 	end
 	
 	always begin

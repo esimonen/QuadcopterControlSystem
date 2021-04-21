@@ -10,9 +10,9 @@ module theo_uart_tb();
 	logic tx_done, rdy;
 	logic clr_rdy;
 	
-	uart_tx iDUT_TX(.clk(clk), .rst_n(rst_n), .TX(serial), .trmt(trmt), .tx_data(tx_data), .tx_done(tx_done));
+	UART_tx iDUT_TX(.clk(clk), .rst_n(rst_n), .TX(serial), .trmt(trmt), .tx_data(tx_data), .tx_done(tx_done));
 	
-	uart_rcv iDUT_RCV(.clk(clk), .rst_n(rst_n), .RX(serial), .rdy(rdy), .rx_data(rx_data), .clr_rdy(clr_rdy));
+	UART_rcv iDUT_RCV(.clk(clk), .rst_n(rst_n), .RX(serial), .rdy(rdy), .rx_data(rx_data), .clr_rdy(clr_rdy));
 	
 	initial begin
 		clk = 0;
@@ -41,7 +41,7 @@ module theo_uart_tb();
 			begin: timeout1;
 				repeat (100000) @(posedge clk);
 				$display("DID NOT RECEIVE POSEDGE RDY OR DID NOT RECEIVE POSEDGE TX_DONE");
-				$stop;
+				$fail;
 			end
 			begin
 				// we don't *really* know which will come first,
@@ -67,7 +67,7 @@ module theo_uart_tb();
 		// sent data should equal received data
 		if (rx_data !== tx_data) begin
 			$display("FAIL. Read rx_data=%h but should have been tx_data=%h", rx_data, tx_data);
-			$stop;
+			$fail;
 		end;
 		
 		// (4) test clr_rdy signal
@@ -78,11 +78,11 @@ module theo_uart_tb();
 		@(posedge clk); // wait for clr_rdy to propogate through SR flop
 		if (rdy === 1'b1) begin
 			$display("FAIL. clr_rdy behavior is incorrect, rdy should have gone to 0");
-			$stop;
+			$fail;
 		end
 		
 		$display("ALL TESTS PASSED.");
-		$stop;
+		$finish;
 	end
 
 	always #5 clk = ~clk;

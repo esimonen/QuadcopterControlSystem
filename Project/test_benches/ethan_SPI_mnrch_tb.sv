@@ -70,7 +70,7 @@ module ethan_SPI_mnrch_tb();
             i = i + 1;
             if( i > 40000) begin
                 $display("Test 1 timed out");
-                $stop();
+                $fail();
             end
             @(negedge clk);
         end
@@ -91,7 +91,7 @@ module ethan_SPI_mnrch_tb();
         wait_timeout(2);
         if(INT !== 1)begin
             $display("Test 2 failed, expected INT == 1 and recieved %h",INT);
-            $stop();
+            $fail();
         end
 
         /*
@@ -169,7 +169,7 @@ module ethan_SPI_mnrch_tb();
         end
 
         $display("Yahoo! All tests passed!");
-        $stop();
+        $finish();
     end
 
 
@@ -192,7 +192,7 @@ module ethan_SPI_mnrch_tb();
             i = i + 1;
             if( i > 40000) begin //40000 cycles is more than enough for a transmission
                 $display("Test %2d timed out",test);
-                $stop();
+                $fail();
             end
             @(negedge clk);
         end
@@ -206,7 +206,7 @@ module ethan_SPI_mnrch_tb();
 
         if(rd_data[7:0] !== expected[7:0])begin
             $display("Test %2d requested: %2d failed, expected %2h and recieved %2h", test ,test2, expected[7:0], rd_data[7:0]);
-            $stop();
+            $fail();
         end 
     endtask       
 endmodule

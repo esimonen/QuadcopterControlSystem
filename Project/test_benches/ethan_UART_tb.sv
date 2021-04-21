@@ -71,14 +71,14 @@ module ethan_UART_tb();
             timeout += 1;
             if (timeout >= 40000) begin
                 $display("Test 1: timeout, rdy not recieved after %d clock cycles",timeout);
-                $stop();
+                $fail();
             end
         end
 
         //check that recieved is what is expected
         if(rx_data !== tx_data) begin
             $display("Test 1: Sent 8'h00 over tx_data, expected to recieve it. Instead recieved %8b", rx_data);
-            $stop();
+            $fail();
         end
 
         // wait for previous transmission to finish. Due to rcv being
@@ -105,14 +105,14 @@ module ethan_UART_tb();
             timeout += 1;
             if (timeout >= 40000) begin
                 $display("Test 2: timeout, rdy not recieved after %d clock cycles",timeout);
-                $stop();
+                $fail();
             end
         end
 
         //check that recieved is what is expected
         if(rx_data !== tx_data) begin
             $display("Test 2: Sent 8'hFF over tx_data, expected to recieve it. Instead recieved %8b", rx_data);
-            $stop();
+            $fail();
         end
 
         // wait for previous transmission to finish. Due to rcv being
@@ -138,14 +138,14 @@ module ethan_UART_tb();
             timeout += 1;
             if (timeout >= 40000) begin
                 $display("Test 3: timeout, rdy not recieved after %d clock cycles",timeout);
-                $stop();
+                $fail();
             end
         end
 
         //check that recieved is what is expected
         if(rx_data !== tx_data) begin
             $display("Test 3: Sent 8'hAA over tx_data, expected to recieve it. Instead recieved %8b", rx_data);
-            $stop();
+            $fail();
         end
 
         // wait for previous transmission to finish. Due to rcv being
@@ -172,14 +172,14 @@ module ethan_UART_tb();
             timeout += 1;
             if (timeout >= 40000) begin
                 $display("Test 4: timeout, rdy not recieved after %d clock cycles",timeout);
-                $stop();
+                $fail();
             end
         end
 
         //check that recieved is what is expected
         if(rx_data !== tx_data) begin
             $display("Test 4: Sent 8'h81 over tx_data, expected to recieve it. Instead recieved %8b", rx_data);
-            $stop();
+            $fail();
         end
         
         // wait for previous transmission to finish. Due to rcv being
@@ -197,21 +197,21 @@ module ethan_UART_tb();
         //check that rst_n is what is expected
         if(rdy !== 0) begin
             $display("Test 5 err, rst_n should reset rdy");
-            $stop();
+            $fail();
         end
         if(tx_done !== 0) begin
             $display("Test 5 err, rst_n should reset tx_done");
-            $stop();
+            $fail();
         end
         if(TX !== 1) begin
             $display("Test 5 err, rst_n should preset TX");
-            $stop();
+            $fail();
         end
 
 
         // Very Nice! All tests passed!
         $display("YAHOO! All tests passed!");
-        $stop();
+        $finish();
     end
 
 

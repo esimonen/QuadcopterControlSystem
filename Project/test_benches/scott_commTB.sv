@@ -165,7 +165,7 @@ module scott_CommTB();
 	
 	if (!error)
 			$display("YAHOO!! test passed");
-	$stop;
+	$finish;
   end
   
   always

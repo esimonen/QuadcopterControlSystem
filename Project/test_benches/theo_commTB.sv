@@ -124,7 +124,7 @@ module theo_CommTB();
 
     if (fail) $display("TEST(S) FAILED.");
     else $display("TESTS PASSED.");
-    $stop;
+    $finish;
 	
   end
   

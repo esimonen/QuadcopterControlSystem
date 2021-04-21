@@ -1,4 +1,4 @@
-module _ethaninert_intf_tb();
+module theo_inert_intf_tb();
 	
 	logic clk, rst_n;
 	logic MISO;					// SPI input from inertial sensor
@@ -27,7 +27,7 @@ module _ethaninert_intf_tb();
 			begin : timeout
 				repeat(210000)@(posedge clk);
 				$display("ERROR: timeout out waiting for NEMO_setup to assert");
-				$stop;
+				$fail;
 			end
 			begin
 				@(posedge iNemo.NEMO_setup);
@@ -44,7 +44,7 @@ module _ethaninert_intf_tb();
 			begin : timeout1
 				repeat(1000000)@(posedge clk);
 				$display("ERROR: timeout out waiting for cal_done to assert");
-				$stop;
+				$fail;
 			end
 			begin
 				@(posedge cal_done);
@@ -55,7 +55,7 @@ module _ethaninert_intf_tb();
 		// run for 8 million clocks
 		repeat(8000000) @(posedge clk);
 		
-		$stop;
+		$finish;
 		
 	end
 	

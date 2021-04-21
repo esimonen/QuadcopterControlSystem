@@ -72,7 +72,7 @@ initial begin
     end
     if (fail) $display("TEST(S) FAILED");
     else $display("ALL TESTS PASSED");
-    $stop;
+    $finish;
 end
 
 always #5 clk = ~clk;

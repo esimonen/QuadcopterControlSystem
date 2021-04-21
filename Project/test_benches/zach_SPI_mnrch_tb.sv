@@ -38,7 +38,7 @@ module zach_SPI_mnrch_tb();
 		@(posedge done) begin
 			if(rd_data[7:0] !== 8'h6A) begin
 				$display("initial read from constant register failed");
-				$stop;
+				$fail;
 			end
 		end
 		// perform reset
@@ -68,7 +68,7 @@ module zach_SPI_mnrch_tb();
 		@(posedge done) begin
 			if(rd_data[7:0] !== 8'h63) begin
 				$display("read pitchL failed");
-				$stop;
+				$fail;
 			end
 		end
 		
@@ -85,11 +85,11 @@ module zach_SPI_mnrch_tb();
 		@(posedge done) begin
 			if(rd_data[7:0] !== 8'h84) begin
 				$display("read AXH failed");
-				$stop;
+				$fail;
 			end
 		end
 		$display("yahoo all tests passed");
-		$stop;
+		$finish;
 	end
 	
 	// clock logic

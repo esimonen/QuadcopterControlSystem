@@ -167,7 +167,7 @@ module scott_SPI_mnrch_tb();
 		// if all tests pass, print a success message
 		if(!error)
 			$display("YAHOO!! Tests passed!");
-		$stop;
+		$finish;
 	end
 	
 	always

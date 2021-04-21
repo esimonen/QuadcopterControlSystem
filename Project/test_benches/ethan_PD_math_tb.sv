@@ -23,10 +23,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd0)  begin 
 				$display("Test %2d failed due to pterm. Expected 0 for neg max, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for neg max, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -42,10 +42,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'h2c0)  begin 
 				$display("Test %2d failed due to pterm. Expected -320 for neg max actual, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for neg max actual, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -61,10 +61,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'h000)  begin 
 				$display("Test %2d failed due to pterm. Expected 318 for neg max desired, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for neg max desired, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -80,10 +80,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd0)  begin 
 				$display("Test %2d failed due to pterm. Expected 0 for all 0, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for all 0, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -99,10 +99,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd0)  begin 
 				$display("Test %2d failed due to pterm. Expected 0 for max pos, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for max pos, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -120,10 +120,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd318)  begin 
 				$display("Test %2d failed due to pterm.expected 319, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for max pos, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -140,10 +140,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'h2c0)  begin 
 				$display("Test %2d failed due to pterm.expected 319, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for max pos, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -160,10 +160,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd0)  begin 
 				$display("Test %2d failed due to pterm.expected 0, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for max pos, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -181,10 +181,10 @@ module ethan_PD_math_tb();
 		  begin
 			if(pout != 10'd318)  begin 
 				$display("Test %2d failed due to pterm.expected 318, Received %h.",i,pout);
-				$stop();
+				$fail();
 			end else if(dout != 10'd0) begin
 				$display("Test %2d failed due to dterm. Expected 0 for max pos, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -209,7 +209,7 @@ module ethan_PD_math_tb();
 		  begin
 			if(dout != 10'h1c0) begin//overflow unaccounted for, this makes sense in our application
 				$display("Test %2d failed due to dterm. Expected 1c0, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
@@ -234,12 +234,12 @@ module ethan_PD_math_tb();
 		  begin
 			if(dout != 10'd170) begin
 				$display("Test %2d failed due to dterm. Expected 170, Received %h.",i,dout);
-				$stop();
+				$fail();
 			end else $display("Test %2d Passed!",i);
 		  end
 		join
 		
 		$display("All Tests Passed! YAHOO!");
-		$stop();
+		$finish();
 	end
 endmodule

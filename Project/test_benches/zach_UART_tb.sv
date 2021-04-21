@@ -35,7 +35,7 @@ end
 @(posedge rdy) begin	// assert that byte sent through trasmitter was sent and received successfully
 	if(rx_data !== 8'b11100100) begin
 		$display("error in first test");
-		$stop;
+		$fail;
 	end
 	clr_rdy = 1'b1;
 end
@@ -56,7 +56,7 @@ end
 @(posedge rdy) begin	// assert that byte sent through trasmitter was sent and received successfully
 	if(rx_data !== 8'b00000000) begin
 		$display("error in second test");
-		$stop;
+		$fail;
 	end
 	clr_rdy = 1'b1;
 end
@@ -77,13 +77,13 @@ end
 @(posedge rdy) begin	// assert that byte sent through trasmitter was sent and received successfully
 	if(rx_data !== 8'b11111111) begin
 		$display("error in third test");
-		$stop;
+		$fail;
 	end
 	clr_rdy = 1'b1;
 end
 
 $display("WOOHOO all tests passed");
-$stop;
+$finish;
 end
 
 // logic for clock

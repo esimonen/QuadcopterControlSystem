@@ -97,7 +97,7 @@ module scott_ESC_interface_tb();
 		// display good message if all tests passed
 		if (!error)
 			$display("YAHOO!! test passed");
-	$stop;
+	$finish;
 	end
 	
 	// clock signal
