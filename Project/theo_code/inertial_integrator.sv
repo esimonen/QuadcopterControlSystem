@@ -10,12 +10,18 @@ input signed [15:0] ptch_rt, roll_rt, yaw_rt;		// raw gyro rate readings from in
 input signed [15:0] ax,ay;							// raw accel readings from inert_intf
 output logic cal_done;				// asserted when calibration is completed
 output signed [15:0] ptch, roll, yaw;
+
+  ////////////////////////////////////////////////////////
+  // Internal registers (pipelined for timing reasons) //
+  //////////////////////////////////////////////////////
+  reg [24:0] ptch_g_product, roll_g_product;	// Used in fusion calculations
+  reg [26:0] ptch_int_part1, roll_int_part1;
+  reg signed [15:0] ptch_comp,roll_comp,yaw_comp;	// offset compensated gyro rate
+  reg vld_ff1,vld_ff2;							// pipe vld to keep synch
   
-  wire signed [15:0] ptch_comp,roll_comp,yaw_comp;	// offset compensated gyro rate readings
-  wire signed [24:0] ptch_g_product, roll_g_product;// used in fusion calculations
-  wire signed [15:0] ptch_g, roll_g;				// pitch and roll exclusively from accel (used in fusion)
-  wire signed [26:0] fusion_ptch;					// fusion term added or subtracted for leaking to ptch_g
-  wire signed [26:0] fusion_roll;					// fusion term added or subtracted for leaking to ptch_g
+  wire signed [15:0] ptch_g, roll_g;			// pitch and roll exclusively from accel (used in fusion)
+  wire signed [26:0] fusion_ptch;				// fusion term added or subtracted for leaking to ptch_g
+  wire signed [26:0] fusion_roll;				// fusion term added or subtracted for leaking to ptch_g
   
   /////////////////
   // SM outputs //
@@ -100,9 +106,11 @@ output signed [15:0] ptch, roll, yaw;
   // During calibration just purly integrate sign extended raw readings //
   // During actual run, we compensate by subtracting offset from raw   //
   //////////////////////////////////////////////////////////////////////
-  assign ptch_comp = (compensate_offset) ? ptch_rt-ptch_off : ptch_rt;
-  assign roll_comp = (compensate_offset) ? roll_rt-roll_off : roll_rt;
-  assign yaw_comp = (compensate_offset) ? yaw_rt-yaw_off : yaw_rt;
+  always_ff @(posedge clk) begin
+    ptch_comp = (compensate_offset) ? ptch_rt-ptch_off : ptch_rt;
+    roll_comp = (compensate_offset) ? roll_rt-roll_off : roll_rt;
+    yaw_comp <= (compensate_offset) ? yaw_rt-yaw_off : yaw_rt;
+  end
   
   ///////////////////////////////////////////////////
   // Integrate first 2048 samples to form average //
@@ -123,6 +131,27 @@ output signed [15:0] ptch, roll, yaw;
     assign enough_smpls = (smpl_cntr==12'h800) ? 1'b1 : 1'b0;
   endgenerate	
   
+  //////////////////////////////////////////////////////////
+  // Form intermediate integrator sum for timing reasons //
+  ////////////////////////////////////////////////////////
+  always_ff @(posedge clk) begin
+    ptch_int_part1 <= ptch_int + fusion_ptch;
+	roll_int_part1 <= roll_int + fusion_roll;
+  end
+  //// now pipeline vld signal ////
+  always_ff @(posedge clk, negedge rst_n)
+    if (!rst_n) begin
+	  vld_ff1 <= 1'b0;
+	  vld_ff2 <= 1'b0;
+	end else begin
+      vld_ff1 <= vld;
+	  vld_ff2 <= vld_ff1;
+	end
+	
+  ///////////////////////////////////////////////////////////////
+  // Now infer integrators to form angular position from rate //
+  // Also used during calibration to form average for offset //
+  ////////////////////////////////////////////////////////////
   always @(posedge clk, negedge rst_n)
     if (!rst_n) begin
 	  ptch_int <= 0;
@@ -132,14 +161,14 @@ output signed [15:0] ptch, roll, yaw;
 	  ptch_int <= 0;
 	  roll_int <= 0;
 	  yaw_int <= 0;
-	end else if (vld) begin
+	end else if (vld_ff2) begin
 	  ///////////////////////////////////////////////////////////////////
 	  // During calibration we use the integrators as accumulators to //
 	  // get an average of 2048 samples of each axis, which is later //
 	  // subtracted from each respective reading during RUN state   //
 	  ///////////////////////////////////////////////////////////////
-	  ptch_int <= ptch_int + {{11{ptch_comp[15]}},ptch_comp} + fusion_ptch;
-	  roll_int <= roll_int + {{11{roll_comp[15]}},roll_comp} + fusion_roll;
+	  ptch_int <= ptch_int_part1 + {{11{ptch_comp[15]}},ptch_comp};
+	  roll_int <= roll_int_part1 + {{11{roll_comp[15]}},roll_comp};
 	  yaw_int  <= yaw_int + {{11{yaw_comp[15]}},yaw_comp};
 	end
 	
@@ -213,9 +242,12 @@ output signed [15:0] ptch, roll, yaw;
 	////////////////////////////////////////////////////////////////////////
 	// Where did that 327 number come from?  Trial/error and observation //
 	//////////////////////////////////////////////////////////////////////
-	assign ptch_g_product = ay_avg*$signed(327);
+	/// registered for timing reasons //
+	always_ff @(posedge clk) begin
+	  ptch_g_product <= ay_avg*$signed(327);
+	  roll_g_product <= -ax_avg*$signed(327);
+	end
 	assign ptch_g = {{4{ptch_g_product[24]}},ptch_g_product[24:13]};
-	assign roll_g_product = -ax_avg*$signed(327);
 	assign roll_g = {{4{roll_g_product[24]}},roll_g_product[24:13]};
 	
     /////////////////////////////////////////////////////////////////////
@@ -224,9 +256,9 @@ output signed [15:0] ptch, roll, yaw;
 	// negative if ptch_g<ptch.  So "DC" reading approaches that of //
 	// what is calculated by the accel alone.                      //
 	////////////////////////////////////////////////////////////////
-	assign fusion_ptch = (!compensate_offset) ? 30'h00000000 :
-	                     (ptch_g>$signed(ptch)) ? 30'h00000800 : 30'hFFFFF800;
-	assign fusion_roll = (!compensate_offset) ? 30'h00000000 :
-	                     (roll_g>$signed(roll)) ? 30'h00000800 : 30'hFFFFF800;
+	assign fusion_ptch = (!compensate_offset) ? 27'h0000000 :
+	                     (ptch_g>$signed(ptch)) ? 27'h0000800 : 27'h7FFF800;
+	assign fusion_roll = (!compensate_offset) ? 27'h0000000 :
+	                     (roll_g>$signed(roll)) ? 27'h0000800 : 27'h7FFF800;
 
 endmodule
