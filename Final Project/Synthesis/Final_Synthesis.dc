@@ -28,7 +28,8 @@ set current_design QuadCopter
 #create the clock
 #3.75ns
 
-create_clock -name "clk" -period 3.75 {clk} # TODO: double check if default to 50% duty cycle
+# TODO: double check if default to 50% duty cycle
+create_clock -name "clk" -period 3.75 {clk}
 
 # remove synopsis' ability to buffer clk
 
