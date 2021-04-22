@@ -11,7 +11,7 @@ cModel Technology
 dC:/Users/darco/Desktop/QuadcopterControlSystem/Team Exercises/Ex19
 vcmd_cfg
 Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z1 !s110 1619061847
+Z1 !s110 1619113190
 !i10b 1
 !s100 z>?9>U4j<[BToX8A6K>?i0
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -22,13 +22,13 @@ Z4 dC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing
 Z5 w1618754564
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv
-!i122 12
+!i122 34
 L0 9 205
 Z6 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z7 !s108 1619061847.000000
+Z7 !s108 1619113190.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv|
 !i113 1
@@ -36,7 +36,7 @@ Z8 o-work work -sv
 Z9 tCvgOpt 0
 vCycloneIV
 R0
-R1
+Z10 !s110 1619113188
 !i10b 1
 !s100 1Gz_PE8mSbN[9g<IO>fOe3
 R2
@@ -44,25 +44,25 @@ I8n<L8[_Uo8J8aKGE6RLE`1
 R3
 S1
 R4
-Z10 w1618359860
-Z11 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv
-Z12 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv
-!i122 6
+Z11 w1618359860
+Z12 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv
+Z13 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv
+!i122 30
 L0 1 166
 R6
 r1
 !s85 0
 31
-R7
-Z13 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv|
-Z14 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv|
+Z14 !s108 1619113188.000000
+Z15 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv|
+Z16 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv|
 !i113 1
 R8
 R9
 n@cyclone@i@v
 vESC_interface
 R0
-Z15 !s110 1619061986
+Z17 !s110 1619113192
 !i10b 1
 !s100 n78FADlj[=?mVo?902<ZP3
 R2
@@ -70,16 +70,16 @@ IMS;A[<`akHDZ7SW:cjeLJ1
 R3
 S1
 R4
-Z16 w1619038090
+Z18 w1619038090
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv
-!i122 18
+!i122 40
 L0 4 40
 R6
 r1
 !s85 0
 31
-Z17 !s108 1619061986.000000
+Z19 !s108 1619113192.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv|
 !i113 1
@@ -88,7 +88,7 @@ R9
 n@e@s@c_interface
 vESCs
 R0
-R15
+R17
 !i10b 1
 !s100 UeE<QF;dJhbNN=@;@z6I?1
 R2
@@ -96,16 +96,16 @@ IfXC8[CS804jKm@iaDHl]@2
 R3
 S1
 R4
-R16
+R18
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv
-!i122 19
+!i122 41
 L0 2 21
 R6
 r1
 !s85 0
 31
-R17
+R19
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv|
 !i113 1
@@ -114,7 +114,7 @@ R9
 n@e@s@cs
 vflght_cntrl
 R0
-R15
+Z20 !s110 1619113193
 !i10b 1
 !s100 _=P@oScAPQ;Ca[_dZQCjL0
 R2
@@ -122,16 +122,16 @@ IR=6:PUDPZ0z202e;CUDe:3
 R3
 S1
 R4
-R16
+R18
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv
-!i122 20
+!i122 42
 L0 4 86
 R6
 r1
 !s85 0
 31
-R17
+R19
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv|
 !i113 1
@@ -139,7 +139,7 @@ R8
 R9
 vinert_intf
 R0
-R15
+R20
 !i10b 1
 !s100 cYm>6W_UJ4;SP9_0;:R4<0
 R2
@@ -147,16 +147,16 @@ IY4NYWiEB`>gZSFV00CQ;C2
 R3
 S1
 R4
-R16
+R18
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv
-!i122 21
+!i122 43
 L0 1 309
 R6
 r1
 !s85 0
 31
-R17
+Z21 !s108 1619113193.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv|
 !i113 1
@@ -164,7 +164,7 @@ R8
 R9
 vinertial_integrator
 R0
-R1
+Z22 !s110 1619113189
 !i10b 1
 !s100 >i?1XMdl:Y8le7DEzmMX;0
 R2
@@ -175,13 +175,13 @@ R4
 w1618353234
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv
-!i122 7
+!i122 31
 L0 1 264
 R6
 r1
 !s85 0
 31
-R7
+R14
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv|
 !i113 1
@@ -189,7 +189,7 @@ R8
 R9
 vinverse_ESC
 R0
-R1
+R10
 !i10b 1
 !s100 MNE2Szkh3DV[>l?az@gz_1
 R2
@@ -197,25 +197,25 @@ Ii^1W53[JfmB<FdQ<RNDo^3
 R3
 S1
 R4
-R10
 R11
 R12
-!i122 6
+R13
+!i122 30
 L0 171 37
 R6
 r1
 !s85 0
 31
-R7
-R13
 R14
+R15
+R16
 !i113 1
 R8
 R9
 ninverse_@e@s@c
 vPD_math
 R0
-Z18 !s110 1619062037
+R20
 !i10b 1
 !s100 OAbZN?`^oKFz3Mz@k[`U^2
 R2
@@ -223,16 +223,16 @@ I7ihSJ^cQlFZ0b1ER0l>0D0
 R3
 S1
 R4
-R16
+R18
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv
-!i122 22
+!i122 44
 L0 4 73
 R6
 r1
 !s85 0
 31
-Z19 !s108 1619062037.000000
+R21
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv|
 !i113 1
@@ -241,7 +241,7 @@ R9
 n@p@d_math
 vQuadCopter
 R0
-R1
+R22
 !i10b 1
 !s100 @56ccIoFf`IF:_h?XBfz50
 R2
@@ -252,13 +252,13 @@ R4
 w1618971839
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv
-!i122 8
+!i122 32
 L0 1 100
 R6
 r1
 !s85 0
 31
-R7
+Z23 !s108 1619113189.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv|
 !i113 1
@@ -266,62 +266,63 @@ R8
 R9
 n@quad@copter
 vQuadCopter_tb
+!s105 QuadCopter_tb_sv_unit
+DXx4 work 21 QuadCopter_tb_sv_unit 0 22 ^[[lIlOb=<b=OfP^U<2X?1
 R0
-Z20 !s110 1619103546
+Z24 !s110 1619114080
 !i10b 1
-!s100 Fn7CCeEfbH1WhBIb29?Mf0
+!s100 2]mVb8mTHIW=e:Enil>MU1
 R2
-I_W9`YeJ4S_K=LPDH3>]CQ0
+ISl9A@J?I:Ri;ORD@f@aOk1
 R3
 S1
 R4
-Z21 w1619063057
-Z22 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv
-Z23 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv
-Z24 Ftb_tasks.sv
-!i122 28
-L0 2 319
+w1619114034
+Z25 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv
+Z26 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv
+!i122 52
+L0 2 139
 R6
 r1
 !s85 0
 31
-!s108 1619103545.000000
-Z25 !s107 tb_tasks.sv|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv|
-Z26 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv|
+Z27 !s108 1619114080.000000
+Z28 !s107 tb_tasks.sv|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv|
+Z29 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv|
 !i113 1
 R8
 R9
 n@quad@copter_tb
 XQuadCopter_tb_sv_unit
 R0
-R1
-VXiR4ekXTjKV7doUM49Q9Y2
+R24
+V^[[lIlOb=<b=OfP^U<2X?1
 r1
 !s85 0
 !i10b 1
-!s100 l<lib9kb@^;DL<U;R^0NH3
-IXiR4ekXTjKV7doUM49Q9Y2
+!s100 aZ4PU<2ZYj9zT7n3d3Md70
+I^[[lIlOb=<b=OfP^U<2X?1
 !i103 1
 S1
 R4
-w1619061581
-R22
-R23
-R24
-!i122 9
-L0 8 0
-R6
-31
-R7
+w1619114071
 R25
 R26
+Ftb_tasks.sv
+!i122 52
+Z30 L0 19 0
+R6
+31
+R27
+R28
+R29
 !i113 1
 R8
 R9
 n@quad@copter_tb_sv_unit
 vRemoteComm
 R0
-R1
+Z31 !s110 1619113191
 !i10b 1
 !s100 VeL2Jz8]M68lX[[WEn3o63
 R2
@@ -332,7 +333,7 @@ R4
 R5
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/RemoteComm.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/RemoteComm.sv
-!i122 13
+!i122 35
 L0 1 114
 R6
 r1
@@ -347,7 +348,7 @@ R9
 n@remote@comm
 vreset_synch
 R0
-R18
+Z32 !s110 1619113194
 !i10b 1
 !s100 F0>3TP=z01nOHT<BGhhIY2
 R2
@@ -355,16 +356,16 @@ Ig;fJX?JEF?Y]m1AmDghGQ0
 R3
 S1
 R4
-R16
+R18
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv
-!i122 23
+!i122 45
 L0 1 27
 R6
 r1
 !s85 0
 31
-R19
+R21
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv|
 !i113 1
@@ -383,13 +384,13 @@ R4
 w1612420846
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv
-!i122 10
+!i122 33
 L0 1 207
 R6
 r1
 !s85 0
 31
-R7
+R23
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv|
 !i113 1
@@ -398,7 +399,7 @@ R9
 n@s@p@i_i@n@e@m@o3
 vSPI_mnrch
 R0
-!s110 1619062086
+R32
 !i10b 1
 !s100 _In_>z_d4d_i450>QP93i3
 R2
@@ -409,13 +410,13 @@ R4
 w1617198050
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv
-!i122 24
+!i122 46
 L0 1 128
 R6
 r1
 !s85 0
 31
-!s108 1619062086.000000
+!s108 1619113194.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv|
 !i113 1
@@ -424,24 +425,24 @@ R9
 n@s@p@i_mnrch
 Xtb_tasks_sv_unit
 R0
-R20
-VPk>51A4J3YU:<SmISdP6K3
+!s110 1619114898
+VLj4TPKCd`eaZJIWfVm_S<2
 r1
 !s85 0
 !i10b 1
-!s100 zR>RZ<dm4]nHi?c9FZzE^0
-IPk>51A4J3YU:<SmISdP6K3
+!s100 Mi8PQgb_ogcWHTV]B5mF72
+ILj4TPKCd`eaZJIWfVm_S<2
 !i103 1
 S1
 R4
-R21
+w1619114893
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/tb_tasks.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/tb_tasks.sv
-!i122 29
-L0 19 0
+!i122 54
+R30
 R6
 31
-!s108 1619103546.000000
+!s108 1619114898.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/tb_tasks.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/tb_tasks.sv|
 !i113 1
@@ -449,7 +450,7 @@ R8
 R9
 vuart
 R0
-R1
+R31
 !i10b 1
 !s100 Y1Q:SLPBLCN@CbP8<YREB1
 R2
@@ -460,13 +461,13 @@ R4
 R5
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv
-!i122 14
+!i122 36
 L0 1 25
 R6
 r1
 !s85 0
 31
-R7
+Z33 !s108 1619113191.000000
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv|
 !i113 1
@@ -474,7 +475,7 @@ R8
 R9
 vUART_comm
 R0
-R1
+R31
 !i10b 1
 !s100 S5nGBegbjI]J875GIm:VO2
 R2
@@ -485,13 +486,13 @@ R4
 R5
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv
-!i122 15
+!i122 37
 L0 1 140
 R6
 r1
 !s85 0
 31
-R7
+R33
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv|
 !i113 1
@@ -500,7 +501,7 @@ R9
 n@u@a@r@t_comm
 vuart_rcv
 R0
-Z27 !s110 1619061848
+R31
 !i10b 1
 !s100 hBg>K9BWkI]a8PGcNk:8S0
 R2
@@ -511,13 +512,13 @@ R4
 R5
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv
-!i122 16
+!i122 38
 L0 5 116
 R6
 r1
 !s85 0
 31
-R7
+R33
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv|
 !i113 1
@@ -525,7 +526,7 @@ R8
 R9
 vuart_tx
 R0
-R27
+R17
 !i10b 1
 !s100 @>z3AL`>?_o0F_dO=aUCJ2
 R2
@@ -536,13 +537,13 @@ R4
 R5
 8C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv
 FC:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv
-!i122 17
+!i122 39
 L0 4 114
 R6
 r1
 !s85 0
 31
-!s108 1619061848.000000
+R33
 !s107 C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv|
 !i113 1

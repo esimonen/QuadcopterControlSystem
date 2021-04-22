@@ -73,18 +73,24 @@ initial begin
         end
         begin
             send_packet();
-            check_cmd_cfg_outputs();
+            // check_cyclone_outputs();
             disable set_cal_done;
         end
     join   
 
+    // set thrst 
+    $display("Set Thrust");
+    cmd2send = STTHRST;
+    data2send = 16'h0045;
+    send_packet(send_cmd,clk,resp_rdy,resp);
+    //check_cyclone_outputs();
 
-    // set pitch 
+   /* // set pitch 
     $display("Set Pitch");
     cmd2send = STPTCH;
     data2send = 16'hBEEF;
     send_packet();
-    check_cmd_cfg_outputs();
+    check_cyclone_outputs();
 
     //check pitch is approaching desired
     repeat (2000000) @(posedge clk);
@@ -94,7 +100,7 @@ initial begin
     cmd2send = STRLL;
     data2send = 16'h1F4B;
     send_packet();
-    check_cmd_cfg_outputs();
+    check_cyclone_outputs();
 
     //check roll is approaching desired
     repeat (2000000) @(posedge clk);
@@ -104,36 +110,32 @@ initial begin
     cmd2send = STYW;
     data2send = 16'h8DA0;
     send_packet();
-    check_cmd_cfg_outputs();
+    check_cyclone_outputs();
 
     //check yaw is approaching desired
     repeat (2000000) @(posedge clk);
 
-    // set thrst 
-    $display("Set Thrust");
-    cmd2send = STTHRST;
-    data2send = 16'h0045;
-    send_packet();
-    check_cmd_cfg_outputs();
+    
 
     // Emergency Land
     $display("Emergency Land");
     cmd2send = EMER;
     data2send = 16'h0000;
     send_packet();
-    check_cmd_cfg_outputs();
+    check_cyclone_outputs();
     
     // Motors off
     $display("Motors Off");
     cmd2send = MTSOFF;
     send_packet();
-    check_cmd_cfg_outputs();
+    check_cyclone_outputs();*/
 
     $stop;
 
 end
-
+`include "tb_tasks.sv"
 always
     #10 clk = ~clk;
-`include "tb_tasks.sv"	
+	
 endmodule	
+
