@@ -1,0 +1,129 @@
+Reading pref.tcl
+
+# 2020.2_2
+
+# vsim -c work.theo_ESC_interface_tb -do "run -all" 
+# Start time: 22:30:37 on Apr 21,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 2020.2_2 linux Jun 13 2020
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.theo_ESC_interface_tb(fast)
+# run -all
+# (2-0) PWM should have been 1. Instead was 0
+# (3-0) PWM should have been 1. Instead was 0
+# (4-0) PWM should have been 1. Instead was 0
+# (5.2-0) PWM should have been 1. Instead was 0
+# (6-end.1) PWM should have been 0. Instead was 1
+# TEST(S) FAILED.
+# ** Note: $finish    : test_benches/theo_ESC_interface_tb.sv(169)
+#    Time: 313895 ns  Iteration: 1  Instance: /theo_ESC_interface_tb
+# End time: 22:30:38 on Apr 21,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+Reading pref.tcl
+
+# 2020.2_2
+
+# vsim -c work.scott_ESC_interface_tb -do "run -all" 
+# Start time: 22:30:39 on Apr 21,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 2020.2_2 linux Jun 13 2020
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.scott_ESC_interface_tb(fast)
+# run -all
+# YAHOO!! test passed
+# ** Note: $finish    : test_benches/scott_ESC_interface_tb.sv(100)
+#    Time: 531110 ns  Iteration: 1  Instance: /scott_ESC_interface_tb
+# End time: 22:30:40 on Apr 21,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+Reading pref.tcl
+
+# 2020.2_2
+
+# vsim -c work.zach_SPI_mnrch_tb -do "run -all" 
+# Start time: 22:30:40 on Apr 21,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 2020.2_2 linux Jun 13 2020
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.zach_SPI_mnrch_tb(fast)
+# run -all
+# yahoo all tests passed
+# ** Note: $finish    : test_benches/zach_SPI_mnrch_tb.sv(92)
+#    Time: 663095 ns  Iteration: 2  Instance: /zach_SPI_mnrch_tb
+# End time: 22:30:41 on Apr 21,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+Reading pref.tcl
+
+# 2020.2_2
+
+# vsim -c work.theo_cmd_cfg_tb -do "run -all" 
+# Start time: 22:30:42 on Apr 21,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 2020.2_2 linux Jun 13 2020
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.theo_cmd_cfg_tb_sv_unit(fast)
+# Loading work.theo_cmd_cfg_tb(fast)
+# run -all
+# CALIBRATE
+# Set Pitch
+# ** Error: Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of beef from data_in, instead recieved 7cef
+#    Time: 6133365 ns  Scope: theo_cmd_cfg_tb_sv_unit.check_cmd_cfg_outputs File: test_benches/theo_tb_tasks.sv Line: 85
+# ** Note: $stop    : test_benches/theo_tb_tasks.sv(86)
+#    Time: 6133365 ns  Iteration: 3  Instance: /theo_cmd_cfg_tb
+# Break at test_benches/theo_tb_tasks.sv line 86
+# Stopped at test_benches/theo_tb_tasks.sv line 86
+VSIM 2> Simulating theo_ESC_interface_tb :: vsim -c work.theo_ESC_interface_tb -do "run -all"
+Simulating scott_ESC_interface_tb :: vsim -c work.scott_ESC_interface_tb -do "run -all"
+Simulating zach_SPI_mnrch_tb :: vsim -c work.zach_SPI_mnrch_tb -do "run -all"
+Simulating theo_cmd_cfg_tb :: vsim -c work.theo_cmd_cfg_tb -do "run -all"

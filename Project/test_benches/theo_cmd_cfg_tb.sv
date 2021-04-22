@@ -1,4 +1,4 @@
-`include "tb_tasks.sv"
+`include "theo_tb_tasks.sv"
 /*
  * Team:            The Moorons
  * Course:          ECE551
@@ -6,7 +6,7 @@
  * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
  * Date:            4/12/2021
  */
-module cmd_cfg_tb();
+module theo_cmd_cfg_tb();
 
 reg clk;                // clock
 reg rst_n;              // active low asynch reset
@@ -89,6 +89,7 @@ initial begin
         end
     join   
 
+
     // set pitch 
     $display("Set Pitch");
     cmd2send = STPTCH;
@@ -130,7 +131,7 @@ initial begin
     send_packet();
     check_cmd_cfg_outputs();
 
-    $stop;
+    $finish;
 
 end
 
