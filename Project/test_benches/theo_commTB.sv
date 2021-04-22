@@ -91,7 +91,6 @@ module theo_CommTB();
     send_resp = 1'b1;
     @(posedge clk);
     send_resp = 1'b0;
-
     fork
     	begin: timeout_resp_sent_1
 		repeat (1000000) @(posedge clk);
@@ -102,7 +101,7 @@ module theo_CommTB();
 		disable timeout_resp_sent_1;
 	end
     join
-    if (respRcvd !== 8'hA5) begin
+   if (respRcvd !== 8'hA5) begin
       fail = 1;
       $display("FAILURE: @posedge of resp_sent, iREMOTE's respRcvd=%h, should have been %h", respRcvd, resp);
     end
@@ -148,7 +147,7 @@ module theo_CommTB();
 		$fatal("FATAL: Timed out waiting fo timeout_resp_rdy_2");
 	end
 	begin
-		@(posedge respRcvd);
+		@(posedge resp_sent);
 		disable timeout_resp_rdy_2;
 	end
     join

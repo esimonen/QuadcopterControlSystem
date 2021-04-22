@@ -2,7 +2,7 @@
 // Theo Hornung
 // ece 551
 // ex13
-module uart_rcv(clk, rst_n, RX, rdy, rx_data, clr_rdy);
+module UART_rcv(clk, rst_n, RX, rdy, rx_data, clr_rdy);
 
 	input clk;
 	input rst_n;

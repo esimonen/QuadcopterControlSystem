@@ -1,7 +1,7 @@
 // Theo Hornung
 // ece 551
 // ex12
-module uart_tx(clk, rst_n, TX, trmt, tx_data, tx_done);
+module UART_tx(clk, rst_n, TX, trmt, tx_data, tx_done);
 
 	input clk;
 	input rst_n;

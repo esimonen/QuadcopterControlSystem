@@ -3,7 +3,7 @@ Reading pref.tcl
 # 2020.2_2
 
 # vsim -c work.theo_ESC_interface_tb -do "run -all" 
-# Start time: 22:13:13 on Apr 21,2021
+# Start time: 07:56:12 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -25,14 +25,14 @@ Reading pref.tcl
 # TESTS PASSED.
 # ** Note: $finish    : test_benches/theo_ESC_interface_tb.sv(169)
 #    Time: 313895 ns  Iteration: 1  Instance: /theo_ESC_interface_tb
-# End time: 22:13:14 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:13 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_ESC_interface_tb -do "run -all" 
-# Start time: 22:13:14 on Apr 21,2021
+# Start time: 07:56:13 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26600,14 +26600,14 @@ Reading pref.tcl
 # ERROR: PWM was high for       12390 clks when it should have been high for 12391
 # ** Note: $finish    : test_benches/scott_ESC_interface_tb.sv(100)
 #    Time: 531110 ns  Iteration: 1  Instance: /scott_ESC_interface_tb
-# End time: 22:13:15 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:15 on Apr 22,2021, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.zach_SPI_mnrch_tb -do "run -all" 
-# Start time: 22:13:16 on Apr 21,2021
+# Start time: 07:56:15 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26629,14 +26629,14 @@ Reading pref.tcl
 # yahoo all tests passed
 # ** Note: $finish    : test_benches/zach_SPI_mnrch_tb.sv(92)
 #    Time: 663215 ns  Iteration: 2  Instance: /zach_SPI_mnrch_tb
-# End time: 22:13:17 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:16 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.theo_cmd_cfg_tb -do "run -all" 
-# Start time: 22:13:18 on Apr 21,2021
+# Start time: 07:56:17 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26665,14 +26665,14 @@ Reading pref.tcl
 # Motors Off
 # ** Note: $finish    : test_benches/theo_cmd_cfg_tb.sv(134)
 #    Time: 11344195 ns  Iteration: 3  Instance: /theo_cmd_cfg_tb
-# End time: 22:13:19 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:19 on Apr 22,2021, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.ethan_UART_tb -do "run -all" 
-# Start time: 22:13:20 on Apr 21,2021
+# Start time: 07:56:19 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26691,19 +26691,17 @@ Reading pref.tcl
 # Loading sv_std.std
 # Loading work.ethan_UART_tb(fast)
 # run -all
-# Test 2: Sent 8'hFF over tx_data, expected to recieve it. Instead recieved 11111110
-# ** Fatal: Assertion error.
-#    Time: 442930 ns  Scope: ethan_UART_tb File: test_benches/ethan_UART_tb.sv Line: 115
-# ** Note: $finish    : test_benches/ethan_UART_tb.sv(115)
-#    Time: 442930 ns  Iteration: 1  Instance: /ethan_UART_tb
-# End time: 22:13:21 on Apr 21,2021, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 0
+# YAHOO! All tests passed!
+# ** Note: $finish    : test_benches/ethan_UART_tb.sv(214)
+#    Time: 1042170 ns  Iteration: 1  Instance: /ethan_UART_tb
+# End time: 07:56:20 on Apr 22,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.zach_CommTB -do "run -all" 
-# Start time: 22:13:22 on Apr 21,2021
+# Start time: 07:56:21 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26728,14 +26726,14 @@ Reading pref.tcl
 # YAHOO all tests passed!
 # ** Note: $finish    : test_benches/zach_commTB.sv(149)
 #    Time: 2305835 ns  Iteration: 2  Instance: /zach_CommTB
-# End time: 22:13:23 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:22 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_SPI_mnrch_tb -do "run -all" 
-# Start time: 22:13:23 on Apr 21,2021
+# Start time: 07:56:23 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26757,14 +26755,14 @@ Reading pref.tcl
 # YAHOO!! Tests passed!
 # ** Note: $finish    : test_benches/scott_SPI_mnrch_tb.sv(170)
 #    Time: 668365 ns  Iteration: 2  Instance: /scott_SPI_mnrch_tb
-# End time: 22:13:24 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:24 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.theo_uart_tb -do "run -all" 
-# Start time: 22:13:25 on Apr 21,2021
+# Start time: 07:56:25 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26783,19 +26781,19 @@ Reading pref.tcl
 # Loading sv_std.std
 # Loading work.theo_uart_tb(fast)
 # run -all
-# RX DONE at time = 221485
-# TX DONE at time = 234495
+# RX DONE at time = 247545
+# TX DONE at time = 260545
 # ALL TESTS PASSED.
 # ** Note: $finish    : test_benches/theo_UART_tb.sv(85)
-#    Time: 234525 ns  Iteration: 1  Instance: /theo_uart_tb
-# End time: 22:13:26 on Apr 21,2021, Elapsed time: 0:00:01
+#    Time: 260575 ns  Iteration: 1  Instance: /theo_uart_tb
+# End time: 07:56:25 on Apr 22,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_flght_cntrl_chk_tb -do "run -all" 
-# Start time: 22:13:27 on Apr 21,2021
+# Start time: 07:56:26 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26817,14 +26815,14 @@ Reading pref.tcl
 # YAHOO!! test passed
 # ** Note: $finish    : test_benches/scott_flght_cntrl_chk_tb.sv(77)
 #    Time: 19996 ns  Iteration: 0  Instance: /scott_flght_cntrl_chk_tb
-# End time: 22:13:27 on Apr 21,2021, Elapsed time: 0:00:00
+# End time: 07:56:27 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.zach_ESC_interface_tb -do "run -all" 
-# Start time: 22:13:28 on Apr 21,2021
+# Start time: 07:56:28 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26845,14 +26843,14 @@ Reading pref.tcl
 # run -all
 # ** Note: $finish    : test_benches/zach_ESC_interface_tb.sv(62)
 #    Time: 190025 ns  Iteration: 1  Instance: /zach_ESC_interface_tb
-# End time: 22:13:29 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:29 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.theo_flight_control_check_tb -do "run -all" 
-# Start time: 22:13:30 on Apr 21,2021
+# Start time: 07:56:29 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26874,14 +26872,14 @@ Reading pref.tcl
 # ALL TESTS PASSED
 # ** Note: $finish    : test_benches/theo_flght_cntrl_chk_tb.sv(75)
 #    Time: 19996 ns  Iteration: 0  Instance: /theo_flight_control_check_tb
-# End time: 22:13:31 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:30 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work._ethaninert_intf_tb -do "run -all" 
-# Start time: 22:13:31 on Apr 21,2021
+# Start time: 07:56:31 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26902,14 +26900,14 @@ Reading pref.tcl
 # run -all
 # ** Note: $finish    : test_benches/ethan_inert_intf_tb.sv(58)
 #    Time: 83310725 ns  Iteration: 1  Instance: /_ethaninert_intf_tb
-# End time: 22:13:35 on Apr 21,2021, Elapsed time: 0:00:04
+# End time: 07:56:34 on Apr 22,2021, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_CommTB -do "run -all" 
-# Start time: 22:13:35 on Apr 21,2021
+# Start time: 07:56:35 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26931,14 +26929,14 @@ Reading pref.tcl
 # YAHOO!! test passed
 # ** Note: $finish    : test_benches/scott_commTB.sv(168)
 #    Time: 3087355 ns  Iteration: 2  Instance: /scott_CommTB
-# End time: 22:13:36 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:36 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.theo_CommTB -do "run -all" 
-# Start time: 22:13:37 on Apr 21,2021
+# Start time: 07:56:36 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26961,18 +26959,17 @@ Reading pref.tcl
 # ASSERTING SEND_CMD
 # (1) cmd GOOD
 # ASSERTING SEND_CMD
-# FAILURE: @posedge of resp_sent, iREMOTE's respRcvd=69, should have been 46
-# TEST(S) FAILED.
-# ** Note: $finish    : test_benches/theo_commTB.sv(164)
-#    Time: 1862895 ns  Iteration: 3  Instance: /theo_CommTB
-# End time: 22:13:38 on Apr 21,2021, Elapsed time: 0:00:01
+# TESTS PASSED.
+# ** Note: $finish    : test_benches/theo_commTB.sv(163)
+#    Time: 2058255 ns  Iteration: 3  Instance: /theo_CommTB
+# End time: 07:56:37 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.zach_flght_cntrl_chk_tb -do "run -all" 
-# Start time: 22:13:39 on Apr 21,2021
+# Start time: 07:56:38 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -26994,14 +26991,14 @@ Reading pref.tcl
 # YAHOO all tests passed
 # ** Note: $finish    : test_benches/zach_flght_cntrl_chk_tb.sv(79)
 #    Time: 19996 ns  Iteration: 0  Instance: /zach_flght_cntrl_chk_tb
-# End time: 22:13:40 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:39 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.ethan_SPI_mnrch_tb -do "run -all" 
-# Start time: 22:13:40 on Apr 21,2021
+# Start time: 07:56:40 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27023,14 +27020,14 @@ Reading pref.tcl
 # Yahoo! All tests passed!
 # ** Note: $finish    : test_benches/ethan_SPI_mnrch_tb.sv(172)
 #    Time: 20979470 ns  Iteration: 1  Instance: /ethan_SPI_mnrch_tb
-# End time: 22:13:42 on Apr 21,2021, Elapsed time: 0:00:02
+# End time: 07:56:41 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_UART_tb -do "run -all" 
-# Start time: 22:13:42 on Apr 21,2021
+# Start time: 07:56:42 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27056,15 +27053,15 @@ Reading pref.tcl
 # Done 3
 # clr_rdy did not clear the ready signal
 # ** Note: $finish    : test_benches/scott_UART_tb.sv(117)
-#    Time: 1367845 ns  Iteration: 1  Instance: /scott_UART_tb
-# End time: 22:13:43 on Apr 21,2021, Elapsed time: 0:00:01
+#    Time: 1524205 ns  Iteration: 1  Instance: /scott_UART_tb
+# End time: 07:56:43 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.scott_inert_intf_tb -do "run -all" 
-# Start time: 22:13:44 on Apr 21,2021
+# Start time: 07:56:44 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27085,14 +27082,14 @@ Reading pref.tcl
 # run -all
 # ** Note: $finish    : test_benches/scott_inert_intf_tb.sv(57)
 #    Time: 83310725 ns  Iteration: 1  Instance: /scott_inert_intf_tb
-# End time: 22:13:47 on Apr 21,2021, Elapsed time: 0:00:03
+# End time: 07:56:46 on Apr 22,2021, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.theo_inert_intf_tb -do "run -all" 
-# Start time: 22:13:47 on Apr 21,2021
+# Start time: 07:56:47 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27113,14 +27110,14 @@ Reading pref.tcl
 # run -all
 # ** Note: $finish    : test_benches/theo_inert_intf_tb.sv(58)
 #    Time: 83310725 ns  Iteration: 1  Instance: /theo_inert_intf_tb
-# End time: 22:13:50 on Apr 21,2021, Elapsed time: 0:00:03
+# End time: 07:56:50 on Apr 22,2021, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.ethan_CommTB -do "run -all" 
-# Start time: 22:13:51 on Apr 21,2021
+# Start time: 07:56:51 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27142,14 +27139,14 @@ Reading pref.tcl
 # yahoo! tests passed!
 # ** Note: $finish    : test_benches/ethan_commTB.sv(318)
 #    Time: 3634460 ns  Iteration: 1  Instance: /ethan_CommTB
-# End time: 22:13:52 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:52 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.zach_UART_tb -do "run -all" 
-# Start time: 22:13:53 on Apr 21,2021
+# Start time: 07:56:53 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27170,15 +27167,15 @@ Reading pref.tcl
 # run -all
 # WOOHOO all tests passed
 # ** Note: $finish    : test_benches/zach_UART_tb.sv(86)
-#    Time: 664445 ns  Iteration: 2  Instance: /zach_UART_tb
-# End time: 22:13:54 on Apr 21,2021, Elapsed time: 0:00:01
+#    Time: 742625 ns  Iteration: 2  Instance: /zach_UART_tb
+# End time: 07:56:54 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.ethan_ESC_interface_tb -do "run -all" 
-# Start time: 22:13:54 on Apr 21,2021
+# Start time: 07:56:54 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27204,14 +27201,14 @@ Reading pref.tcl
 # YAHOO! All Tests Passed!
 # ** Note: $finish    : test_benches/ethan_ESC_interface_tb.sv(163)
 #    Time: 309780 ns  Iteration: 1  Instance: /ethan_ESC_interface_tb
-# End time: 22:13:55 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:55 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Reading pref.tcl
 
 # 2020.2_2
 
 # vsim -c work.ethan_flght_cntrl_chk_tb -do "run -all" 
-# Start time: 22:13:56 on Apr 21,2021
+# Start time: 07:56:56 on Apr 22,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 2020.2_2 linux Jun 13 2020
@@ -27233,7 +27230,7 @@ Reading pref.tcl
 # YAHOO! All tests passed!
 # ** Note: $finish    : test_benches/ethan_flght_cntrl_chk_tb.sv(63)
 #    Time: 19996 ns  Iteration: 0  Instance: /ethan_flght_cntrl_chk_tb
-# End time: 22:13:57 on Apr 21,2021, Elapsed time: 0:00:01
+# End time: 07:56:57 on Apr 22,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 Simulating theo_ESC_interface_tb :: vsim -c work.theo_ESC_interface_tb -do "run -all"
 Simulating scott_ESC_interface_tb :: vsim -c work.scott_ESC_interface_tb -do "run -all"
