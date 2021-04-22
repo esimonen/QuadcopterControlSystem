@@ -64,8 +64,17 @@ module theo_CommTB();
     $display("ASSERTING SEND_CMD");
     @(posedge clk);
     send_cmd = 0;
-
-    @(posedge cmd_rdy);
+    
+    fork
+	begin: timeout_cmd_rdy_1
+		repeat (1000000) @(posedge clk);
+		$fatal("FATAL: Waiting for timeout_cmd_rdy_1");
+	end
+	begin
+		@(posedge cmd_rdy);
+		disable timeout_cmd_rdy_1;
+	end
+    join
     assert(cmd == 8'hA1) $display("(1) cmd GOOD");
     else begin
       $error("(1) cmd ERR: @posedge of cmd_rdy, iQUAD's cmd=%h, should have been %h", cmd, cmd2send);
@@ -83,7 +92,16 @@ module theo_CommTB();
     @(posedge clk);
     send_resp = 1'b0;
 
-    @(posedge resp_sent);
+    fork
+    	begin: timeout_resp_sent_1
+		repeat (1000000) @(posedge clk);
+		$fatal("FATAL: Timed out waiting for timeout_resp_sent_1");
+	end
+	begin
+		@(posedge resp_sent);
+		disable timeout_resp_sent_1;
+	end
+    join
     if (respRcvd !== 8'hA5) begin
       fail = 1;
       $display("FAILURE: @posedge of resp_sent, iREMOTE's respRcvd=%h, should have been %h", respRcvd, resp);
@@ -98,7 +116,16 @@ module theo_CommTB();
     @(posedge clk);
     send_cmd = 0;
 
-    @(posedge cmd_rdy);
+    fork
+    	begin: timeout_cmd_rdy_2
+		repeat (1000000) @(posedge clk);
+		$fatal("FATAL: Timed out waiting for timeout_cmd_rdy_2");
+	end
+	begin
+		@(posedge cmd_rdy);
+		disable timeout_cmd_rdy_2;
+	end
+    join
     if (cmd !== 8'h23) begin
       fail = 1;
       $display("FAILURE: @posedge of cmd_rdy, iQUAD's cmd=%h, should have been %h", cmd, cmd2send);
@@ -115,7 +142,17 @@ module theo_CommTB();
     @(posedge clk);
     send_resp = 1'b0;
 
-    @(posedge resp_sent);
+    fork
+    	begin: timeout_resp_rdy_2
+		repeat (1000000) @(posedge clk);
+		$fatal("FATAL: Timed out waiting fo timeout_resp_rdy_2");
+	end
+	begin
+		@(posedge respRcvd);
+		disable timeout_resp_rdy_2;
+	end
+    join
+
     if (respRcvd !== 8'h46) begin
       fail = 1;
       $display("FAILURE: @posedge of resp_sent, iREMOTE's respRcvd=%h, should have been %h", respRcvd, resp);

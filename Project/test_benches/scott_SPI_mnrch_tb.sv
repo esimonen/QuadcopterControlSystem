@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+//`timescale 1ns/1ps
 module scott_SPI_mnrch_tb();
 	
 	logic clk, rst_n; // 50 MHz clock and asynchronous active low reset

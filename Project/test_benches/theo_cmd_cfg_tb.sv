@@ -1,4 +1,4 @@
-`include "../tasks/tb_tasks.sv"
+`include "theo_tb_tasks.sv"
 /*
  * Team:            The Moorons
  * Course:          ECE551

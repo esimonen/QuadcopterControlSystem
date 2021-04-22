@@ -20,25 +20,24 @@ modules = []
 
 # read all test bench files
 for tb in benches:
-    match = [line for line in open(tb) if re.match(r'module .*\(',line)][0].split(' ')[1].split('(')[0]
-    test_benches.append(tb)
+    lines = [line for line in open(tb) if re.match(r'module .*\(',line)]
+    if lines: # check here bc tb_tasks doesn't follow regex
+        test_benches.append(lines[0].split(' ')[1].split('(')[0])
 
-#print(test_benches[0].split('/')[1].split('.')[0]);
+#print(test_benches);
 #exit()
 
 # compile all source files
 subprocess.check_output(['vlog' , '-work', 'work', os.path.join(src_dir, '*.sv')])
 # compile tasks
-subprocess.check_output(['vlog', '-work' , 'work', './tasks/tb_tasks.sv'])
+subprocess.check_output(['vlog', '-work' , 'work', './test_benches/*_tb_tasks.sv'])
 
 # compile all test benches
-for tb in test_benches:
-    print("Compiling " + tb)
-    subprocess.check_output(['vlog', '-work', 'work',  tb])
+subprocess.check_output(['vlog', '-work', 'work', os.path.join(bench_dir, '*.sv')])
 
 # test each test bench
 for tb in test_benches:
     cmd = "vsim -c work." + tb + ' -do "run -all"'
     print("Simulating " + tb + " :: " + cmd)
-    subprocess.run(["vsim", "-c", "work." + tb.split('/')[1].split('.')[0], "-do", 'run -all'])
+    subprocess.run(["vsim", "-c", "work." + tb, "-do", 'run -all'])#, stdout=subprocess.DEVNULL)
 
