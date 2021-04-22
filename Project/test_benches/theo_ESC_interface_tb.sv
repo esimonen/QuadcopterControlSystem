@@ -35,7 +35,7 @@ module theo_ESC_interface_tb();
         @(posedge clk);
         wrt = 0;
         // pwm high for 6250 clks
-        for (i = MIN_PWM_CLKS; i >= 0; i--) begin
+        for (i = MIN_PWM_CLKS; i > 0; i--) begin
             @(posedge clk);
             if (pwm !== 1'b1) begin
                 fail = 1;
@@ -56,7 +56,7 @@ module theo_ESC_interface_tb();
         @(posedge clk);
         wrt = 0;
         // pwm high for 6250 + 2047*3 clks
-        for (i = MIN_PWM_CLKS + 6141; i >= 0; i--) begin
+        for (i = MIN_PWM_CLKS + 6141; i > 0; i--) begin
             @(posedge clk);
             if (pwm !== 1'b1) begin
                 fail = 1;
@@ -76,7 +76,7 @@ module theo_ESC_interface_tb();
         @(posedge clk);
         wrt = 0;
         // pwm high for 6250 + 33*3 clks
-        for (i = MIN_PWM_CLKS + 99; i >= 0; i--) begin
+        for (i = MIN_PWM_CLKS + 99; i > 0; i--) begin
             @(posedge clk);
             if (pwm !== 1'b1) begin
                 fail = 1;
@@ -109,7 +109,7 @@ module theo_ESC_interface_tb();
         @(posedge clk);
         wrt = 0;
         // pwm high for 6250 clks before interrupting w/ wrt
-        for (i = MIN_PWM_CLKS; i >= 0; i--) begin
+        for (i = MIN_PWM_CLKS; i > 0; i--) begin
             @(posedge clk);
             if (pwm !== 1'b1) begin
                 fail = 1;
