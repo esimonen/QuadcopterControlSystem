@@ -1,6 +1,6 @@
-`include "tb_tasks.sv"
+
 module QuadCopter_tb();
-			
+		
 //// Interconnects to DUT/support defined as type wire /////
 wire SS_n,SCLK,MOSI,MISO,INT;
 wire RX,TX;
@@ -14,10 +14,21 @@ reg [7:0] host_cmd;				// command host is sending to DUT
 reg [15:0] data;				// data associated with command
 reg send_cmd;					// asserted to initiate sending of command
 reg clr_resp_rdy;				// asserted to knock down resp_rdy
-
 wire [7:0] LED;
 
 //// Maybe define some localparams for command encoding ///
+
+logic [7:0] cmd2send; //sends the command with tasks
+logic [15:0] data2send; //sends the data
+
+// local params for commands
+localparam STPTCH   = 8'h02;
+localparam STRLL    = 8'h03;
+localparam STYW     = 8'h04;
+localparam STTHRST  = 8'h05;
+localparam CAL      = 8'h06;
+localparam EMER     = 8'h07;
+localparam MTSOFF   = 8'h08;
 
 ////////////////////////////////////////////////////////////////
 // Instantiate Physical Model of Copter with Inertial sensor //
@@ -39,14 +50,14 @@ RemoteComm iREMOTE(.clk(clk), .rst_n(RST_n), .RX(TX), .TX(RX),
 					 .cmd_sent(cmd_sent), .resp_rdy(resp_rdy),
 					 .resp(resp), .clr_resp_rdy(clr_resp_rdy));
 initial begin
-    rst_n = 1;
+    RST_n = 1;
     clk = 0;
-    snd_cmd = 0;
+    send_cmd = 0;
     @(posedge clk);
-        rst_n = 0;
+        RST_n = 0;
 
     @(posedge clk); // wait a clock cycle
-    @(negedge clk) rst_n = 1; // deassert reset
+    @(negedge clk) RST_n = 1; // deassert reset
     
     // Call tasks
 
@@ -56,9 +67,9 @@ initial begin
     fork
         begin: set_cal_done
             repeat (500000) @(posedge clk);
-            cal_done = 1;
+            //cal_done = 1;
             @(posedge clk);
-            cal_done = 0;
+            //cal_done = 0;
         end
         begin
             send_packet();
@@ -122,8 +133,7 @@ initial begin
 
 end
 
-
 always
     #10 clk = ~clk;
-
+`include "tb_tasks.sv"	
 endmodule	

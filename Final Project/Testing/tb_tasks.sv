@@ -5,12 +5,23 @@
  * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
  * Date:            4/14/2021
  */
+
+// send_packet
+//
+// Fun little task to send a packet od data to our quadcopter (DUT)
+//
+// Requires no values for an input, but does read values from the tb:
+// send_cmd:
+// clk: clock singal 
+// cmd_rdy:
+// cal_done:
+// resp_rdy:
 task send_packet;
     
     begin
         // set the command to be sent to cmd_cfg through RemoteComm
-        @(posedge QuadCopter_tb.clk) QuadCopter_tb.snd_cmd = 1'b1;
-        @(posedge QuadCopter_tb.clk) QuadCopter_tb.snd_cmd = 1'b0;
+        @(posedge QuadCopter_tb.clk) QuadCopter_tb.send_cmd = 1'b1;
+        @(posedge QuadCopter_tb.clk) QuadCopter_tb.send_cmd = 1'b0;
         fork
             // wait until the command is received in the UART
             begin: timeout_cmd_rdy

@@ -1,0 +1,121 @@
+{C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_PD_math.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module PD_math
+
+Top level modules:
+	PD_math
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module uart
+
+Top level modules:
+	uart
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_comm.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module UART_comm
+
+Top level modules:
+	UART_comm
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_tx.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module uart_tx
+
+Top level modules:
+	uart_tx
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module QuadCopter
+
+Top level modules:
+	QuadCopter
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_inert_intf.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module inert_intf
+
+Top level modules:
+	inert_intf
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESC_interface.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ESC_interface
+
+Top level modules:
+	ESC_interface
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_mnrch.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module SPI_mnrch
+
+Top level modules:
+	SPI_mnrch
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/cmd_cfg.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module cmd_cfg
+
+Top level modules:
+	cmd_cfg
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/CycloneIV.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module CycloneIV
+-- Compiling module inverse_ESC
+
+Top level modules:
+	CycloneIV
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_ESCs.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ESCs
+
+Top level modules:
+	ESCs
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/UART_rcv.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module uart_rcv
+
+Top level modules:
+	uart_rcv
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/SPI_iNEMO3.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module SPI_iNEMO3
+
+Top level modules:
+	SPI_iNEMO3
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/inertial_integrator.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module inertial_integrator
+
+Top level modules:
+	inertial_integrator
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_flght_cntrl.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module flght_cntrl
+
+Top level modules:
+	flght_cntrl
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/theo_reset_synch.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module reset_synch
+
+Top level modules:
+	reset_synch
+
+} {} {}} {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/RemoteComm.sv} {1 {vlog -work work -sv -stats=none {C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/RemoteComm.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module RemoteComm
+
+Top level modules:
+	RemoteComm
+
+} {} {}}

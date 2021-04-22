@@ -1,0 +1,71 @@
+# Compile of QuadCopter_tb.sv was successful with warnings.
+# Compile of tb_tasks.sv was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.QuadCopter_tb
+# vsim work.QuadCopter_tb 
+# Start time: 10:01:49 on Apr 22,2021
+# Loading sv_std.std
+# Loading work.QuadCopter_tb
+# Loading work.CycloneIV
+# Loading work.reset_synch
+# Loading work.SPI_iNEMO3
+# Loading work.inverse_ESC
+# Loading work.QuadCopter
+# Loading work.UART_comm
+# Loading work.uart
+# Loading work.uart_tx
+# Loading work.uart_rcv
+# Loading work.cmd_cfg
+# Loading work.inert_intf
+# Loading work.SPI_mnrch
+# Loading work.inertial_integrator
+# Loading work.flght_cntrl
+# Loading work.PD_math
+# Loading work.ESCs
+# Loading work.ESC_interface
+# Loading work.RemoteComm
+# ** Warning: (vsim-3008) [CNNODP] - Component name (cal_done) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 48
+# ** Error: (vsim-3043) Unresolved reference to 'cal_done' in QuadCopter_tb.cal_done.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 48
+# ** Warning: (vsim-3008) [CNNODP] - Component name (cmd_rdy) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 33
+# ** Error: (vsim-3043) Unresolved reference to 'cmd_rdy' in QuadCopter_tb.cmd_rdy.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 33
+# ** Warning: (vsim-3008) [CNNODP] - Component name (inertial_cal) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 39
+# ** Error: (vsim-3043) Unresolved reference to 'inertial_cal' in QuadCopter_tb.inertial_cal.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 39
+# ** Warning: (vsim-3008) [CNNODP] - Component name (resp_out) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 66
+# ** Error: (vsim-3043) Unresolved reference to 'resp_out' in QuadCopter_tb.resp_out.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 66
+# ** Warning: (vsim-3008) [CNNODP] - Component name (d_ptch) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 94
+# ** Error: (vsim-3043) Unresolved reference to 'd_ptch' in QuadCopter_tb.d_ptch.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 94
+# ** Warning: (vsim-3008) [CNNODP] - Component name (d_roll) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 106
+# ** Error: (vsim-3043) Unresolved reference to 'd_roll' in QuadCopter_tb.d_roll.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 106
+# ** Warning: (vsim-3008) [CNNODP] - Component name (d_yaw) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 118
+# ** Error: (vsim-3043) Unresolved reference to 'd_yaw' in QuadCopter_tb.d_yaw.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 118
+# ** Warning: (vsim-3008) [CNNODP] - Component name (motors_off) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 173
+# ** Error: (vsim-3043) Unresolved reference to 'motors_off' in QuadCopter_tb.motors_off.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 173
+# ** Warning: (vsim-3008) [CNNODP] - Component name (resp_out) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 89
+# ** Error: (vsim-3043) Unresolved reference to 'resp_out' in QuadCopter_tb.resp_out.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 89
+# ** Warning: (vsim-3008) [CNNODP] - Component name (thrst) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 130
+# ** Error: (vsim-3043) Unresolved reference to 'thrst' in QuadCopter_tb.thrst.
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb File: tb_tasks.sv Line: 130
+# ** Error (suppressible): (vsim-3389) Port 'LED' not found in the connected module (10th connection).
+#    Time: 0 ps  Iteration: 0  Instance: /QuadCopter_tb/iDUT File: C:/Users/darco/Desktop/QuadcopterControlSystem/Final Project/Testing/QuadCopter_tb.sv Line: 42
+# Error loading design
+# End time: 10:01:51 on Apr 22,2021, Elapsed time: 0:00:02
+# Errors: 11, Warnings: 12
