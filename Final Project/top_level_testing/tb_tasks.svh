@@ -56,10 +56,10 @@ task check_cyclone_outputs;
     localparam CALIBRATE    = 8'h06;
     localparam EMER_LAND    = 8'h07;
     localparam MTRS_OFF     = 8'h08;
-    reg tempdata [15:0]; // we have this register so we can get a snapshot of the data that is being sent, so we can compare
+    reg [15:0] tempdata; // we have this register so we can get a snapshot of the data that is being sent, so we can compare
                          // the requested value to the value in the iDUT
-    real LOW_THRESHOLD = 0.9; // a coefficient that we use as part of the cutoff to check for our data
-    real HIGH_THRESHOLD = 1.1; // a coefficient that we use as part of the cutoff to check for our data
+    static real LOW_THRESHOLD = 0.9; // a coefficient that we use as part of the cutoff to check for our data
+    static real HIGH_THRESHOLD = 1.1; // a coefficient that we use as part of the cutoff to check for our data
     begin
         tempdata = data; //copy data so we can send another signal from RemoteComm and still let this task work correctly
         case (host_cmd)
@@ -71,7 +71,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.ptch <= tempdata * HIGH_THRESHOLD  && iDUT.ptch >= tempdata * LOW_THRESHOLD); // we expect pitch to get above some threshold when we ask for a desired pitch
+                        @(iDUT.ptch <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.ptch >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect pitch to get above some threshold when we ask for a desired pitch
                         disable timeout_ptch;
                     end
                 join
@@ -84,7 +84,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.roll <= tempdata * HIGH_THRESHOLD  && iDUT.roll >= tempdata * LOW_THRESHOLD); // we expect roll to get above (or below) some threshold when we ask for a desired roll
+                        @(iDUT.roll <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.roll >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect roll to get above (or below) some threshold when we ask for a desired roll
                         disable timeout_roll;
                     end
                 join
@@ -98,7 +98,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.yaw <= tempdata * HIGH_THRESHOLD  && iDUT.yaw >= tempdata * LOW_THRESHOLD); // we expect yaw to get above (or below) some threshold when we ask for a desired yaw
+                        @(iDUT.yaw <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.yaw >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect yaw to get above (or below) some threshold when we ask for a desired yaw
                         disable timeout_yaw;
                     end
                 join
@@ -115,7 +115,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.thrust <= tempdata * HIGH_THRESHOLD  && iDUT.thrust >= tempdata * LOW_THRESHOLD); // we expect thrust to get above (or below) some threshold when we ask for a desired thrust
+                        @(iDUT.thrst <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.thrst >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect thrust to get above (or below) some threshold when we ask for a desired thrust
                         disable timeout_thrst;
                     end
                 join
@@ -136,7 +136,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.thrust === 0); // we expect thrust to get towards 0
+                        @(iDUT.thrst === 0); // we expect thrust to get towards 0
                         disable timeout_thrst_emer;
                     end
                     begin : timeout_roll_emer
@@ -163,7 +163,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.pitch === 0); // we expect pitch to get towards 0
+                        @(iDUT.ptch === 0); // we expect pitch to get towards 0
                         disable timeout_ptch_emer;
                     end
                 join
@@ -179,7 +179,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.thrust === 0); // we expect thrust to be 0 when we turn off the motors
+                        @(iDUT.thrst === 0); // we expect thrust to be 0 when we turn off the motors
                         disable timeout_mtrsoff;
                     end
                 join

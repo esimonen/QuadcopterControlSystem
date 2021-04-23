@@ -61,7 +61,8 @@ initial begin
     // calibrate 
     $display("CALIBRATE");
     host_cmd = CAL;
-    fork
+    send_packet();
+    /*fork
         begin: set_cal_done
             repeat (500000) @(posedge clk);
             //cal_done = 1;
@@ -73,22 +74,21 @@ initial begin
             // check_cyclone_outputs();
             disable set_cal_done;
         end
-    join   
+    join*/   
 
     // set thrst 
     $display("Set Thrust");
     host_cmd = STTHRST;
     data = 16'h00FF;
     send_packet();//send_cmd,clk,resp_rdy,resp);
+    check_cyclone_outputs();
     repeat (1000000) @(posedge clk);
-    //check_cyclone_outputs();
-
     // set pitch 
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0100;
     send_packet();
-    //check_cyclone_outputs();
+    check_cyclone_outputs();
 
     //check pitch is approaching desired
     repeat (2000000) @(posedge clk);
@@ -98,7 +98,7 @@ initial begin
     host_cmd = STRLL;
     data = -16'h0080;
     send_packet();
-    //check_cyclone_outputs();
+    check_cyclone_outputs();
 
     //check roll is approaching desired
     repeat (2000000) @(posedge clk);
@@ -108,7 +108,7 @@ initial begin
     host_cmd = STYW;
     data = 16'h080;
     send_packet();
-    //check_cyclone_outputs();
+    check_cyclone_outputs();
 
     //check yaw is approaching desired
     repeat (2000000) @(posedge clk);
@@ -118,7 +118,7 @@ initial begin
     host_cmd = STPTCH;
     data = 16'h0000;
     send_packet();
-    //check_cyclone_outputs();
+    check_cyclone_outputs();
 
     //check pitch is approaching desired
     repeat (2000000) @(posedge clk);
@@ -145,7 +145,7 @@ end
 always
     #10 clk = ~clk;
 
-`include "../tb_tasks.svh";
+`include "./tb_tasks.svh";
 	
 endmodule	
 
