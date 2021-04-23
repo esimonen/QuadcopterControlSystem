@@ -16,7 +16,7 @@
 // cmd_rdy:
 // cal_done:
 // resp_rdy:
-task automatic send_packet(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
+task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
     //pass in 
     begin
         // set the command to be sent to cmd_cfg through RemoteComm

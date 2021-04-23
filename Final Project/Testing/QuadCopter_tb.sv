@@ -82,7 +82,7 @@ initial begin
     $display("Set Thrust");
     cmd2send = STTHRST;
     data2send = 16'h0045;
-    send_packet(send_cmd,clk,resp_rdy,resp);
+    send_packet();//send_cmd,clk,resp_rdy,resp);
     //check_cyclone_outputs();
 
    /* // set pitch 
@@ -133,9 +133,11 @@ initial begin
     $stop;
 
 end
-`include "tb_tasks.sv"
+
 always
     #10 clk = ~clk;
+
+`include "tb_tasks.h";
 	
 endmodule	
 
