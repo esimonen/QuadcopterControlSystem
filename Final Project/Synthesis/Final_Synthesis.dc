@@ -77,6 +77,7 @@ set_clock_uncertainty 0.20 clk
 compile -map_effort high
 # compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
 
+set_fix_hold clk
 
 # flatten design
 
