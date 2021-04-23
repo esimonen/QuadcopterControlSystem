@@ -18,9 +18,6 @@ wire [7:0] LED;
 
 //// Maybe define some localparams for command encoding ///
 
-logic [7:0] cmd2send; //sends the command with tasks
-logic [15:0] data2send; //sends the data
-
 // local params for commands
 localparam STPTCH   = 8'h02;
 localparam STRLL    = 8'h03;
@@ -40,7 +37,7 @@ CycloneIV iQuad(.clk(clk),.RST_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.MISO(MISO),
 	 
 ////// Instantiate DUT ////////
 QuadCopter iDUT(.clk(clk),.RST_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.MOSI(MOSI),.MISO(MISO),
-                .INT(INT),.RX(RX),.TX(TX),.LED(LED),.FRNT(frnt_ESC),.BCK(back_ESC),
+                .INT(INT),.RX(RX),.TX(TX),.FRNT(frnt_ESC),.BCK(back_ESC),
 				.LFT(left_ESC),.RGHT(rght_ESC));
 
 
@@ -63,7 +60,7 @@ initial begin
 
     // calibrate 
     $display("CALIBRATE");
-    cmd2send = CAL;
+    host_cmd = CAL;
     fork
         begin: set_cal_done
             repeat (500000) @(posedge clk);
@@ -80,53 +77,64 @@ initial begin
 
     // set thrst 
     $display("Set Thrust");
-    cmd2send = STTHRST;
-    data2send = 16'h0045;
+    host_cmd = STTHRST;
+    data = 16'h00FF;
     send_packet();//send_cmd,clk,resp_rdy,resp);
+    repeat (1000000) @(posedge clk);
     //check_cyclone_outputs();
 
-   /* // set pitch 
+    // set pitch 
     $display("Set Pitch");
-    cmd2send = STPTCH;
-    data2send = 16'hBEEF;
+    host_cmd = STPTCH;
+    data = 16'h0100;
     send_packet();
-    check_cyclone_outputs();
+    //check_cyclone_outputs();
 
     //check pitch is approaching desired
     repeat (2000000) @(posedge clk);
-
+    
     // set roll 
     $display("Set Roll");
-    cmd2send = STRLL;
-    data2send = 16'h1F4B;
+    host_cmd = STRLL;
+    data = -16'h0080;
     send_packet();
-    check_cyclone_outputs();
+    //check_cyclone_outputs();
 
     //check roll is approaching desired
     repeat (2000000) @(posedge clk);
-
+    
     // set yaw 
     $display("Set Yaw");
-    cmd2send = STYW;
-    data2send = 16'h8DA0;
+    host_cmd = STYW;
+    data = 16'h080;
     send_packet();
-    check_cyclone_outputs();
+    //check_cyclone_outputs();
 
     //check yaw is approaching desired
     repeat (2000000) @(posedge clk);
 
-    
+    // set pitch 
+    $display("Set Pitch");
+    host_cmd = STPTCH;
+    data = 16'h0000;
+    send_packet();
+    //check_cyclone_outputs();
+
+    //check pitch is approaching desired
+    repeat (2000000) @(posedge clk);
+
+    /*
 
     // Emergency Land
     $display("Emergency Land");
-    cmd2send = EMER;
-    data2send = 16'h0000;
+    host_cmd = EMER;
+    data = 16'h0000;
     send_packet();
     check_cyclone_outputs();
     
     // Motors off
     $display("Motors Off");
-    cmd2send = MTSOFF;
+    host_cmd = MTSOFF;
     send_packet();
     check_cyclone_outputs();*/
 
@@ -137,7 +145,7 @@ end
 always
     #10 clk = ~clk;
 
-`include "tb_tasks.h";
+`include "../tb_tasks.svh";
 	
 endmodule	
 

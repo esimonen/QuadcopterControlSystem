@@ -35,8 +35,6 @@ reg clr_resp_rdy;
 reg resp_sent;
 reg [7:0] resp_out;
 
-//`include "tb_tasks.sv" // Tasks
-
 // local params for commands
 localparam STPTCH   = 8'h02;
 localparam STRLL    = 8'h03;

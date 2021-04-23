@@ -41,16 +41,12 @@ task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
             $error("Task 'send_packet' Failed: Received incorrect response. Received %h, but expected %h.", resp, 8'hA5);
             $stop;
         end
+        $display("SENT PACKET");
     end
 
 endtask
 
-task automatic check_cyclone_outputs(
-    ref [7:0] cmd2send, 
-    ref [7:0] resp_out, 
-    ref [15:0] d_ptch, 
-    ref [15:0] d_roll, 
-    ref [15:0] d_yaw);
+task check_cyclone_outputs;
 
     // constants to make commands from uart more readable
     localparam SET_PTCH     = 8'h02;
@@ -60,9 +56,12 @@ task automatic check_cyclone_outputs(
     localparam CALIBRATE    = 8'h06;
     localparam EMER_LAND    = 8'h07;
     localparam MTRS_OFF     = 8'h08;
+    reg tempdata [15:0]; // we have this register so we can get a snapshot of the data that is being sent, so we can compare
+                         // the requested value to the value in the iDUT
+    
     begin
         
-        case (cmd2send)
+        case (host_cmd)
             SET_PTCH : begin 
                 assert(resp_out === 8'hA5)
                 else begin
@@ -100,7 +99,19 @@ task automatic check_cyclone_outputs(
                 end
             end
             SET_THRST : begin
-                assert(resp_out === 8'hA5) 
+                // when we set the thrust, we would expect the thrust to increase over time
+                // 
+                fork
+                    begin : 
+                        
+                    end
+                    begin
+                        @(iDUT.thrust >= ) // we expect thrust to get above some threshold when we ask for a desired thrust
+                    end
+                join
+
+
+                /*assert(resp_out === 8'hA5) 
                 else begin
                     $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of 8'A5, instead recieved %2h", resp_out);
                     $stop();
@@ -109,9 +120,9 @@ task automatic check_cyclone_outputs(
                 else begin
                     $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of %3h from data_in, instead recieved %3h", data2send[8:0], thrst);
                     $stop();
-                end
+                end*/
             end
-
+/*
             // don't need to check here, included for completeness
             CALIBRATE : begin
                 // we do nothing!
@@ -154,9 +165,10 @@ task automatic check_cyclone_outputs(
                     $stop();
                 end
             end
+        */
         endcase
+    
     end
-
 
 
 
