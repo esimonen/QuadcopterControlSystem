@@ -15,7 +15,7 @@ module ESC_interface(clk, rst_n, wrt, SPEED, PWM);
     wire rst_pwm; // sync reset input to PWM sig flop
 
     reg wrt_ff; 	// flopped wrt signal for pipelining
-    reg [10:0] SPEED_ff; 	// flopped SPEED signal for pipelining
+    reg SPEED_ff; 	// flopped SPEED signal for pipelining
 
     // pipeline wrt and SPEED signals
     always_ff @(posedge clk) begin
