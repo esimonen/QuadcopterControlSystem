@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module QuadCopter_tb();
 		
 //// Interconnects to DUT/support defined as type wire /////
