@@ -60,23 +60,15 @@ set_max_transition 0.15 [current_design]
 
 set_clock_uncertainty 0.20 clk
 
-# by default, synopsis does not fix our clock uncertainty problems unless asked:
-
-#set_fix_hold clk
-
-# now we want to drive the undriven port Bp (for some reason this actually hurts our design, ignored for now)
-
-#set_drive 3 [find port Bp]
-
-
 #
 # compile the design
 #
 
 
 compile -map_effort high
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
+#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
 
+# fix hold times
 set_fix_hold clk
 
 # flatten design
@@ -85,9 +77,9 @@ ungroup -all -flatten
 
 # compile again
 
-# set compile_seqmap_enable_output_inversion true
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
-compile -map_effort high
+#set compile_seqmap_enable_output_inversion true
+#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
+compile -map_effort high -incremental_mapping
 
 # timing reports
 
