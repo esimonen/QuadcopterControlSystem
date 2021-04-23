@@ -44,7 +44,7 @@ task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
     end
 
 endtask
-/*
+
 task automatic check_cyclone_outputs(
     ref [7:0] cmd2send, 
     ref [7:0] resp_out, 
@@ -161,4 +161,3 @@ task automatic check_cyclone_outputs(
 
 
 endtask
-*/
