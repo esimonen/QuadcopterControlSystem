@@ -1,4 +1,4 @@
-`include "tb_tasks.sv"
+`include "theo_tb_tasks.sv"
 /*
  * Team:            The Moorons
  * Course:          ECE551
@@ -6,7 +6,7 @@
  * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
  * Date:            4/12/2021
  */
-module cmd_cfg_tb();
+module theo_cmd_cfg_tb();
 
 reg clk;                // clock
 reg rst_n;              // active low asynch reset
@@ -34,6 +34,8 @@ reg resp_rdy;
 reg clr_resp_rdy;
 reg resp_sent;
 reg [7:0] resp_out;
+
+//`include "tb_tasks.sv" // Tasks
 
 // local params for commands
 localparam STPTCH   = 8'h02;
@@ -95,8 +97,6 @@ initial begin
     send_packet();
     check_cmd_cfg_outputs();
 
-    repeat (2000000)
-
     // set roll 
     $display("Set Roll");
     cmd2send = STRLL;
@@ -131,7 +131,7 @@ initial begin
     send_packet();
     check_cmd_cfg_outputs();
 
-    $stop;
+    $finish;
 
 end
 
