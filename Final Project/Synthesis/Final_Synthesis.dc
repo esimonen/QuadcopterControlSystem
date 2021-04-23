@@ -97,6 +97,9 @@ report_timing -delay max > max_timing_report.txt
 
 report_area > area_report.txt
 
+# latch report
+report_register -level_sensitive > latches_report.txt
+
 # report sdc file
 
 write_sdc QuadCopter.sdc
