@@ -58,71 +58,70 @@ task check_cyclone_outputs;
     localparam MTRS_OFF     = 8'h08;
     reg tempdata [15:0]; // we have this register so we can get a snapshot of the data that is being sent, so we can compare
                          // the requested value to the value in the iDUT
-    
+    real LOW_THRESHOLD = 0.9; // a coefficient that we use as part of the cutoff to check for our data
+    real HIGH_THRESHOLD = 1.1; // a coefficient that we use as part of the cutoff to check for our data
     begin
-        
+        tempdata = data; //copy data so we can send another signal from RemoteComm and still let this task work correctly
         case (host_cmd)
             SET_PTCH : begin 
-                assert(resp_out === 8'hA5)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of 8'A5, instead recieved %2h", resp_out);
-                    $stop();
-                end
-                assert(d_ptch === data2send)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_PTCH, expected response of %4h from data_in, instead recieved %4h", data2send, d_ptch);
-                    $stop();
-                end
+                fork
+                    begin : timeout_ptch
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for pitch to near %0h", tempdata);
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.ptch <= tempdata * HIGH_THRESHOLD  && iDUT.ptch >= tempdata * LOW_THRESHOLD); // we expect pitch to get above some threshold when we ask for a desired pitch
+                        disable timeout_ptch;
+                    end
+                join
             end
             SET_ROLL : begin
-                assert(resp_out === 8'hA5)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of 8'A5, instead recieved %2h", resp_out);
-                    $stop();
-                end
-                assert(d_roll === data2send)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_ROLL, expected response of %4h from data_in, instead recieved %4h", data2send, d_roll);
-                    $stop();
-                end
+                fork
+                    begin : timeout_roll
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for roll to near %0h", tempdata);
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.roll <= tempdata * HIGH_THRESHOLD  && iDUT.roll >= tempdata * LOW_THRESHOLD); // we expect roll to get above (or below) some threshold when we ask for a desired roll
+                        disable timeout_roll;
+                    end
+                join
             end
             SET_YAW : begin
-                assert(resp_out === 8'hA5)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of 8'A5, instead recieved %2h", resp_out);
-                    $stop();
-                end
-                assert(d_yaw === data2send)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_YAW, expected response of %4h from data_in, instead recieved %4h", data2send, d_yaw);
-                    $stop();
-                end
+
+                fork
+                    begin : timeout_yaw
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for yaw to near %0h", tempdata);
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.yaw <= tempdata * HIGH_THRESHOLD  && iDUT.yaw >= tempdata * LOW_THRESHOLD); // we expect yaw to get above (or below) some threshold when we ask for a desired yaw
+                        disable timeout_yaw;
+                    end
+                join
+
             end
             SET_THRST : begin
                 // when we set the thrust, we would expect the thrust to increase over time
                 // 
+
                 fork
-                    begin : 
-                        
+                    begin : timeout_thrst
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near %0h", tempdata);
+                        $stop;
                     end
                     begin
-                        @(iDUT.thrust >= ) // we expect thrust to get above some threshold when we ask for a desired thrust
+                        @(iDUT.thrust <= tempdata * HIGH_THRESHOLD  && iDUT.thrust >= tempdata * LOW_THRESHOLD); // we expect thrust to get above (or below) some threshold when we ask for a desired thrust
+                        disable timeout_thrst;
                     end
                 join
 
-
-                /*assert(resp_out === 8'hA5) 
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of 8'A5, instead recieved %2h", resp_out);
-                    $stop();
-                end
-                assert (thrst === data2send)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command SET_THRST, expected response of %3h from data_in, instead recieved %3h", data2send[8:0], thrst);
-                    $stop();
-                end*/
             end
-/*
+
             // don't need to check here, included for completeness
             CALIBRATE : begin
                 // we do nothing!
@@ -130,42 +129,61 @@ task check_cyclone_outputs;
 
             // all values should be zero to stop quadcopter
             EMER_LAND : begin
-                assert(d_ptch === 16'h0000)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_ptch, instead recieved %4h", d_ptch);
-                    $stop();
-                end
-                assert(d_roll === 16'h0000)
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_roll, instead recieved %4h", d_roll);
-                    $stop();
-                end
-                assert(d_yaw === 16'h0000) 
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for d_yaw, instead recieved %4h", d_yaw);
-                    $stop();
-                end
-                assert(thrst === 9'h000) 
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Emergency land command sent: expected response of 16'h0000 for thrst, instead recieved %3h", thrst);
-                    $stop();
-                end
-                assert(resp_out === 8'hA5) 
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Sent command EMER_LAND, expected response of 8'hA5, instead recieved %2h", resp);
-                    $stop();
-                end
+                fork
+                    begin : timeout_thrst_emer
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near 0");
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.thrust === 0); // we expect thrust to get towards 0
+                        disable timeout_thrst_emer;
+                    end
+                    begin : timeout_roll_emer
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for roll to near 0");
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.roll === 0); // we expect roll to get towards 0
+                        disable timeout_roll_emer;
+                    end
+                    begin : timeout_yaw_emer
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for yaw to near 0");
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.roll === 0); // we expect yaw to get towards 0
+                        disable timeout_yaw_emer;
+                    end
+                    begin : timeout_ptch_emer
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for pitch to near 0");
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.pitch === 0); // we expect pitch to get towards 0
+                        disable timeout_ptch_emer;
+                    end
+                join
+
             end
 
             // the motors off signal should be one
-            MTRS_OFF : begin
-                assert (motors_off === 1'b1) 
-                else begin
-                    $error("Task 'check_cmd_cfg_outputs' Failed: Motors off, expected response of 1'b1, instead received %1h", motors_off);
-                    $stop();
-                end
+            default : begin // MTRSOFF
+                fork
+                    begin : timeout_mtrsoff
+                        repeat (3000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near 0, as MTRSOFF has been called");
+                        $stop;
+                    end
+                    begin
+                        @(iDUT.thrust === 0); // we expect thrust to be 0 when we turn off the motors
+                        disable timeout_mtrsoff;
+                    end
+                join
             end
-        */
         endcase
     
     end
