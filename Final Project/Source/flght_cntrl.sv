@@ -1,6 +1,6 @@
 // Theo Hornung
 // ece 551
-
+// ex16
 module flght_cntrl(clk,rst_n,vld,inertial_cal,d_ptch,d_roll,d_yaw,ptch,
 					roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);
 				
@@ -11,10 +11,10 @@ input inertial_cal;							// need to run motors at CAL_SPEED during inertial cal
 input signed [15:0] d_ptch,d_roll,d_yaw;	// desired pitch roll and yaw (from cmd_cfg)
 input signed [15:0] ptch,roll,yaw;			// actual pitch roll and yaw (from inertial interface)
 input [8:0] thrst;							// thrust level from slider
-output reg [10:0] frnt_spd;						// 11-bit unsigned speed at which to run front motor
-output reg [10:0] bck_spd;						// 11-bit unsigned speed at which to back front motor
-output reg [10:0] lft_spd;						// 11-bit unsigned speed at which to left front motor
-output reg [10:0] rght_spd;						// 11-bit unsigned speed at which to right front motor
+output [10:0] frnt_spd;						// 11-bit unsigned speed at which to run front motor
+output [10:0] bck_spd;						// 11-bit unsigned speed at which to back front motor
+output [10:0] lft_spd;						// 11-bit unsigned speed at which to left front motor
+output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front motor
 
   //////////////////////////////////////////////////////
   // You will need a bunch of interal wires declared //
@@ -30,6 +30,7 @@ output reg [10:0] rght_spd;						// 11-bit unsigned speed at which to right fron
 
   // hold 13 bit summations before outputting saturated speed values
   wire [12:0] front_speed_temp, back_speed_temp, right_speed_temp, left_speed_temp;
+
   ///////////////////////////////////////////////////////////////
   // some Parameters to keep things more generic and flexible //
   /////////////////////////////////////////////////////////////
@@ -69,25 +70,20 @@ output reg [10:0] rght_spd;						// 11-bit unsigned speed at which to right fron
   assign right_speed_temp = thrust_13b + MIN_RUN_SPEED + roll_dterm_13b + roll_pterm_13b + yaw_pterm_13b + yaw_dterm_13b;
   
   // infer muxes and perform unsigned saturate
-  // pipelining outputs for timing, this block forms a big chunk of comb logic with ESC_interface and PD_math
-  always_ff @(posedge clk) begin
-    frnt_spd <= inertial_cal ?              CAL_SPEED :
-                      |front_speed_temp[12:11] ?  11'h7FF   :
-                                                  front_speed_temp[10:0];
-  end
-  always_ff @(posedge clk) begin
-    bck_spd <=  inertial_cal ?              CAL_SPEED :
-                       back_speed_temp[12:11]  ?  11'h7FF   :
-                                                  back_speed_temp[10:0];
-  end  
-  always_ff @(posedge clk) begin
-    lft_spd <=  inertial_cal ?              CAL_SPEED :
-                      |left_speed_temp[12:11]  ?  11'h7FF   :
-                                                  left_speed_temp[10:0];
-  end
-  always_ff @(posedge clk) begin
-    rght_spd <= inertial_cal ?              CAL_SPEED :
-                      |right_speed_temp[12:11] ?  11'h7FF   :
-                                                  right_speed_temp[10:0];
-  end
+  assign frnt_spd = inertial_cal ?              CAL_SPEED :
+                    |front_speed_temp[12:11] ?  11'h7FF   :
+                                                front_speed_temp[10:0];
+
+  assign bck_spd =  inertial_cal ?              CAL_SPEED :
+                    |back_speed_temp[12:11]  ?  11'h7FF   :
+                                                back_speed_temp[10:0];
+
+  assign lft_spd =  inertial_cal ?              CAL_SPEED :
+                    |left_speed_temp[12:11]  ?  11'h7FF   :
+                                                left_speed_temp[10:0];
+
+  assign rght_spd = inertial_cal ?              CAL_SPEED :
+                    |right_speed_temp[12:11] ?  11'h7FF   :
+                                                right_speed_temp[10:0];
+  
 endmodule 
