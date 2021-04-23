@@ -8,7 +8,7 @@ Report : timing
         -max_paths 1
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Fri Apr 23 10:45:51 2021
+Date   : Fri Apr 23 11:30:11 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -33,7 +33,7 @@ Wire Load Model Mode: enclosed
   clock network delay (ideal)                             0.00       0.00
   iCOMM/iUART/iRX/bit_count_reg[0]/CLK (DFFX1_RVT)        0.00 #     0.00 r
   iCOMM/iUART/iRX/bit_count_reg[0]/QN (DFFX1_RVT)         0.09       0.09 f
-  U2555/Y (AO22X1_RVT)                                    0.08       0.17 f
+  iCOMM/iUART/iRX/U25/Y (AO22X1_RVT)                      0.08       0.17 f
   iCOMM/iUART/iRX/bit_count_reg[0]/D (DFFX1_RVT)          0.01       0.18 f
   data arrival time                                                  0.18
 

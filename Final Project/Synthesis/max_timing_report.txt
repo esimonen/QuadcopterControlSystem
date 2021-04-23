@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Fri Apr 23 10:45:51 2021
+Date   : Fri Apr 23 11:30:11 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,7 +14,7 @@ Date   : Fri Apr 23 10:45:51 2021
 Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
 Wire Load Model Mode: enclosed
 
-  Startpoint: iCMD/d_ptch_reg[0]
+  Startpoint: iNEMO/iINT/ptch_int_reg[13]
               (rising edge-triggered flip-flop clocked by clk)
   Endpoint: ifly/iPTCH/D_diff_reg[10]
             (rising edge-triggered flip-flop clocked by clk)
@@ -29,45 +29,43 @@ Wire Load Model Mode: enclosed
   --------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  iCMD/d_ptch_reg[0]/CLK (DFFARX1_RVT)                    0.00 #     0.00 r
-  iCMD/d_ptch_reg[0]/QN (DFFARX1_RVT)                     0.11       0.11 r
-  U2976/Y (INVX0_RVT)                                     0.03       0.14 f
-  U3091/Y (AND2X1_RVT)                                    0.06       0.21 f
-  U1317/Y (NAND2X0_RVT)                                   0.05       0.25 r
-  U1316/Y (AO22X1_RVT)                                    0.08       0.33 r
-  ifly/iPTCH/sub_62/U2_2/CO (FADDX1_RVT)                  0.11       0.45 r
-  ifly/iPTCH/sub_62/U2_3/CO (FADDX1_RVT)                  0.12       0.56 r
-  ifly/iPTCH/sub_62/U2_4/CO (FADDX1_RVT)                  0.12       0.68 r
-  ifly/iPTCH/sub_62/U2_5/CO (FADDX1_RVT)                  0.12       0.80 r
+  iNEMO/iINT/ptch_int_reg[13]/CLK (DFFARX1_RVT)           0.00 #     0.00 r
+  iNEMO/iINT/ptch_int_reg[13]/QN (DFFARX1_RVT)            0.09       0.09 f
+  iNEMO/iINT/U358/Y (INVX0_RVT)                           0.04       0.13 r
+  ifly/iPTCH/sub_62/U21/Y (INVX0_RVT)                     0.03       0.16 f
+  ifly/iPTCH/sub_62/U28/Y (NAND2X0_RVT)                   0.06       0.22 r
+  ifly/iPTCH/sub_62/U2_1/CO (FADDX1_RVT)                  0.12       0.34 r
+  ifly/iPTCH/sub_62/U2_2/CO (FADDX1_RVT)                  0.12       0.46 r
+  ifly/iPTCH/sub_62/U2_3/CO (FADDX1_RVT)                  0.12       0.57 r
+  ifly/iPTCH/sub_62/U2_4/CO (FADDX1_RVT)                  0.12       0.69 r
+  ifly/iPTCH/sub_62/U2_5/CO (FADDX1_RVT)                  0.12       0.81 r
   ifly/iPTCH/sub_62/U2_6/CO (FADDX1_RVT)                  0.12       0.92 r
-  U2986/Y (NAND2X0_RVT)                                   0.05       0.97 f
-  U2989/Y (NAND3X0_RVT)                                   0.06       1.03 r
+  ifly/iPTCH/sub_62/U2_7/CO (FADDX1_RVT)                  0.12       1.04 r
   ifly/iPTCH/sub_62/U2_8/CO (FADDX1_RVT)                  0.12       1.15 r
   ifly/iPTCH/sub_62/U2_9/CO (FADDX1_RVT)                  0.12       1.27 r
-  ifly/iPTCH/sub_62/U2_10/CO (FADDX1_RVT)                 0.12       1.38 r
+  ifly/iPTCH/sub_62/U2_10/CO (FADDX1_RVT)                 0.12       1.39 r
   ifly/iPTCH/sub_62/U2_11/CO (FADDX1_RVT)                 0.12       1.50 r
-  ifly/iPTCH/sub_62/U2_12/CO (FADDX1_RVT)                 0.12       1.61 r
-  ifly/iPTCH/sub_62/U2_13/CO (FADDX1_RVT)                 0.12       1.73 r
-  ifly/iPTCH/sub_62/U2_14/CO (FADDX1_RVT)                 0.12       1.85 r
-  U2982/Y (NAND2X0_RVT)                                   0.04       1.90 f
-  U2985/Y (NAND3X0_RVT)                                   0.06       1.96 r
-  U3012/Y (XOR3X2_RVT)                                    0.12       2.07 f
-  U3020/Y (NAND2X4_RVT)                                   0.12       2.19 r
-  U1330/Y (AO21X1_RVT)                                    0.09       2.28 r
-  U2917/Y (OR2X1_RVT)                                     0.07       2.36 r
-  ifly/iPTCH/sub_70/U2_1/CO (FADDX1_RVT)                  0.12       2.47 r
-  ifly/iPTCH/sub_70/U2_2/CO (FADDX1_RVT)                  0.12       2.60 r
-  U2977/Y (NAND2X0_RVT)                                   0.05       2.64 f
-  U2980/Y (NAND3X0_RVT)                                   0.06       2.71 r
-  ifly/iPTCH/sub_70/U2_4/CO (FADDX1_RVT)                  0.12       2.83 r
-  ifly/iPTCH/sub_70/U2_5/CO (FADDX1_RVT)                  0.12       2.94 r
-  ifly/iPTCH/sub_70/U2_6/CO (FADDX1_RVT)                  0.12       3.06 r
-  ifly/iPTCH/sub_70/U2_7/CO (FADDX1_RVT)                  0.12       3.17 r
-  ifly/iPTCH/sub_70/U2_8/CO (FADDX1_RVT)                  0.12       3.29 r
-  ifly/iPTCH/sub_70/U2_9/CO (FADDX1_RVT)                  0.11       3.40 r
-  U3010/Y (XOR3X2_RVT)                                    0.08       3.49 f
-  ifly/iPTCH/D_diff_reg[10]/D (DFFARX1_RVT)               0.01       3.50 f
-  data arrival time                                                  3.50
+  ifly/iPTCH/sub_62/U2_12/CO (FADDX1_RVT)                 0.12       1.62 r
+  ifly/iPTCH/sub_62/U2_13/CO (FADDX2_RVT)                 0.13       1.75 r
+  ifly/iPTCH/sub_62/U2_14/CO (FADDX1_RVT)                 0.12       1.86 r
+  ifly/iPTCH/sub_62/U22/Y (XOR3X2_RVT)                    0.07       1.93 r
+  ifly/iPTCH/U169/Y (OR4X1_RVT)                           0.11       2.05 r
+  ifly/iPTCH/U167/Y (NOR4X1_RVT)                          0.09       2.14 f
+  ifly/iPTCH/U160/Y (NOR2X1_RVT)                          0.08       2.22 r
+  ifly/iPTCH/U135/Y (AO21X1_RVT)                          0.06       2.28 r
+  ifly/iPTCH/sub_70/U13/Y (OR2X2_RVT)                     0.07       2.35 r
+  ifly/iPTCH/sub_70/U2_1/CO (FADDX1_RVT)                  0.11       2.46 r
+  ifly/iPTCH/sub_70/U2_2/CO (FADDX1_RVT)                  0.12       2.57 r
+  ifly/iPTCH/sub_70/U2_3/CO (FADDX1_RVT)                  0.12       2.69 r
+  ifly/iPTCH/sub_70/U2_4/CO (FADDX1_RVT)                  0.12       2.81 r
+  ifly/iPTCH/sub_70/U2_5/CO (FADDX1_RVT)                  0.12       2.92 r
+  ifly/iPTCH/sub_70/U2_6/CO (FADDX1_RVT)                  0.12       3.04 r
+  ifly/iPTCH/sub_70/U2_7/CO (FADDX1_RVT)                  0.12       3.15 r
+  ifly/iPTCH/sub_70/U2_8/CO (FADDX1_RVT)                  0.12       3.27 r
+  ifly/iPTCH/sub_70/U2_9/CO (FADDX1_RVT)                  0.11       3.38 r
+  ifly/iPTCH/sub_70/U12/Y (XOR3X2_RVT)                    0.08       3.46 f
+  ifly/iPTCH/D_diff_reg[10]/D (DFFARX1_RVT)               0.01       3.48 f
+  data arrival time                                                  3.48
 
   clock clk (rise edge)                                   3.75       3.75
   clock network delay (ideal)                             0.00       3.75
@@ -77,9 +75,9 @@ Wire Load Model Mode: enclosed
   data required time                                                 3.49
   --------------------------------------------------------------------------
   data required time                                                 3.49
-  data arrival time                                                 -3.50
+  data arrival time                                                 -3.48
   --------------------------------------------------------------------------
-  slack (VIOLATED)                                                  -0.01
+  slack (MET)                                                        0.01
 
 
 1

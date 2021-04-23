@@ -74,8 +74,8 @@ set_clock_uncertainty 0.20 clk
 #
 
 
-compile -map_effort high
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
+compile -map_effort low
+ #compile -power_effort none -incremental_mapping -map_effort high
 
 set_fix_hold clk
 
@@ -85,9 +85,9 @@ ungroup -all -flatten
 
 # compile again
 
-# set compile_seqmap_enable_output_inversion true
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
-compile -map_effort high
+#set compile_seqmap_enable_output_inversion true
+#compile -power_effort none -incremental_mapping -map_effort high
+compile -map_effort high -incremental_mapping
 
 # timing reports
 
