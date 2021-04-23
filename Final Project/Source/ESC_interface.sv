@@ -1,46 +1,43 @@
+// Theo Hornung
+// ece 551
+// ex11
 module ESC_interface(clk, rst_n, wrt, SPEED, PWM);
 
-	input logic clk, rst_n; // clock and active low reset
-	input logic wrt; // initiates new pulse
-	input logic [10:0] SPEED; // speed given from flight controller
-	output reg PWM; // output to ESC for motor speed
-	
-	logic [12:0] speed_mult; // intermediate signal of speed * 3
-	logic [13:0] speed_set, q; // intermediate signals of adding the base speed and speed_mult and then the output of the first flop
-	logic reset; // reset signal for the 2nd flop (SR flop)
-	
-	localparam PCONST = 2'b11;     // decimal 3
-	localparam ACONST = 13'h186A; // decimal 6250
-	
-	// add and multiply to get intermediate signals
-	assign speed_mult = SPEED * PCONST;
-	assign speed_set = speed_mult + ACONST;
+    input clk, rst_n, wrt;
+    input [10:0] SPEED;
+    output reg PWM;
 
-	// logic for the first flop
-	always_ff@(posedge clk, negedge rst_n, wrt) begin
-		// asynch active low rst
-		if(!rst_n)
-			q <= 14'h0000;
-		// first iteration q gets the result of addition from before
-		else if (wrt)
-			q <= speed_set;
-		else
-			// every other iteration we subtract
-			q <= q - 1;
-	end
-	
-	// assign reset to be high when all 0s
-	assign reset = ~|q;
-	
-	// SR flop that assigns pwm
-	always_ff@(posedge clk, negedge rst_n) begin
-		// asynch active low reset
-		if(!rst_n)
-			PWM <= 1'b0;
-		// assign pwm based on sr signals and hold otherwise
-		else if (reset)  
-			PWM <= 1'b0;
-		else if (wrt)
-			PWM <= 1'b1;
-	end
+    localparam MIN_CLKS = 13'h186A;
+
+    // internal signals
+    wire [13:0] scaled_spd; // scaled speed signal to determine PWM period
+    reg [13:0] count; // clks left before PWM sig goes low
+    wire rst_pwm; // sync reset input to PWM sig flop
+
+    // intermediate calculation for num of clock cycles for PWM signal
+    assign scaled_spd = SPEED * 2'b11 + MIN_CLKS;
+
+    // sync-ly reset PWM flop when count goes to all zeroes
+    assign rst_pwm = ~|count;
+
+    // counter logic w/ muxed input
+    always_ff @(posedge clk, negedge rst_n)
+        if (!rst_n)
+            count <= 0;
+        else
+            // subtract 1 and infer input mux to flop
+            // can unconditionally subtract bc asserting wrt overwrites this flop, and even if
+            // count wraps and rst_pwm is reasserted, it's just setting the PWM signal to zero again
+            count <= wrt ? scaled_spd : count - 1'b1;
+
+    // async reset SR flop w/ PWM sig output
+    always_ff @(posedge clk, negedge rst_n)
+        if (!rst_n)
+            PWM <= 1'b0;
+        else if (rst_pwm)
+            PWM <= 1'b0;
+        else if (wrt)
+            PWM <= 1'b1;
+        // else PWM holds value
+
 endmodule
