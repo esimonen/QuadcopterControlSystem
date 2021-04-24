@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module QuadCopter_tb();
 		
 //// Interconnects to DUT/support defined as type wire /////
@@ -142,7 +143,7 @@ initial begin
 end
 
 always
-    #10 clk = ~clk;
+    #1 clk = ~clk;
 
 `include "../tb_tasks.svh";
 	
