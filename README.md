@@ -11,18 +11,18 @@ Scott Woolf
 
 ## TODOs:
 
-- Polish synthesis script
+- Polish synthesis script (DONE FOR NOW)
   - we can try messing around with some more compile combos to try to reduce area, but I think we've reached diminishing marginal returns there
 
-- Full-chip test bench (ex23)
+- Full-chip test bench
   - Finished the example tb that eric showed.
   - Make a few more test benches for different command combinations
 
 - Test/debug everyone's modules (DONE)
  
 - Post synthesis validation (TODO)
-  - questasim is dumb, but it shouldn't be that bad
-  - currently experiencing an issue with time scales???
+  - did once, but extremely slow to simulate in Questasim
+  - TODO: talk to John a/o Eric to see if there's a good way to speed it up
 
 - code coverage tests
   - finished first round. We're looking really good even with just the first full-chip tb
