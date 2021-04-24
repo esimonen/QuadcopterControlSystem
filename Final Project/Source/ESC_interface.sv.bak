@@ -23,7 +23,7 @@ module ESC_interface(clk, rst_n, wrt, SPEED, PWM);
 	    wrt_ff <= 0;
 	    SPEED_ff <= 0;
         end
-	else begin 
+	else    
 	    wrt_ff <= wrt;
 	    SPEED_ff <= SPEED;
         end

@@ -20,7 +20,7 @@ create_clock -name "clk" -period 3.75 -waveform { 0 1.875 } { clk }
 # remove synopsis' ability to buffer clk
 
 set_dont_touch_network [find port clk]
-
+set_dont_touch_network [get_net iRST/rst_n]
 # add input delays to all signals except clock for realism
 
 set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
@@ -60,33 +60,26 @@ set_max_transition 0.15 [current_design]
 
 set_clock_uncertainty 0.20 clk
 
-# by default, synopsis does not fix our clock uncertainty problems unless asked:
-
-#set_fix_hold clk
-
-# now we want to drive the undriven port Bp (for some reason this actually hurts our design, ignored for now)
-
-#set_drive 3 [find port Bp]
-
+# by default, synopsis does not fix our clock uncertainty problems unless ask
 
 #
 # compile the design
 #
 
+# compile #1
+compile -area_effort high -map_effort medium
 
-compile -map_effort high
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
-
+set_fix_hold clk
 
 # flatten design
 
 ungroup -all -flatten
 
-# compile again
+# compile #2
+compile -map_effort medium -area_effort high -incremental_mapping
 
-# set compile_seqmap_enable_output_inversion true
-# compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
-compile -map_effort high
+# compile #3
+compile -map_effort high -area_effort high -incremental_mapping
 
 # timing reports
 
