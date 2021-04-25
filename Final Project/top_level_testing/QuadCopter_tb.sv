@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+//`timescale 1ns/1ps // uncomment for post-synth validation
 module QuadCopter_tb();
 		
 //// Interconnects to DUT/support defined as type wire /////
@@ -123,27 +123,29 @@ initial begin
     //check pitch is approaching desired
     repeat (2000000) @(posedge clk);
 
-    /*
+    
 
     // Emergency Land
     $display("Emergency Land");
     host_cmd = EMER;
     data = 16'h0000;
     send_packet();
-    check_cyclone_outputs();
+    //check_cyclone_outputs();
+    repeat (2000000) @(posedge clk);
     
     // Motors off
     $display("Motors Off");
     host_cmd = MTSOFF;
     send_packet();
-    check_cyclone_outputs();*/
+    //check_cyclone_outputs();
+    repeat (2000000) @(posedge clk);
 
     $stop;
 
 end
 
 always
-    #1 clk = ~clk;
+    #1 clk = ~clk; // change back to 20ns period (#10) for tests
 
 `include "../tb_tasks.svh";
 	

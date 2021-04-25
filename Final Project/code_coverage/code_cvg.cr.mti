@@ -103,13 +103,6 @@ QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
 Top level modules:
 	QuadCopter_tb
 
-} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_mnrch.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_mnrch.sv}
-QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
--- Compiling module SPI_mnrch
-
-Top level modules:
-	SPI_mnrch
-
 } {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/cmd_cfg.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/cmd_cfg.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
 -- Compiling module cmd_cfg
@@ -117,12 +110,12 @@ QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
 Top level modules:
 	cmd_cfg
 
-} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv}
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_mnrch.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_mnrch.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
--- Compiling module UART
+-- Compiling module SPI_mnrch
 
 Top level modules:
-	UART
+	SPI_mnrch
 
 } {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/CycloneIV.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/CycloneIV.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
@@ -132,12 +125,12 @@ QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
 Top level modules:
 	CycloneIV
 
-} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_iNEMO2.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_iNEMO2.sv}
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
--- Compiling module SPI_iNEMO2
+-- Compiling module UART
 
 Top level modules:
-	SPI_iNEMO2
+	UART
 
 } {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/PD_math.sv} {1 {vlog -work work -vopt -sv -covercells -cover sbcef3 -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/PD_math.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
@@ -145,6 +138,13 @@ QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
 
 Top level modules:
 	PD_math
+
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_iNEMO2.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/SPI_iNEMO2.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling module SPI_iNEMO2
+
+Top level modules:
+	SPI_iNEMO2
 
 } {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/inertial_integrator.sv} {1 {vlog -work work -vopt -sv -cover sbcef3 -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/inertial_integrator.sv}
 QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020

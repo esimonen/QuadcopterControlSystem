@@ -27,3 +27,5 @@ Scott Woolf
 - code coverage tests
   - finished first round. We're looking really good even with just the first full-chip tb
   - will want to make sure other tbs go through MOTORS_OFF and EMER_LAND commands
+
+- move tb_tasks.svh? we might want to either put it in a different directory or change the reference in QuadCopter_tb.sv
