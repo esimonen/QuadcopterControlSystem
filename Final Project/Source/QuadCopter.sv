@@ -48,7 +48,7 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,FRNT,BCK,LFT,RGHT);
   wire [10:0] lft_spd;				// front motor speed from flght_cntrl
   wire [10:0] rght_spd;				// front motor speed from flght_cntrl  
   
-  localparam FAST_SIM = 1;			// used to accelerate simulations.
+  localparam FAST_SIM = 0;			// used to accelerate simulations.
 	 
   ////////////////////////////////////////////////////////////
   // Instantiate UART_comm that handles host communication //
