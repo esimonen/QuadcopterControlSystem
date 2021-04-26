@@ -23,9 +23,11 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     localparam NEG_BOUND_10BIT = 10'h200;
     localparam POS_BOUND_10BIT = 10'h1FF;
 
-    // regs for pipelining
+    // sigs for pipelining
     wire [9:0] pipe_pterm;
-    wire [10:0] pipe_D_diff;
+    wire [6:0] pipe_D_diff_sat;
+    wire [9:0] pipe_err_sat;
+    reg pipe_vld;
 
     //////////////////////////////////////////
     // Declare prev_err which is flop queue that //
@@ -38,19 +40,23 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
 
     // internal signals for actual - desired
     wire signed [16:0] err; // assigned difference between actual value and desired value
-    wire [9:0] err_sat;
+    reg [9:0] err_sat;
     reg signed [10:0] D_diff; // holds our pre-saturated derivative term
-    wire [6:0] D_diff_sat;
+    reg [6:0] D_diff_sat;
 
     // pipeline pterm and D_diff dterm
     always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n) begin
 	    pterm <= 0;
-	    D_diff <= 0;
+	    D_diff_sat <= 0;
+	    pipe_vld <= 0;
+	    err_sat <= 0;
         end
 	else begin
 	    pterm <= pipe_pterm;
-	    D_diff <= pipe_D_diff;
+	    D_diff_sat <= pipe_D_diff_sat;
+	    pipe_vld <= vld;
+	    err_sat <= pipe_err_sat;
 	end
 
     // calculate proportional error term
@@ -62,13 +68,13 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     assign err = { actual[15], actual[15:0] } - { desired[15], desired[15:0] };
 
     // 17->10 bit saturation logic
-    assign err_sat = err[16] ?
+    assign pipe_err_sat = err[16] ?
 		    (&err[15:9] ? err[9:0] : NEG_BOUND_10BIT) :
 		    (|err[15:9] ? POS_BOUND_10BIT : err[9:0]);
 	
     // calculate derivative error term
-    assign pipe_D_diff = {err_sat[9], err_sat } - {prev_err[D_QUEUE_DEPTH-1][9], prev_err[D_QUEUE_DEPTH-1] };
-    assign D_diff_sat = D_diff[10] ? 
+    assign D_diff = {err_sat[9], err_sat } - {prev_err[D_QUEUE_DEPTH-1][9], prev_err[D_QUEUE_DEPTH-1] };
+    assign pipe_D_diff_sat = D_diff[10] ? 
                                      (&D_diff[9:6] ?  D_diff[6:0] : NEG_BOUND_7BIT) :
                                      (|D_diff[9:6] ?  POS_BOUND_7BIT : D_diff[6:0]);
     // dterm = (saturate to 7-bits(D_diff) * DTERM)
@@ -81,7 +87,7 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
             for (int i = 0; i < D_QUEUE_DEPTH; i++)
                 prev_err[i] <= 10'h000;
         end
-        else if (vld) begin
+        else if (pipe_vld) begin
             prev_err[0] <= err_sat;
             for (int i = 1; i < D_QUEUE_DEPTH; i++)
                 prev_err[i] <= prev_err[i - 1];

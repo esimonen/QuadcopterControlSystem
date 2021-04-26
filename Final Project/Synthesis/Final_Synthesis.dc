@@ -12,10 +12,8 @@ set current_design QuadCopter
 link
 
 #create the clock
-#3.75ns
-
- # TODO: double check if default to 50% duty cycle
-create_clock -name "clk" -period 3.75 -waveform { 0 1.875 } { clk }
+#3.75ns, 50% duty cycle
+create_clock -name "clk" -period 3.75 { clk }
 
 # remove synopsis' ability to buffer clk
 
@@ -30,11 +28,6 @@ set_input_delay -clock clk 0.25 $prim_inputs
 # set the strength of the driving cell, which is used to simulate the input strength
 
 set_driving_cell -lib_cell NAND2X2_RVT -library saed32rvt_tt0p85v25c $prim_inputs
-
-# TODO: is this necessary? ask john and/or eric
-## rst_n is a strong signal, so we will drive it seperately
-#
-#set_drive 0.1 rst_n
 
 # set output delay to model the timing parameters
 # our delay is 0.5 ns
@@ -60,23 +53,8 @@ set_max_transition 0.15 [current_design]
 
 set_clock_uncertainty 0.20 clk
 
-<<<<<<< HEAD
-# by default, synopsis does not fix our clock uncertainty problems unless ask
-
-=======
->>>>>>> flght_cntrl_pipe
-#
-# compile the design
-#
-
-<<<<<<< HEAD
 # compile #1
-compile -area_effort high -map_effort medium
-=======
-
-compile -map_effort high
-#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
->>>>>>> flght_cntrl_pipe
+compile -area_effort high
 
 # fix hold times
 set_fix_hold clk
@@ -86,16 +64,7 @@ set_fix_hold clk
 ungroup -all -flatten
 
 # compile #2
-compile -map_effort medium -area_effort high -incremental_mapping
-
-<<<<<<< HEAD
-# compile #3
-compile -map_effort high -area_effort high -incremental_mapping
-=======
-#set compile_seqmap_enable_output_inversion true
-#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
-compile -map_effort high -incremental_mapping
->>>>>>> flght_cntrl_pipe
+compile -area_effort high
 
 # timing reports
 
