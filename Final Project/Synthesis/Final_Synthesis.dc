@@ -60,15 +60,25 @@ set_max_transition 0.15 [current_design]
 
 set_clock_uncertainty 0.20 clk
 
+<<<<<<< HEAD
 # by default, synopsis does not fix our clock uncertainty problems unless ask
 
+=======
+>>>>>>> flght_cntrl_pipe
 #
 # compile the design
 #
 
+<<<<<<< HEAD
 # compile #1
 compile -area_effort high -map_effort medium
+=======
 
+compile -map_effort high
+#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
+>>>>>>> flght_cntrl_pipe
+
+# fix hold times
 set_fix_hold clk
 
 # flatten design
@@ -78,8 +88,14 @@ ungroup -all -flatten
 # compile #2
 compile -map_effort medium -area_effort high -incremental_mapping
 
+<<<<<<< HEAD
 # compile #3
 compile -map_effort high -area_effort high -incremental_mapping
+=======
+#set compile_seqmap_enable_output_inversion true
+#compile -boundary_optimization -power_effort none -incremental_mapping -map_effort high
+compile -map_effort high -incremental_mapping
+>>>>>>> flght_cntrl_pipe
 
 # timing reports
 
