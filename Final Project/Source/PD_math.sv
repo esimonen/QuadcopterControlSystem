@@ -69,8 +69,8 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     // calculate derivative error term
     assign pipe_D_diff = {err_sat[9], err_sat } - {prev_err[D_QUEUE_DEPTH-1][9], prev_err[D_QUEUE_DEPTH-1] };
     assign D_diff_sat = D_diff[10] ? 
-            (&D_diff[9:6] ?  D_diff[6:0] : NEG_BOUND_7BIT) :
-			(|D_diff[9:6] ?  POS_BOUND_7BIT : D_diff[6:0]);
+                                     (&D_diff[9:6] ?  D_diff[6:0] : NEG_BOUND_7BIT) :
+                                     (|D_diff[9:6] ?  POS_BOUND_7BIT : D_diff[6:0]);
     // dterm = (saturate to 7-bits(D_diff) * DTERM)
     assign dterm = $signed(DTERM) * $signed(D_diff_sat);
 
