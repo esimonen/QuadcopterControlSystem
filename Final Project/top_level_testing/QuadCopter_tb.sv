@@ -82,26 +82,22 @@ initial begin
     data = 16'h00FF;
     send_packet();//send_cmd,clk,resp_rdy,resp);
     check_cyclone_outputs();
-    repeat (1000000) @(posedge clk);
+    //repeat (1000000) @(posedge clk);
     // set pitch 
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0100;
     send_packet();
-    check_cyclone_outputs();
-
     //check pitch is approaching desired
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
     // set roll 
     $display("Set Roll");
     host_cmd = STRLL;
     data = -16'h0080;
     send_packet();
-    check_cyclone_outputs();
-
     //check roll is approaching desired
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
     // set yaw 
     $display("Set Yaw");
@@ -109,21 +105,13 @@ initial begin
     data = 16'h080;
     send_packet();
     check_cyclone_outputs();
-
-    //check yaw is approaching desired
-    repeat (2000000) @(posedge clk);
-
+    
     // set pitch 
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0000;
     send_packet();
     check_cyclone_outputs();
-
-    //check pitch is approaching desired
-    repeat (2000000) @(posedge clk);
-
-    /*
 
     // Emergency Land
     $display("Emergency Land");
@@ -136,15 +124,16 @@ initial begin
     $display("Motors Off");
     host_cmd = MTSOFF;
     send_packet();
-    check_cyclone_outputs();*/
+    check_cyclone_outputs();
 
+    $display("yahoo, bitch");
     $stop;
-
+    
 end
 
 always
     #10 clk = ~clk;
-
+    
 `include "./tb_tasks.svh";
 	
 endmodule	

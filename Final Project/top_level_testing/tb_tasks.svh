@@ -56,22 +56,29 @@ task check_cyclone_outputs;
     localparam CALIBRATE    = 8'h06;
     localparam EMER_LAND    = 8'h07;
     localparam MTRS_OFF     = 8'h08;
-    reg [15:0] tempdata; // we have this register so we can get a snapshot of the data that is being sent, so we can compare
-                         // the requested value to the value in the iDUT
-    static real LOW_THRESHOLD = 0.9; // a coefficient that we use as part of the cutoff to check for our data
-    static real HIGH_THRESHOLD = 1.1; // a coefficient that we use as part of the cutoff to check for our data
+
+    static reg [15:0] RANGE = 15'd20; // a coefficient that we use as part of the cutoff to check for our data
+    reg signed [16:0] high;
+    reg signed [16:0] low;
+    reg thrust_in_range, yaw_in_range, pitch_in_range, roll_in_range;
+    assign thrust_in_range = iDUT.thrst <= high  && iDUT.thrst >= low;
+    assign yaw_in_range = iDUT.yaw <= high  && iDUT.yaw >= low;
+    assign pitch_in_range = iDUT.ptch <= high  && iDUT.ptch >= low;
+    assign roll_in_range = iDUT.roll <= high  && iDUT.roll >= low;
+    assign high = {data[15], data} + RANGE;
+    assign low = {data[15], data} - RANGE;
     begin
-        tempdata = data; //copy data so we can send another signal from RemoteComm and still let this task work correctly
+
         case (host_cmd)
             SET_PTCH : begin 
                 fork
                     begin : timeout_ptch
-                        repeat (3000000) @(posedge clk);
-                        $error("Task 'check_cyclone_outputs' Failed: Waiting for pitch to near %0h", tempdata);
+                        repeat (6000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for pitch to near %0h", data);
                         $stop;
                     end
                     begin
-                        @(iDUT.ptch <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.ptch >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect pitch to get above some threshold when we ask for a desired pitch
+                        while(!pitch_in_range) @(posedge clk); // we expect pitch to get above some threshold when we ask for a desired pitch
                         disable timeout_ptch;
                     end
                 join
@@ -79,12 +86,12 @@ task check_cyclone_outputs;
             SET_ROLL : begin
                 fork
                     begin : timeout_roll
-                        repeat (3000000) @(posedge clk);
-                        $error("Task 'check_cyclone_outputs' Failed: Waiting for roll to near %0h", tempdata);
+                        repeat (6000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for roll to near %0h", data);
                         $stop;
                     end
                     begin
-                        @(iDUT.roll <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.roll >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect roll to get above (or below) some threshold when we ask for a desired roll
+                        while(!roll_in_range) @(posedge clk); // we expect roll to get above (or below) some threshold when we ask for a desired roll
                         disable timeout_roll;
                     end
                 join
@@ -93,12 +100,12 @@ task check_cyclone_outputs;
 
                 fork
                     begin : timeout_yaw
-                        repeat (3000000) @(posedge clk);
-                        $error("Task 'check_cyclone_outputs' Failed: Waiting for yaw to near %0h", tempdata);
+                        repeat (6000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for yaw to near %0h", data);
                         $stop;
                     end
                     begin
-                        @(iDUT.yaw <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.yaw >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect yaw to get above (or below) some threshold when we ask for a desired yaw
+                        while(!yaw_in_range) @(posedge clk); // we expect yaw to get above (or below) some threshold when we ask for a desired yaw
                         disable timeout_yaw;
                     end
                 join
@@ -110,12 +117,12 @@ task check_cyclone_outputs;
 
                 fork
                     begin : timeout_thrst
-                        repeat (3000000) @(posedge clk);
-                        $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near %0h", tempdata);
+                        repeat (6000000) @(posedge clk);
+                        $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near %0h", data);
                         $stop;
                     end
                     begin
-                        @(iDUT.thrst <= $bitstoreal(tempdata) * HIGH_THRESHOLD  && iDUT.thrst >= $bitstoreal(tempdata) * LOW_THRESHOLD); // we expect thrust to get above (or below) some threshold when we ask for a desired thrust
+                        while(!thrust_in_range) @(posedge clk); // we expect thrust to get above (or below) some threshold when we ask for a desired thrust
                         disable timeout_thrst;
                     end
                 join
@@ -131,39 +138,39 @@ task check_cyclone_outputs;
             EMER_LAND : begin
                 fork
                     begin : timeout_thrst_emer
-                        repeat (3000000) @(posedge clk);
+                        repeat (6000000) @(posedge clk);
                         $error("Task 'check_cyclone_outputs' Failed: Waiting for thrust to near 0");
                         $stop;
                     end
                     begin
-                        @(iDUT.thrst === 0); // we expect thrust to get towards 0
+                        while(iDUT.thrst !== 0) @(posedge clk); // we expect thrust to get towards 0
                         disable timeout_thrst_emer;
                     end
                     begin : timeout_roll_emer
-                        repeat (3000000) @(posedge clk);
+                        repeat (6000000) @(posedge clk);
                         $error("Task 'check_cyclone_outputs' Failed: Waiting for roll to near 0");
                         $stop;
                     end
                     begin
-                        @(iDUT.roll === 0); // we expect roll to get towards 0
+                        while(iDUT.roll !== 0)@(posedge clk); // we expect roll to get towards 0
                         disable timeout_roll_emer;
                     end
                     begin : timeout_yaw_emer
-                        repeat (3000000) @(posedge clk);
+                        repeat (6000000) @(posedge clk);
                         $error("Task 'check_cyclone_outputs' Failed: Waiting for yaw to near 0");
                         $stop;
                     end
                     begin
-                        @(iDUT.roll === 0); // we expect yaw to get towards 0
+                        while(iDUT.yaw !== 0) @(posedge clk); // we expect yaw to get towards 0
                         disable timeout_yaw_emer;
                     end
                     begin : timeout_ptch_emer
-                        repeat (3000000) @(posedge clk);
+                        repeat (6000000) @(posedge clk);
                         $error("Task 'check_cyclone_outputs' Failed: Waiting for pitch to near 0");
                         $stop;
                     end
                     begin
-                        @(iDUT.ptch === 0); // we expect pitch to get towards 0
+                        while(iDUT.ptch !== 0) @(posedge clk); // we expect pitch to get towards 0
                         disable timeout_ptch_emer;
                     end
                 join
@@ -179,7 +186,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        @(iDUT.thrst === 0); // we expect thrust to be 0 when we turn off the motors
+                        while(iDUT.thrst !== 0) @(posedge clk); // we expect thrust to be 0 when we turn off the motors
                         disable timeout_mtrsoff;
                     end
                 join
