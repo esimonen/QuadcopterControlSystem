@@ -1,4 +1,3 @@
-`include "theo_tb_tasks.sv"
 /*
  * Team:            The Moorons
  * Course:          ECE551
@@ -131,6 +130,23 @@ initial begin
     send_packet();
     check_cmd_cfg_outputs();
 
+    // check if we can calibrate again after turnin motors off
+    $display("CALIBRATE");
+    cmd2send = CAL;
+    fork
+        begin: set_cal_done
+            repeat (500000) @(posedge clk);
+            cal_done = 1;
+            @(posedge clk);
+            cal_done = 0;
+        end
+        begin
+            send_packet();
+            check_cmd_cfg_outputs();
+            disable set_cal_done;
+        end
+    join  
+
     $finish;
 
 end
@@ -138,5 +154,7 @@ end
 
 always
     #5 clk = ~clk;
+
+`include "tb_tasks.svh"
 
 endmodule
