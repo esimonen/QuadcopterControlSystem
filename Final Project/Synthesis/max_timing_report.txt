@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Mon Apr 26 11:23:53 2021
+Date   : Tue Apr 27 11:45:41 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -31,7 +31,7 @@ Wire Load Model Mode: enclosed
   clock network delay (ideal)                             0.00       0.00
   iNEMO/iINT/ptch_comp_reg[0]/CLK (DFFX1_RVT)             0.00 #     0.00 r
   iNEMO/iINT/ptch_comp_reg[0]/QN (DFFX1_RVT)              0.10       0.10 f
-  U1902/Y (NOR2X0_RVT)                                    0.10       0.21 r
+  U1864/Y (NOR2X0_RVT)                                    0.10       0.21 r
   iNEMO/iINT/add_170/U1_1/CO (FADDX1_RVT)                 0.11       0.32 r
   iNEMO/iINT/add_170/U1_2/CO (FADDX1_RVT)                 0.12       0.43 r
   iNEMO/iINT/add_170/U1_3/CO (FADDX1_RVT)                 0.12       0.55 r
@@ -57,8 +57,8 @@ Wire Load Model Mode: enclosed
   iNEMO/iINT/add_170/U1_23/CO (FADDX1_RVT)                0.12       2.87 r
   iNEMO/iINT/add_170/U1_24/CO (FADDX1_RVT)                0.12       2.99 r
   iNEMO/iINT/add_170/U1_25/CO (FADDX1_RVT)                0.11       3.10 r
-  U2800/Y (XNOR3X1_RVT)                                   0.10       3.21 r
-  U1773/Y (AO22X1_RVT)                                    0.09       3.29 r
+  U2764/Y (XNOR3X1_RVT)                                   0.10       3.21 r
+  U1735/Y (AO22X1_RVT)                                    0.09       3.29 r
   iNEMO/iINT/ptch_int_reg[26]/D (DFFARX2_RVT)             0.01       3.30 r
   data arrival time                                                  3.30
 

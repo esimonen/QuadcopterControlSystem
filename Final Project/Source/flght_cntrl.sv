@@ -34,6 +34,8 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   // flops to pipeline *_speed_temp values
   reg [12:0] pipe_fs, pipe_bs, pipe_rs, pipe_ls;
 
+  // flops to pipeline intermediate in the large additions to make the *_speed_temp
+  reg [12:0] ptch_ff,roll_ff,yaw_ff, thrst_ff;
   ///////////////////////////////////////////////////////////////
   // some Parameters to keep things more generic and flexible //
   /////////////////////////////////////////////////////////////
@@ -43,19 +45,35 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   
   // pipeline *_speed_temp values
   always_ff @(posedge clk, negedge rst_n) begin
-      if (!rst_n) begin
-	  pipe_fs <= 0;
-	  pipe_bs <= 0;
-	  pipe_rs <= 0;
-	  pipe_ls <= 0;
-      end
-      else begin
-	  pipe_fs <= front_speed_temp;
-	  pipe_bs <= back_speed_temp;
-	  pipe_rs <= right_speed_temp;
-	  pipe_ls <= left_speed_temp;
-      end
+    if (!rst_n) begin
+	    pipe_fs <= 0;
+	    pipe_bs <= 0;
+	    pipe_rs <= 0;
+	    pipe_ls <= 0;
+    end
+    else begin
+	    pipe_fs <= front_speed_temp;
+	    pipe_bs <= back_speed_temp;
+	    pipe_rs <= right_speed_temp;
+	    pipe_ls <= left_speed_temp;
+    end
   end
+
+
+  always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n) begin
+      ptch_ff <=0;
+      roll_ff <= 0;
+      yaw_ff <= 0;
+      thrst_ff <= 0;       
+    end else begin
+      ptch_ff <= ptch_pterm_13b + ptch_dterm_13b;
+      roll_ff <= roll_dterm_13b + roll_pterm_13b;
+      yaw_ff <= yaw_pterm_13b + yaw_dterm_13b;
+      thrst_ff <= thrust_13b + MIN_RUN_SPEED;   
+    end
+  end
+
 
   //////////////////////////////////////
   // Instantiate 3 copies of PD_math //
@@ -77,16 +95,16 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   // so, add terms that dec, sub terms that inc
 
   // faster front motor --> inc pitch, inc yaw
-  assign front_speed_temp = thrust_13b + MIN_RUN_SPEED - ptch_pterm_13b - ptch_dterm_13b - yaw_pterm_13b - yaw_dterm_13b; 
+  assign front_speed_temp = thrst_ff - ptch_ff - yaw_ff; 
   
   // faster back motor --> dec pitch, inc yaw
-  assign back_speed_temp = thrust_13b + MIN_RUN_SPEED + ptch_pterm_13b + ptch_dterm_13b - yaw_pterm_13b - yaw_dterm_13b;
+  assign back_speed_temp = thrst_ff + ptch_ff - yaw_ff;
   
   // faster left motor --> inc roll, dec yaw
-  assign left_speed_temp = thrust_13b + MIN_RUN_SPEED - roll_dterm_13b - roll_pterm_13b + yaw_pterm_13b + yaw_dterm_13b;
+  assign left_speed_temp = thrst_ff - roll_ff + yaw_ff;
   
   // faster right motor --> dec roll, dec yaw
-  assign right_speed_temp = thrust_13b + MIN_RUN_SPEED + roll_dterm_13b + roll_pterm_13b + yaw_pterm_13b + yaw_dterm_13b;
+  assign right_speed_temp = thrst_ff + roll_ff + yaw_ff;
   
   // infer muxes and perform unsigned saturate
   assign frnt_spd = inertial_cal ?              CAL_SPEED :
