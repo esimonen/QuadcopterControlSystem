@@ -46,6 +46,12 @@ task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
 
 endtask
 
+
+// Task: check_cyclone_outputs
+// 
+// Checks that the pitch,roll, and yaw converge upon their expected values within a reasonable amount of clocks.
+// 
+
 task check_cyclone_outputs;
 
     // constants to make commands from uart more readable
@@ -186,7 +192,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        while(iDUT.thrst !== 0) @(posedge clk); // we expect thrust to be 0 when we turn off the motors
+                        while(iDUT.thrst <= RANGE && iDUT.thrst >= -RANGE) @(posedge clk); // we expect thrust to be 0 when we turn off the motors
                         disable timeout_mtrsoff;
                     end
                 join

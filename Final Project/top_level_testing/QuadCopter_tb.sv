@@ -61,28 +61,15 @@ initial begin
     // calibrate 
     $display("CALIBRATE");
     host_cmd = CAL;
-    send_packet();
-    /*fork
-        begin: set_cal_done
-            repeat (500000) @(posedge clk);
-            //cal_done = 1;
-            @(posedge clk);
-            //cal_done = 0;
-        end
-        begin
-            send_packet();
-            // check_cyclone_outputs();
-            disable set_cal_done;
-        end
-    join*/   
+    send_packet();  
 
     // set thrst 
     $display("Set Thrust");
     host_cmd = STTHRST;
     data = 16'h00FF;
-    send_packet();//send_cmd,clk,resp_rdy,resp);
+    send_packet();
     check_cyclone_outputs();
-    //repeat (1000000) @(posedge clk);
+    
     // set pitch 
     $display("Set Pitch");
     host_cmd = STPTCH;
@@ -99,34 +86,35 @@ initial begin
     //check roll is approaching desired
     check_cyclone_outputs();
     
-    // set yaw 
+    // set yaw, will makt yaw go to 80
     $display("Set Yaw");
     host_cmd = STYW;
     data = 16'h080;
     send_packet();
     check_cyclone_outputs();
     
-    // set pitch 
+    // set pitch , will make pitch go to 0
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0000;
     send_packet();
     check_cyclone_outputs();
 
-    // Emergency Land
+    // Emergency Land, will make t,p,r,y go to 0
     $display("Emergency Land");
     host_cmd = EMER;
     data = 16'h0000;
     send_packet();
     check_cyclone_outputs();
     
-    // Motors off
+    // Motors off, will make thrust go to 0
     $display("Motors Off");
     host_cmd = MTSOFF;
     send_packet();
     check_cyclone_outputs();
 
-    $display("yahoo, bitch");
+    // at this point, all of the tests in this bench have passed
+    $display("YAHOO!! Tests Passed!");
     $stop;
     
 end
