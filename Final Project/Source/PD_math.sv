@@ -8,8 +8,8 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     input vld; // if most recent reading is valid
     input [15:0] desired; // what we want the reading to be
     input [15:0] actual; // current reading
-    output reg [9:0] pterm; // proportional PID term
-    output reg [11:0] dterm; // derivative PID term
+    output wire [9:0] pterm; // proportional PID term
+    output wire [11:0] dterm; // derivative PID term
 
     // default depth of d_term err queue
     localparam D_QUEUE_DEPTH = 12;
@@ -24,7 +24,7 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     localparam POS_BOUND_10BIT = 10'h1FF;
 
     // sigs for pipelining
-    wire [9:0] pipe_pterm;
+    // wire [9:0] pipe_pterm;
     wire [6:0] pipe_D_diff_sat;
     wire [9:0] pipe_err_sat;
     reg pipe_vld;
@@ -47,13 +47,13 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
     // pipeline pterm and D_diff dterm
     always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n) begin
-	    pterm <= 0;
+	    //pterm <= 0;
 	    D_diff_sat <= 0;
 	    pipe_vld <= 0;
 	    err_sat <= 0;
         end
 	else begin
-	    pterm <= pipe_pterm;
+	    //pterm <= pipe_pterm;
 	    D_diff_sat <= pipe_D_diff_sat;
 	    pipe_vld <= vld;
 	    err_sat <= pipe_err_sat;
@@ -61,8 +61,8 @@ module PD_math(clk, rst_n, vld, desired, actual, pterm, dterm);
 
     // calculate proportional error term
     // pterm = (5/8) * err_sat = (1/2 + 1/8) * err_sat (so ASR 1 + ASR 3);
-    assign pipe_pterm = {err_sat[9], err_sat[9:1]} + {{3{err_sat[9]}}, err_sat[9:3]};
-
+    // assign pipe_pterm = {err_sat[9], err_sat[9:1]} + {{3{err_sat[9]}}, err_sat[9:3]};
+    assign pterm = {err_sat[9], err_sat[9:1]} + {{3{err_sat[9]}}, err_sat[9:3]};
     // figure out saturated error term
     // sign extend for correct subtraction
     assign err = { actual[15], actual[15:0] } - { desired[15], desired[15:0] };
