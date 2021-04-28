@@ -40,17 +40,15 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     wire C_Y_L, C_Y_H;    // capture yaw low, high
     wire C_AX_L, C_AX_H;  // capture acceleration x direction low, high
     wire C_AY_L, C_AY_H;  // capture acceleration y direction low, high
-    reg wrt;             // high to tell SPI_mnrch to send data to the sensor
+    logic wrt;             // high to tell SPI_mnrch to send data to the sensor
     reg [15:0] cmd;      // data to send through the SPI_mnrch
-    reg pointer_reset;   // asserted when reseting the register pointer
-
-    
+    logic pointer_reset;   // asserted when reseting the register pointer
+    logic capture_reset; // asserted when resetting which data we want to capture    
   
     ///////////////////////////////////////
     // Create enumerated type for state //
     /////////////////////////////////////
-    typedef enum reg [2:0] {  INIT_INTERRUPT, INIT_ACCEL, INIT_GYRO, INIT_ROUNDING, 
-                            READ /*R_pitchL, R_pitchH, R_rollL, R_rollH, R_yawL, R_yawH, R_axL, R_axH, R_ayL, R_ayH*/, IDLE } state_t;
+    typedef enum reg [2:0] {  INIT_INTERRUPT, INIT_ACCEL, INIT_GYRO, INIT_ROUNDING, READ, IDLE } state_t;
     state_t next_state, state;
     
     // FSM state register
@@ -66,23 +64,12 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     // FSM output logic and state transition logic
     always_comb begin
         next_state = state;
-        // default comb outputs to prevent latches
-        /*C_P_L = 0;
-        C_P_H = 0;
-        C_R_L = 0;
-        C_R_H = 0;
-        C_Y_L = 0;
-        C_Y_H = 0;
-        C_AX_L = 0;
-        C_AX_H = 0;
-        C_AY_L = 0;
-        C_AY_H = 0;
-        wrt = 0;*/
         vld = 0;
         cmd = 16'hxxxx;
         pointer_reset = 0;
         wrt = 0;
-
+        capture_reset = 0;
+        
         // cmd in each state is { R/~W, ADDR, DATA } for the next state
         // this way, we are reading/writing the data in each state that 
         // corresponds to the name of the state
@@ -119,85 +106,8 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                     wrt = 1;
                 end
             end
-            /*R_pitchL: begin
-                cmd = 16'hA3xx;
-                if (done) begin
-                    next_state = R_pitchH;
-                    C_P_L = 1;
-                    wrt = 1;
-                end
-            end
-            R_pitchH: begin
-                cmd = 16'hA4xx;
-                if (done) begin
-                    next_state = R_rollL;
-                    C_P_H = 1;
-                    wrt = 1;
-                end
-            end    
-            R_rollL: begin
-                cmd = 16'hA5xx;
-                if (done) begin
-                    next_state = R_rollH;
-                    C_R_L = 1;
-                    wrt = 1;
-                end
-            end
-            R_rollH: begin
-                cmd = 16'hA6xx;
-                if (done) begin
-                    next_state = R_yawL;
-                    C_R_H = 1;
-                    wrt = 1;
-                end
-            end
-            R_yawL: begin
-                cmd = 16'hA7xx;
-                if (done) begin
-                    next_state = R_yawH;
-                    C_Y_L = 1;
-                    wrt = 1;
-                end
-            end
-            R_yawH: begin
-                cmd = 16'hA8xx;
-                if (done) begin
-                    next_state = R_axL;
-                    C_Y_H = 1;
-                    wrt = 1;
-                end
-            end
-            R_axL: begin
-                cmd = 16'hA9xx;
-                if (done) begin
-                    next_state = R_axH;
-                    C_AX_L = 1;
-                    wrt = 1;
-                end
-            end
-            R_axH: begin
-                cmd = 16'hAAxx;
-                if (done) begin
-                    next_state = R_ayL;
-                    C_AX_H = 1;
-                    wrt = 1;
-                end
-            end
-            R_ayL: begin
-                cmd = 16'hABxx;
-                if (done) begin
-                    next_state = R_ayH;
-                    C_AY_L = 1;
-                    wrt = 1;
-                end
-            end
-            R_ayH: begin
-                if (done) begin
-                    next_state = IDLE;
-                    C_AY_H = 1;
-                    vld = 1;
-                end
-            end*/
+
+            // read state to read the collected data into whereever the pointer is pointing to
             READ: begin
                 cmd = {4'hA, pointer, 8'hxx};
                 if (pointer == 4'hC) begin
@@ -211,6 +121,7 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
                 if(INT_f2 && done) begin
                     next_state = READ;
                     pointer_reset = 1; //resetting the pointer to its initial value
+                    capture_reset = 1;
                 end
             end
         endcase
@@ -223,9 +134,9 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            pointer <= 4'h1;
+            pointer <= 4'h2;
         else if (pointer_reset)
-            pointer <= 4'h1;
+            pointer <= 4'h2;
         else if (done && state == READ) begin
             pointer <= pointer + 1;
         end
@@ -236,23 +147,25 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     // we use a 11 bit register, one bit for each capture signal, and 11th bit is non-read
     // Rotate left 
     reg [10:0] capture;
-    // [0] capture pitch low
-    // [1] capture pitch high
-    // [2] capture roll low
-    // [3] capture roll high
-    // [4] capture yaw low
-    // [5] capture yaw high
-    // [6] capture acceleration x low
-    // [7] capture acceleration x high
-    // [8] capture acceleration y low
-    // [9] capture acceleration y high
-    // [10] dont capture anything, here so that we can
+    // [1] capture pitch low
+    // [2] capture pitch high
+    // [3] capture roll low
+    // [4] capture roll high
+    // [5] capture yaw low
+    // [6] capture yaw high
+    // [7] capture acceleration x low
+    // [8] capture acceleration x high
+    // [9] capture acceleration y low
+    // [10] capture acceleration y high
+    // [0] dont capture anything, here so that we can
     //      keep this to a rotate, instead of a shift with reset
     always_ff @(posedge clk, negedge rst_n)
         if (!rst_n)
-            capture <= 11'h200;
-        else if (done && wrt)
-            capture <= { capture[9:0], capture[10] };
+            capture <= 11'h001;
+        else if (capture_reset)
+            capture <= 11'h001;
+        else if (wrt)
+            capture <= { capture[9:0], 1'b0 };
 
     ////////////////////////////////////////////////////////////
     // Instantiate SPI monarch for Inertial Sensor interface //
@@ -267,16 +180,16 @@ module inert_intf(clk,rst_n,ptch,roll,yaw,strt_cal,cal_done,vld,SS_n,SCLK,
     inertial_integrator #(FAST_SIM) iINT(.clk(clk), .rst_n(rst_n), .strt_cal(strt_cal), .cal_done(cal_done),
                                        .vld(vld), .ptch_rt(ptch_rt), .roll_rt(roll_rt), .yaw_rt(yaw_rt), .ax(ax),
 						               .ay(ay), .ptch(ptch), .roll(roll), .yaw(yaw));
-	assign C_P_L = capture[0]  && done;
-    assign C_P_H = capture[1]  && done;
-    assign C_R_L = capture[2]  && done;
-    assign C_R_H = capture[3]  && done;
-    assign C_Y_L = capture[4]  && done;
-    assign C_Y_H = capture[5]  && done;
-    assign C_AX_L = capture[6] && done;
-    assign C_AX_H = capture[7] && done;
-    assign C_AY_L = capture[8] && done;
-    assign C_AY_H = capture[9] && done;
+	assign C_P_L = capture[1]  && done;
+    assign C_P_H = capture[2]  && done;
+    assign C_R_L = capture[3]  && done;
+    assign C_R_H = capture[4]  && done;
+    assign C_Y_L = capture[5]  && done;
+    assign C_Y_H = capture[6]  && done;
+    assign C_AX_L = capture[7] && done;
+    assign C_AX_H = capture[8] && done;
+    assign C_AY_L = capture[9] && done;
+    assign C_AY_H = capture[10] && done;
     // internal registers
      // pitch low
     always_ff @(posedge clk, negedge rst_n)
