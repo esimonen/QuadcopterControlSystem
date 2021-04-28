@@ -143,7 +143,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        while(iDUT.thrst !== 0) @(posedge clk); // we expect thrust to get towards 0
+                        while(iDUT.thrst <= RANGE && iDUT.thrst >= -RANGE) @(posedge clk); // we expect thrust to get towards 0
                         disable timeout_thrst_emer;
                     end
                     begin : timeout_roll_emer
@@ -152,7 +152,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        while(iDUT.roll !== 0)@(posedge clk); // we expect roll to get towards 0
+                        while(iDUT.roll <= RANGE && iDUT.roll >= -RANGE)@(posedge clk); // we expect roll to get towards 0
                         disable timeout_roll_emer;
                     end
                     begin : timeout_yaw_emer
@@ -161,7 +161,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        while(iDUT.yaw !== 0) @(posedge clk); // we expect yaw to get towards 0
+                        while(iDUT.yaw <= RANGE && iDUT.yaw >= -RANGE) @(posedge clk); // we expect yaw to get towards 0
                         disable timeout_yaw_emer;
                     end
                     begin : timeout_ptch_emer
@@ -170,7 +170,7 @@ task check_cyclone_outputs;
                         $stop;
                     end
                     begin
-                        while(iDUT.ptch !== 0) @(posedge clk); // we expect pitch to get towards 0
+                        while(iDUT.ptch <= RANGE && iDUT.ptch >= -RANGE) @(posedge clk); // we expect pitch to get towards 0
                         disable timeout_ptch_emer;
                     end
                 join
