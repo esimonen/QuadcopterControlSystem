@@ -1,20 +1,20 @@
 module UART_comm(clk, rst_n, RX, TX, resp, send_resp, resp_sent, cmd_rdy, cmd, data, clr_cmd_rdy);
 
 	input clk, rst_n;		// clock and active low reset
-	input RX;			// serial data input
+	input RX;				// serial data input
 	input send_resp;		// indicates to transmit 8-bit data (resp)
 	input [7:0] resp;		// byte to transmit
 	input clr_cmd_rdy;		// host asserts when command digested
 
-	output TX;			// serial data output
+	output TX;				// serial data output
 	output resp_sent;		// indicates transmission of response complete
 	output reg cmd_rdy;		// indicates 24-bit command has been received
 	output reg [7:0] cmd;		// 8-bit opcode sent from host via BLE
-	output reg [15:0] data;		// 16-bit parameter sent LSB first via BLE
+	output reg [15:0] data;	// 16-bit parameter sent LSB first via BLE
 
 	wire [7:0] rx_data;		// 8-bit data received from UART
 	wire rx_rdy;			// indicates new 8-bit data ready from UART
-	wire rx_rdy_posedge;		// output of posedge detector on rx_rdy used to transition SM
+	wire rx_rdy_posedge;	// output of posedge detector on rx_rdy used to transition SM
 
 	////////////////////////////////////////////////////
 	// declare any needed internal signals/registers //
@@ -93,32 +93,32 @@ module UART_comm(clk, rst_n, RX, TX, resp, send_resp, resp_sent, cmd_rdy, cmd, d
 
 	// FSM output logic and state transition logic
 	always_comb begin
-		next_state = state;
-		capture_cmd = 1'b0;
-		capture_data_hi = 1'b0;
-		clr_cmd_ready_i = 1'b0;
+    	next_state = state;
+    	capture_cmd = 1'b0;
+    	capture_data_hi = 1'b0;
+    	clr_cmd_ready_i = 1'b0;
 		set_cmd_rdy_i = 1'b0;
 
-		case (state)
-			IDLE: begin
-				if (rx_rdy_posedge) begin
+    	case (state)
+    		IDLE: begin
+    	        if (rx_rdy_posedge) begin
 					next_state = READ_1;
-    	        			capture_cmd = 1'b1;
-    	        			clr_cmd_ready_i = 1'b1;
-    	        		end
-			end
-			READ_1: begin
-				if (rx_rdy_posedge) begin
+    	            capture_cmd = 1'b1;
+    	            clr_cmd_ready_i = 1'b1;
+    	        end
+    	    end
+    	    READ_1: begin
+    	        if (rx_rdy_posedge) begin
 					next_state = READ_2;
-					capture_data_hi = 1'b1;
-				end
-			end
-			default: begin // READ_2
-				if (rx_rdy_posedge) begin
+    		        capture_data_hi = 1'b1;
+    	        end
+    	    end
+    	    default: begin // READ_2
+   		        if (rx_rdy_posedge) begin
 					next_state = IDLE;
-					set_cmd_rdy_i = 1'b1;
-				end
-			end
+        	        set_cmd_rdy_i = 1'b1;
+    	        end
+        	end
 		endcase
 	end
 

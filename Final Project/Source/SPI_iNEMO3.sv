@@ -1,4 +1,3 @@
-//`timescale 1ns/1ps // uncomment for post synth validation
 module SPI_iNEMO3(SS_n,SCLK,MISO,MOSI,INT,AX,AY,PTCH,ROLL,YAW);
   /////////////////////////////////////////////////////////
   // Model of a ST iNEMO 6-axis inertial device         //
@@ -178,7 +177,7 @@ module SPI_iNEMO3(SS_n,SCLK,MISO,MOSI,INT,AX,AY,PTCH,ROLL,YAW);
   end
   
   always
-    #4 internal_clk = ~internal_clk;	// generate 12.5MHz internal clock
+    #40 internal_clk = ~internal_clk;	// generate 12.5MHz internal clock
   
   function [7:0] response (input [7:0] in_byte);
     if (in_byte[7])	begin		// if it is a read respond with requested register

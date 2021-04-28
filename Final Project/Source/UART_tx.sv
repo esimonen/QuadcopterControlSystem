@@ -1,6 +1,6 @@
 // Theo Hornung
 // ece 551
-//
+// ex12
 module UART_tx(clk, rst_n, TX, trmt, tx_data, tx_done);
 
 	input clk;
@@ -48,13 +48,14 @@ module UART_tx(clk, rst_n, TX, trmt, tx_data, tx_done);
 	
 	// (2) Baud Counter
 	// output for when transmission done, which determines shift signal
+	// *** ripped this from eric's example, trying to debug rn ***
 	always @(posedge clk or negedge rst_n)
-		if (!rst_n)
-			baud_count <= 2604;
-		else if (load || shift)
-			baud_count <= 2604;			// baud of 19200 with 50MHz clk
-		else if (transmitting)
-			baud_count <= baud_count-1;		// only burn power incrementing if tranmitting
+  		if (!rst_n)
+    		baud_count <= 2604;
+  		else if (load || shift)
+    		baud_count <= 2604;			// baud of 19200 with 50MHz clk
+  		else if (transmitting)
+    		baud_count <= baud_count-1;		// only burn power incrementing if tranmitting
 	assign shift = ~|baud_count;
 	
 	// (3) Bit Counter

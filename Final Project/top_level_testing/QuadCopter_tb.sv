@@ -1,4 +1,4 @@
-//`timescale 1ns/1ps // uncomment for post-synth validation
+
 module QuadCopter_tb();
 		
 //// Interconnects to DUT/support defined as type wire /////
@@ -118,8 +118,7 @@ initial begin
     host_cmd = EMER;
     data = 16'h0000;
     send_packet();
-    //check_cyclone_outputs();
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
     // Motors off
     $display("Motors Off");
@@ -133,11 +132,9 @@ initial begin
 end
 
 always
-
     #10 clk = ~clk;
     
 `include "./tb_tasks.svh";
-
 	
 endmodule	
 

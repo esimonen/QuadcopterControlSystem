@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Mon Apr 26 11:23:53 2021
+Date   : Fri Apr 23 09:59:31 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,9 +14,9 @@ Date   : Mon Apr 26 11:23:53 2021
 Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
 Wire Load Model Mode: enclosed
 
-  Startpoint: iNEMO/iINT/ptch_comp_reg[0]
+  Startpoint: iCMD/d_yaw_reg[10]
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: iNEMO/iINT/ptch_int_reg[26]
+  Endpoint: iESC/esc_back/SPEED_ff_reg[3]
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -29,50 +29,68 @@ Wire Load Model Mode: enclosed
   --------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  iNEMO/iINT/ptch_comp_reg[0]/CLK (DFFX1_RVT)             0.00 #     0.00 r
-  iNEMO/iINT/ptch_comp_reg[0]/QN (DFFX1_RVT)              0.10       0.10 f
-  U1902/Y (NOR2X0_RVT)                                    0.10       0.21 r
-  iNEMO/iINT/add_170/U1_1/CO (FADDX1_RVT)                 0.11       0.32 r
-  iNEMO/iINT/add_170/U1_2/CO (FADDX1_RVT)                 0.12       0.43 r
-  iNEMO/iINT/add_170/U1_3/CO (FADDX1_RVT)                 0.12       0.55 r
-  iNEMO/iINT/add_170/U1_4/CO (FADDX1_RVT)                 0.12       0.67 r
-  iNEMO/iINT/add_170/U1_5/CO (FADDX1_RVT)                 0.12       0.78 r
-  iNEMO/iINT/add_170/U1_6/CO (FADDX1_RVT)                 0.12       0.90 r
-  iNEMO/iINT/add_170/U1_7/CO (FADDX1_RVT)                 0.12       1.01 r
-  iNEMO/iINT/add_170/U1_8/CO (FADDX1_RVT)                 0.12       1.13 r
-  iNEMO/iINT/add_170/U1_9/CO (FADDX1_RVT)                 0.12       1.25 r
-  iNEMO/iINT/add_170/U1_10/CO (FADDX1_RVT)                0.12       1.36 r
-  iNEMO/iINT/add_170/U1_11/CO (FADDX1_RVT)                0.12       1.48 r
-  iNEMO/iINT/add_170/U1_12/CO (FADDX1_RVT)                0.12       1.59 r
-  iNEMO/iINT/add_170/U1_13/CO (FADDX1_RVT)                0.12       1.71 r
-  iNEMO/iINT/add_170/U1_14/CO (FADDX1_RVT)                0.12       1.83 r
-  iNEMO/iINT/add_170/U1_15/CO (FADDX1_RVT)                0.12       1.94 r
-  iNEMO/iINT/add_170/U1_16/CO (FADDX1_RVT)                0.12       2.06 r
-  iNEMO/iINT/add_170/U1_17/CO (FADDX1_RVT)                0.12       2.18 r
-  iNEMO/iINT/add_170/U1_18/CO (FADDX1_RVT)                0.12       2.29 r
-  iNEMO/iINT/add_170/U1_19/CO (FADDX1_RVT)                0.12       2.41 r
-  iNEMO/iINT/add_170/U1_20/CO (FADDX1_RVT)                0.12       2.52 r
-  iNEMO/iINT/add_170/U1_21/CO (FADDX1_RVT)                0.12       2.64 r
-  iNEMO/iINT/add_170/U1_22/CO (FADDX1_RVT)                0.12       2.76 r
-  iNEMO/iINT/add_170/U1_23/CO (FADDX1_RVT)                0.12       2.87 r
-  iNEMO/iINT/add_170/U1_24/CO (FADDX1_RVT)                0.12       2.99 r
-  iNEMO/iINT/add_170/U1_25/CO (FADDX1_RVT)                0.11       3.10 r
-  U2800/Y (XNOR3X1_RVT)                                   0.10       3.21 r
-  U1773/Y (AO22X1_RVT)                                    0.09       3.29 r
-  iNEMO/iINT/ptch_int_reg[26]/D (DFFARX2_RVT)             0.01       3.30 r
-  data arrival time                                                  3.30
+  iCMD/d_yaw_reg[10]/CLK (DFFARX1_RVT)                    0.00 #     0.00 r
+  iCMD/d_yaw_reg[10]/QN (DFFARX1_RVT)                     0.10       0.10 r
+  U4767/Y (INVX0_RVT)                                     0.03       0.13 f
+  U6317/Y (NAND2X0_RVT)                                   0.07       0.20 r
+  U4745/Y (NAND2X0_RVT)                                   0.05       0.25 f
+  U6319/Y (AO21X1_RVT)                                    0.07       0.32 f
+  U4253/Y (OAI221X1_RVT)                                  0.10       0.42 r
+  U4907/Y (AND2X1_RVT)                                    0.06       0.48 r
+  U5120/Y (NAND2X0_RVT)                                   0.04       0.52 f
+  U4198/Y (NAND2X0_RVT)                                   0.06       0.58 r
+  U4276/Y (AO221X1_RVT)                                   0.10       0.67 r
+  U4718/Y (XOR2X2_RVT)                                    0.12       0.79 f
+  U5248/Y (INVX0_RVT)                                     0.05       0.84 r
+  U3963/Y (AND4X1_RVT)                                    0.09       0.92 r
+  U4649/Y (NAND3X0_RVT)                                   0.06       0.99 f
+  U4205/Y (NAND2X0_RVT)                                   0.07       1.05 r
+  U6460/Y (NAND4X0_RVT)                                   0.07       1.12 f
+  U6462/Y (AO22X1_RVT)                                    0.11       1.23 f
+  U3997/Y (AND2X1_RVT)                                    0.07       1.30 f
+  U6465/Y (NAND3X0_RVT)                                   0.04       1.35 r
+  U4981/Y (NAND3X0_RVT)                                   0.06       1.40 f
+  U5262/Y (NAND2X0_RVT)                                   0.06       1.47 r
+  U5133/Y (OAI222X2_RVT)                                  0.12       1.58 f
+  U3946/Y (XOR2X1_RVT)                                    0.12       1.71 r
+  U5008/Y (NAND4X0_RVT)                                   0.08       1.79 f
+  U4445/Y (NAND2X0_RVT)                                   0.08       1.87 r
+  U4149/Y (AO21X1_RVT)                                    0.11       1.98 r
+  U4275/Y (XOR2X2_RVT)                                    0.15       2.12 f
+  U4670/Y (AO21X1_RVT)                                    0.11       2.23 f
+  U4688/Y (XNOR2X2_RVT)                                   0.13       2.36 f
+  U6515/Y (NAND2X0_RVT)                                   0.05       2.42 r
+  U6516/Y (AO22X1_RVT)                                    0.08       2.49 r
+  U5249/Y (XOR3X2_RVT)                                    0.16       2.65 r
+  U3953/Y (INVX0_RVT)                                     0.04       2.70 f
+  U5184/Y (AOI22X1_RVT)                                   0.10       2.80 r
+  U6549/Y (AO21X1_RVT)                                    0.08       2.89 r
+  U6552/Y (NAND3X0_RVT)                                   0.07       2.95 f
+  U5232/Y (AOI22X1_RVT)                                   0.09       3.05 r
+  U6554/Y (NAND2X0_RVT)                                   0.04       3.08 f
+  U4259/Y (AO22X1_RVT)                                    0.09       3.17 f
+  U6556/Y (NAND2X0_RVT)                                   0.05       3.23 r
+  U5160/Y (AOI22X1_RVT)                                   0.09       3.31 f
+  U6561/Y (AO21X1_RVT)                                    0.07       3.39 f
+  U6562/Y (NAND2X0_RVT)                                   0.05       3.43 r
+  U4272/Y (AO22X1_RVT)                                    0.07       3.50 r
+  U5085/Y (XOR3X2_RVT)                                    0.10       3.60 f
+  U5079/Y (AND2X1_RVT)                                    0.08       3.68 f
+  U6572/Y (AO21X1_RVT)                                    0.06       3.74 f
+  iESC/esc_back/SPEED_ff_reg[3]/D (DFFX1_RVT)             0.01       3.75 f
+  data arrival time                                                  3.75
 
   clock clk (rise edge)                                   3.75       3.75
   clock network delay (ideal)                             0.00       3.75
   clock uncertainty                                      -0.20       3.55
-  iNEMO/iINT/ptch_int_reg[26]/CLK (DFFARX2_RVT)           0.00       3.55 r
-  library setup time                                     -0.06       3.49
-  data required time                                                 3.49
+  iESC/esc_back/SPEED_ff_reg[3]/CLK (DFFX1_RVT)           0.00       3.55 r
+  library setup time                                     -0.05       3.50
+  data required time                                                 3.50
   --------------------------------------------------------------------------
-  data required time                                                 3.49
-  data arrival time                                                 -3.30
+  data required time                                                 3.50
+  data arrival time                                                 -3.75
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (VIOLATED)                                                  -0.25
 
 
 1
