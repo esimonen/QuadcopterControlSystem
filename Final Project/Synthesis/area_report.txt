@@ -3,7 +3,7 @@
 Report : area
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Mon Apr 26 11:23:53 2021
+Date   : Wed Apr 28 07:05:26 2021
 ****************************************
 
 Library(s) Used:
@@ -11,20 +11,20 @@ Library(s) Used:
     saed32rvt_tt0p85v25c (File: /cae/apps/data/saed32_edk-2018/lib/stdcell_rvt/db_nldm/saed32rvt_tt0p85v25c.db)
 
 Number of ports:                           13
-Number of nets:                          5340
-Number of cells:                         4444
-Number of combinational cells:           3204
-Number of sequential cells:              1238
+Number of nets:                          5321
+Number of cells:                         4461
+Number of combinational cells:           3237
+Number of sequential cells:              1222
 Number of macros/black boxes:               0
-Number of buf/inv:                        530
-Number of references:                      49
+Number of buf/inv:                        554
+Number of references:                      51
 
-Combinational area:               9356.819546
-Buf/Inv area:                      862.310618
-Noncombinational area:            8720.697385
+Combinational area:               9424.930136
+Buf/Inv area:                      888.233306
+Noncombinational area:            8608.365735
 Macro/Black Box area:                0.000000
-Net Interconnect area:            3877.601083
+Net Interconnect area:            3865.840456
 
-Total cell area:                 18077.516931
-Total area:                      21955.118014
+Total cell area:                 18033.295871
+Total area:                      21899.136327
 1

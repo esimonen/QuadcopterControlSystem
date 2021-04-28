@@ -56,6 +56,9 @@ set_clock_uncertainty 0.20 clk
 # compile #1
 compile -area_effort high
 
+#report area hierarchy to see what modules are largest.
+report_area -hierarchy > area_report_hierarchy.txt
+
 # fix hold times
 set_fix_hold clk
 
