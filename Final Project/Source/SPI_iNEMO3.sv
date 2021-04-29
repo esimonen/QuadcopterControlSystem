@@ -1,4 +1,3 @@
-//`timescale 1ns/1ps // uncomment for post synth validation
 module SPI_iNEMO3(SS_n,SCLK,MISO,MOSI,INT,AX,AY,PTCH,ROLL,YAW);
   /////////////////////////////////////////////////////////
   // Model of a ST iNEMO 6-axis inertial device         //

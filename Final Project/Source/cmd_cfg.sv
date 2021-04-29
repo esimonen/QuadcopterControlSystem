@@ -122,11 +122,17 @@ module cmd_cfg(
                             wthrust = 1'b1;
                             acknowledge();
                         end
-                        default: begin // EMER_LAND
+                        EMER_LAND: begin
                             // Emergency Land, set ptch roll yaw thrst to zero
                             emergency_land = 1'b1;
                             acknowledge();
                         end
+                        default: begin // for garbage cmd
+                            resp = 8'h5A; // "negative" acknowledge when sig bad
+                            send_resp = 1'b1;
+                            clr_cmd_rdy = 1'b1;
+                        end
+                            
                     endcase
                 end
             end

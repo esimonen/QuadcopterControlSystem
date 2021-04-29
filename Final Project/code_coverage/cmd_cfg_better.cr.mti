@@ -1,0 +1,37 @@
+{/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/RemoteComm.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/RemoteComm.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling module RemoteComm
+
+Top level modules:
+	RemoteComm
+
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv} {1 {vlog -work work -vopt -sv -covercells -cover sbcef3 -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling module UART
+
+Top level modules:
+	UART
+
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/test_benches/theo_cmd_cfg_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/test_benches/theo_cmd_cfg_tb.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling package theo_cmd_cfg_tb_sv_unit
+-- Compiling module theo_cmd_cfg_tb
+
+Top level modules:
+	theo_cmd_cfg_tb
+
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART_rcv.sv} {1 {vlog -work work -vopt -sv -covercells -cover sbcef3 -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/UART_rcv.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling module UART_rcv
+
+Top level modules:
+	UART_rcv
+
+} {} {}} {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/cmd_cfg.sv} {1 {vlog -work work -vopt -sv -covercells -cover sbcef3 -stats=none {/filespace/t/tthornung/ece551/QuadcopterControlSystem/Final Project/Source/cmd_cfg.sv}
+QuestaSim vlog 2020.2_2 Compiler 2020.06 Jun 13 2020
+-- Compiling module cmd_cfg
+
+Top level modules:
+	cmd_cfg
+
+} {} {}}
