@@ -121,7 +121,7 @@ initial begin
     // set new pitch
     $display("Set Pitch");
     host_cmd = STPTCH;
-    data = 16'h8000;        
+    data = 16'h0080;        
     send_packet();
     //check pitch is approaching desired
     check_cyclone_outputs();
@@ -137,7 +137,7 @@ initial begin
     // set new yaw
     $display("Set Yaw");
     host_cmd = STYW;
-    data = 16'h080;
+    data = 16'h0080;
     send_packet();
     check_cyclone_outputs();
 

@@ -84,12 +84,13 @@ initial begin
     join
     // response is now ready, do not expect 8'hA5 as our expected response for a erroneous output
     if(resp !== 8'hA5) begin
-        $error("YAHOO, garbage was perceived as garbage");
+        $display("YAHOO, garbage was perceived as garbage");
     end
     else begin
         $error("'send_packet' Failed: Received positive acknowledge with garbage command");
-        $stop;
     end
+
+    $stop;
 
 end
 
