@@ -1,12 +1,13 @@
 ###################################################################
 
-# Created by write_sdc on Fri Apr 23 09:59:31 2021
+# Created by write_sdc on Thu Apr 29 15:00:15 2021
 
 ###################################################################
 set sdc_version 2.1
 
 set_units -time ns -resistance MOhm -capacitance fF -voltage V -current uA
 set_wire_load_model -name 16000 -library saed32rvt_tt0p85v25c
+set_max_area 0
 set_max_transition 0.15 [current_design]
 set_driving_cell -lib_cell NAND2X2_RVT -library saed32rvt_tt0p85v25c           \
 [get_ports RST_n]

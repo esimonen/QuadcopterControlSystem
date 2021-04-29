@@ -3,7 +3,7 @@
 Report : area
 Design : QuadCopter
 Version: Q-2019.12-SP3
-Date   : Thu Apr 29 12:56:20 2021
+Date   : Thu Apr 29 14:59:59 2021
 ****************************************
 
 Information: Updating design information... (UID-85)
@@ -13,22 +13,22 @@ Library(s) Used:
     saed32rvt_tt0p85v25c (File: /cae/apps/data/saed32_edk-2018/lib/stdcell_rvt/db_nldm/saed32rvt_tt0p85v25c.db)
 
 Number of ports:                         3081
-Number of nets:                          8186
+Number of nets:                          8194
 Number of cells:                         4801
-Number of combinational cells:           3401
+Number of combinational cells:           3417
 Number of sequential cells:              1240
 Number of macros/black boxes:               0
-Number of buf/inv:                        582
+Number of buf/inv:                        592
 Number of references:                       6
 
-Combinational area:               9524.046343
-Buf/Inv area:                      802.586762
+Combinational area:               9552.764616
+Buf/Inv area:                      819.868555
 Noncombinational area:            8734.929450
 Macro/Black Box area:                0.000000
-Net Interconnect area:            4387.259377
+Net Interconnect area:            4391.868796
 
-Total cell area:                 18258.975793
-Total area:                      22646.235170
+Total cell area:                 18287.694065
+Total area:                      22679.562861
 
 Hierarchical area distribution
 ------------------------------
@@ -38,15 +38,15 @@ Hierarchical area distribution
 Hierarchical cell                 Absolute    Percent  Combi-     Noncombi-  Black-
                                   Total       Total    national   national   boxes   Design
 --------------------------------  ----------  -------  ---------  ---------  ------  -----------------------------------------------------
-QuadCopter                        18258.9758    100.0     0.0000     0.0000  0.0000  QuadCopter
-iCMD                               1030.8081      5.6   326.8292   619.0948  0.0000  cmd_cfg_FAST_SIM0
-iCMD/add_185                         84.8841      0.5    84.8841     0.0000  0.0000  cmd_cfg_FAST_SIM0_DW01_inc_0_DW01_inc_7
+QuadCopter                        18287.6941    100.0     0.0000     0.0000  0.0000  QuadCopter
+iCMD                               1058.2556      5.8   354.2767   619.0948  0.0000  cmd_cfg_FAST_SIM0
+iCMD/add_191                         84.8841      0.5    84.8841     0.0000  0.0000  cmd_cfg_FAST_SIM0_DW01_inc_0_DW01_inc_7
 iCOMM                               960.4102      5.3    60.2321   141.3041  0.0000  UART_comm
-iCOMM/iUART                         758.8740      4.2     0.0000     0.0000  0.0000  UART
+iCOMM/iUART                         758.8740      4.1     0.0000     0.0000  0.0000  UART
 iCOMM/iUART/iRX                     379.6911      2.1   121.4808   193.6577  0.0000  UART_rcv
 iCOMM/iUART/iRX/sub_76               64.5526      0.4    64.5526     0.0000  0.0000  UART_rcv_DW01_dec_0_DW01_dec_4
 iCOMM/iUART/iTX                     379.1829      2.1   122.4974   192.1329  0.0000  UART_tx
-iCOMM/iUART/iTX/sub_57               64.5526      0.4    64.5526     0.0000  0.0000  UART_tx_DW01_dec_0_DW01_dec_5
+iCOMM/iUART/iTX/sub_58               64.5526      0.4    64.5526     0.0000  0.0000  UART_tx_DW01_dec_0_DW01_dec_5
 iESC                               2169.6274     11.9    98.8620     0.0000  0.0000  ESCs
 iESC/esc_back                       517.6913      2.8   123.0057   192.1329  0.0000  ESC_interface_3
 iESC/esc_back/mult_33               126.3096      0.7     2.0332     0.0000  0.0000  ESC_interface_3_DW02_mult_0_DW02_mult_2
@@ -64,16 +64,16 @@ iESC/esc_right                      517.6913      2.8   123.0057   192.1329  0.0
 iESC/esc_right/mult_33              126.3096      0.7     2.0332     0.0000  0.0000  ESC_interface_1_DW02_mult_0
 iESC/esc_right/mult_33/FS_3         124.2764      0.7   124.2764     0.0000  0.0000  ESC_interface_1_DW01_add_1_DW01_add_12
 iESC/esc_right/sub_46                76.2432      0.4    76.2432     0.0000  0.0000  ESC_interface_1_DW01_dec_0
-iNEMO                              6900.7721     37.8   372.0668   669.9236  0.0000  inert_intf_FAST_SIM0
+iNEMO                              6902.0428     37.7   372.0668   669.9236  0.0000  inert_intf_FAST_SIM0
 iNEMO/add_289                        51.8454      0.3    51.8454     0.0000  0.0000  inert_intf_FAST_SIM0_DW01_inc_0_DW01_inc_4
-iNEMO/iINT                         5470.4496     30.0  1181.2613  2412.8432  0.0000  inertial_integrator_FAST_SIM0
+iNEMO/iINT                         5471.7203     29.9  1181.2613  2412.8432  0.0000  inertial_integrator_FAST_SIM0
 iNEMO/iINT/add_126                   38.6299      0.2    38.6299     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_inc_0_DW01_inc_5
 iNEMO/iINT/add_170                  134.1880      0.7   134.1880     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_4_DW01_add_8
 iNEMO/iINT/add_171                  134.1880      0.7   134.1880     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_3_DW01_add_7
 iNEMO/iINT/add_172                  134.1880      0.7   134.1880     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_2_DW01_add_6
 iNEMO/iINT/add_208                   98.0996      0.5    98.0996     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_1_DW01_add_5
 iNEMO/iINT/add_209                   98.0996      0.5    98.0996     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_0_DW01_add_4
-iNEMO/iINT/mult_247                 462.2879      2.5   352.4977     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW02_mult_1_DW02_mult_8
+iNEMO/iINT/mult_247                 463.5586      2.5   353.7684     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW02_mult_1_DW02_mult_8
 iNEMO/iINT/mult_247/FS_1            109.7902      0.6   109.7902     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_8_DW01_add_23
 iNEMO/iINT/mult_248                 477.0283      2.6   374.8624     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW02_mult_0_DW02_mult_7
 iNEMO/iINT/mult_248/FS_1            102.1659      0.6   102.1659     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_add_7_DW01_add_22
@@ -82,7 +82,7 @@ iNEMO/iINT/sub_111                   99.8786      0.5    99.8786     0.0000  0.0
 iNEMO/iINT/sub_112                   99.8786      0.5    99.8786     0.0000  0.0000  inertial_integrator_FAST_SIM0_DW01_sub_0_DW01_sub_6
 iNEMO/iSPI                          336.4867      1.8   142.8289   193.6577  0.0000  SPI_mnrch
 iRST                                 27.4476      0.2    13.2155    14.2321  0.0000  reset_synch
-ifly                               7169.9105     39.3   430.5199   370.0337  0.0000  flght_cntrl
+ifly                               7169.9105     39.2   430.5199   370.0337  0.0000  flght_cntrl
 ifly/add_0_root_add_0_root_add_89_5
                                      64.2984      0.4    64.2984     0.0000  0.0000  flght_cntrl_DW01_add_6_DW01_add_29
 ifly/add_0_root_sub_0_root_add_86_3
@@ -123,6 +123,6 @@ ifly/sub_3_root_sub_0_root_add_86_3
 ifly/sub_3_root_sub_0_root_sub_80_4
                                      78.2764      0.4    78.2764     0.0000  0.0000  flght_cntrl_DW01_sub_2_DW01_sub_12
 --------------------------------  ----------  -------  ---------  ---------  ------  -----------------------------------------------------
-Total                                                  9524.0463  8734.9294  0.0000
+Total                                                  9552.7646  8734.9294  0.0000
 
 1
