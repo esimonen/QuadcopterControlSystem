@@ -13,7 +13,7 @@ Scott Woolf
 
 - Post synthesis validation
 - videos
-  --post synth
-  --tb tour
-  --code coverage
+  -post synth
+  -tb tour
+  -code coverage
 
