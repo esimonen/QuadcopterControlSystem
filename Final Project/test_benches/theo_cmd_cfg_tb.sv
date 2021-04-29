@@ -1,4 +1,4 @@
-`include "theo_tb_tasks.sv"
+
 /*
  * Team:            The Moorons
  * Course:          ECE551
@@ -34,8 +34,6 @@ reg resp_rdy;
 reg clr_resp_rdy;
 reg resp_sent;
 reg [7:0] resp_out;
-
-//`include "tb_tasks.sv" // Tasks
 
 // local params for commands
 localparam STPTCH   = 8'h02;
@@ -138,5 +136,7 @@ end
 
 always
     #5 clk = ~clk;
+
+`include "theo_tb_tasks.svh"
 
 endmodule

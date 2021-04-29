@@ -36,4 +36,4 @@ for tb in test_benches:
 merged_res_file = "./" + now_str + "/suite_cvg.ucdb"
 
 subprocess.run(["vsim", "-c", "-do", "vcover merge " + merged_res_file + " ./" + now_str + "/*.ucdb; exit"], stdout=subprocess.DEVNULL)
-subprocess.run(["vsim", "-c", "-viewcov", merged_res_file, "-do", "coverage analyze -du *; exit"])
+subprocess.run(["vsim", "-c", "-viewcov", merged_res_file, "-do", "coverage analyze -du *; "])
