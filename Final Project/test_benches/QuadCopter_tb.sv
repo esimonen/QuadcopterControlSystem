@@ -1,4 +1,4 @@
-//`timescale 1ns/1ps // uncomment for post-synth validation
+
 module QuadCopter_tb();
 		
 //// Interconnects to DUT/support defined as type wire /////
@@ -61,93 +61,68 @@ initial begin
     // calibrate 
     $display("CALIBRATE");
     host_cmd = CAL;
-    fork
-        begin: set_cal_done
-            repeat (500000) @(posedge clk);
-            //cal_done = 1;
-            @(posedge clk);
-            //cal_done = 0;
-        end
-        begin
-            send_packet();
-            // check_cyclone_outputs();
-            disable set_cal_done;
-        end
-    join   
+    send_packet();  
 
     // set thrst 
     $display("Set Thrust");
     host_cmd = STTHRST;
     data = 16'h00FF;
-    send_packet();//send_cmd,clk,resp_rdy,resp);
-    repeat (1000000) @(posedge clk);
-    //check_cyclone_outputs();
-
+    send_packet();
+    check_cyclone_outputs();
+    
     // set pitch 
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0100;
     send_packet();
-    //check_cyclone_outputs();
-
     //check pitch is approaching desired
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
     // set roll 
     $display("Set Roll");
     host_cmd = STRLL;
     data = -16'h0080;
     send_packet();
-    //check_cyclone_outputs();
-
     //check roll is approaching desired
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
-    // set yaw 
+    // set yaw, will makt yaw go to 80
     $display("Set Yaw");
     host_cmd = STYW;
     data = 16'h080;
     send_packet();
-    //check_cyclone_outputs();
-
-    //check yaw is approaching desired
-    repeat (2000000) @(posedge clk);
-
-    // set pitch 
+    check_cyclone_outputs();
+    
+    // set pitch , will make pitch go to 0
     $display("Set Pitch");
     host_cmd = STPTCH;
     data = 16'h0000;
     send_packet();
-    //check_cyclone_outputs();
+    check_cyclone_outputs();
 
-    //check pitch is approaching desired
-    repeat (2000000) @(posedge clk);
-
-    
-
-    // Emergency Land
+    // Emergency Land, will make t,p,r,y go to 0
     $display("Emergency Land");
     host_cmd = EMER;
     data = 16'h0000;
     send_packet();
-    //check_cyclone_outputs();
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
     
-    // Motors off
+    // Motors off, will make thrust go to 0
     $display("Motors Off");
     host_cmd = MTSOFF;
     send_packet();
-    //check_cyclone_outputs();
-    repeat (2000000) @(posedge clk);
+    check_cyclone_outputs();
 
+    // at this point, all of the tests in this bench have passed
+    $display("YAHOO!! Tests Passed!");
     $stop;
-
+    
 end
 
 always
-    #1 clk = ~clk; // change back to 20ns period (#10) for tests
-
-`include "../tb_tasks.svh";
+    #10 clk = ~clk;
+    
+`include "./tb_tasks.svh";
 	
 endmodule	
 
