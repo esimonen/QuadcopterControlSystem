@@ -63,18 +63,14 @@ report_area -hierarchy > area_report_hierarchy.txt
 set_fix_hold clk
 
 # flatten design
+
 ungroup -all -flatten
-
-
-# sets a rule to try for the smallest area
-set_max_area 0.0
-
-# allows inversion of outputs 
-set compile_seqmap_enable_output_inversion true
 
 # compile #2
 
-compile -map_effort high -area_effort high
+set compile_seqmap_enable_output_inversion true
+
+compile -area_effort high
 
 
 
