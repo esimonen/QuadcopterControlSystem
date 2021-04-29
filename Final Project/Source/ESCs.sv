@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 // module to manage Electronic Speed Controllers for front, left, back, right motors
 module ESCs (clk, rst_n, frnt_spd, bck_spd, lft_spd, rght_spd, frnt, bck, lft, rght, motors_off, wrt);
 

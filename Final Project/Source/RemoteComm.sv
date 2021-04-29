@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module RemoteComm(clk, rst_n, RX, TX, cmd, data, send_cmd, cmd_sent, resp_rdy, resp, clr_resp_rdy);
 
 	input clk, rst_n;		// clock and active low reset

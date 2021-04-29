@@ -1,5 +1,10 @@
-// Theo Hornung
-// ece 551
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
 
 module flght_cntrl(clk,rst_n,vld,inertial_cal,d_ptch,d_roll,d_yaw,ptch,
                    roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);

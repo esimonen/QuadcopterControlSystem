@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module PB_release(clk, rst_n, PB, released);
 	
 	input logic PB, rst_n, clk; // clock, reset, and button inputs

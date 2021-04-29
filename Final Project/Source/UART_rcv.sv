@@ -1,7 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
 
-// Theo Hornung
-// ece 551
-// ex13
 module UART_rcv(clk, rst_n, RX, rdy, rx_data, clr_rdy);
 
 	input clk;

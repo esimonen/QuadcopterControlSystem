@@ -1,6 +1,11 @@
-// Theo Hornung
-// ece 551
-// ex12
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module UART_tx(clk, rst_n, TX, trmt, tx_data, tx_done);
 
 	input clk;

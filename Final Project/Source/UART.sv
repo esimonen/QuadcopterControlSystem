@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module UART(clk, rst_n, trmt, tx_data, tx_done, rx_rdy, clr_rx_rdy, rx_data, TX, RX);
 
 input clk,rst_n;                // clock and active low reset

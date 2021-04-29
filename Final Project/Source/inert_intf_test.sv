@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module inert_intf_test(clk, NEXT, RST_n, LED, SS_n, SCLK, MOSI, MISO, INT);
 
     input clk;
