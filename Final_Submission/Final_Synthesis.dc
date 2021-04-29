@@ -1,0 +1,101 @@
+#
+#Read in verilog files
+#
+read_file -format sverilog { ../Source/UART_comm.sv ../Source/UART.sv ../Source/UART_tx.sv ../Source/UART_rcv.sv ../Source/cmd_cfg.sv ../Source/inert_intf.sv ../Source/flght_cntrl.sv ../Source/reset_synch.sv ../Source/PB_release.sv ../Source/ESCs.sv ../Source/ESC_interface.sv ../Source/PD_math.sv ../Source/inertial_integrator.sv ../Source/SPI_mnrch.sv ../Source/QuadCopter.sv}
+
+#
+#set current design to top level
+#
+
+set current_design QuadCopter
+
+link
+
+#create the clock
+#3.75ns, 50% duty cycle
+create_clock -name "clk" -period 3.75 { clk }
+
+# remove synopsis' ability to buffer clk
+
+set_dont_touch_network [find port clk]
+set_dont_touch_network [get_net iRST/rst_n]
+# add input delays to all signals except clock for realism
+
+set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
+
+set_input_delay -clock clk 0.25 $prim_inputs
+
+# set the strength of the driving cell, which is used to simulate the input strength
+
+set_driving_cell -lib_cell NAND2X2_RVT -library saed32rvt_tt0p85v25c $prim_inputs
+
+# set output delay to model the timing parameters
+# our delay is 0.5 ns
+set_output_delay -clock clk 0.5 [all_outputs]
+
+# now we tell synopsis our load. Higher load = slower gate (capacitance)
+# 0.1 pF load
+
+set_load 0.1 [all_outputs]
+
+# we can set the "parasitic routing capacitances"
+# we can't really know these, so synopsys estimates what it will be - guess
+
+set_wire_load_model -name 16000 -library saed32rvt_tt0p85v25c
+
+# we now want to set a transition time that is above a certain time to avoid
+# "hot electron" issue, which will damage gates over time.
+# 0.15 ns
+
+set_max_transition 0.15 [current_design]
+
+#adding clock uncertainty - it could be anywhere within 0.2 ns +-
+
+set_clock_uncertainty 0.20 clk
+
+# compile #1
+compile -area_effort high
+
+#report hierarchy
+report_area -hierarchy > area_report_hierarchy.txt
+
+# fix hold times
+set_fix_hold clk
+
+# flatten design
+ungroup -all -flatten
+
+
+# sets a rule to try for the smallest area
+set_max_area 0.0
+
+# allows inversion of outputs 
+set compile_seqmap_enable_output_inversion true
+
+# compile #2
+
+compile -map_effort high -area_effort high
+
+
+
+# timing reports
+
+report_timing -delay min > min_timing_report.txt
+report_timing -delay max > max_timing_report.txt
+
+# area report
+
+report_area > area_report.txt
+
+# latch report
+report_register -level_sensitive > latches_report.txt
+
+# report sdc file
+
+write_sdc QuadCopter.sdc
+
+#
+# write out resulting synthesized netlist
+#
+
+write -format verilog QuadCopter -output QuadCopter.vg
