@@ -11,13 +11,7 @@
 // Fun little task to send a packet of data to our quadcopter (DUT)
 //
 // Requires no values for an input, but does read values from the tb:
-// send_cmd: 
-// clk: clock singal 
-// cmd_rdy:
-// cal_done:
-// resp_rdy:
-task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
-    //pass in 
+task send_packet;
     begin
         // set the command to be sent to cmd_cfg through RemoteComm
         @(posedge clk) send_cmd = 1'b1;
