@@ -1,8 +1,8 @@
 // Theo Hornung
 // ece 551
-// ex16
+
 module flght_cntrl(clk,rst_n,vld,inertial_cal,d_ptch,d_roll,d_yaw,ptch,
-					roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);
+                   roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);
 				
 input clk,rst_n;
 input vld;									// tells when a new valid inertial reading ready
@@ -31,6 +31,9 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   // hold 13 bit summations before outputting saturated speed values
   wire [12:0] front_speed_temp, back_speed_temp, right_speed_temp, left_speed_temp;
 
+  // flops to pipeline *_speed_temp values
+  reg [12:0] pipe_fs, pipe_bs, pipe_rs, pipe_ls;
+
   ///////////////////////////////////////////////////////////////
   // some Parameters to keep things more generic and flexible //
   /////////////////////////////////////////////////////////////
@@ -38,6 +41,22 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   localparam MIN_RUN_SPEED = 13'h2C0;	// minimum speed while running  
   localparam D_COEFF = 5'b00111;		// D coefficient in PID control = +7
   
+  // pipeline *_speed_temp values
+  always_ff @(posedge clk, negedge rst_n) begin
+      if (!rst_n) begin
+	  pipe_fs <= 0;
+	  pipe_bs <= 0;
+	  pipe_rs <= 0;
+	  pipe_ls <= 0;
+      end
+      else begin
+	  pipe_fs <= front_speed_temp;
+	  pipe_bs <= back_speed_temp;
+	  pipe_rs <= right_speed_temp;
+	  pipe_ls <= left_speed_temp;
+      end
+  end
+
   //////////////////////////////////////
   // Instantiate 3 copies of PD_math //
   ////////////////////////////////////
@@ -71,19 +90,19 @@ output [10:0] rght_spd;						// 11-bit unsigned speed at which to right front mo
   
   // infer muxes and perform unsigned saturate
   assign frnt_spd = inertial_cal ?              CAL_SPEED :
-                    |front_speed_temp[12:11] ?  11'h7FF   :
-                                                front_speed_temp[10:0];
+                    |pipe_fs[12:11] ?  11'h7FF   :
+                                                pipe_fs[10:0];
 
   assign bck_spd =  inertial_cal ?              CAL_SPEED :
-                    |back_speed_temp[12:11]  ?  11'h7FF   :
-                                                back_speed_temp[10:0];
+                    |pipe_bs[12:11]  ?  11'h7FF   :
+                                                pipe_bs[10:0];
 
   assign lft_spd =  inertial_cal ?              CAL_SPEED :
-                    |left_speed_temp[12:11]  ?  11'h7FF   :
-                                                left_speed_temp[10:0];
+                    |pipe_ls[12:11]  ?  11'h7FF   :
+                                                pipe_ls[10:0];
 
   assign rght_spd = inertial_cal ?              CAL_SPEED :
-                    |right_speed_temp[12:11] ?  11'h7FF   :
-                                                right_speed_temp[10:0];
+                    |pipe_rs[12:11] ?  11'h7FF   :
+                                                pipe_rs[10:0];
   
 endmodule 

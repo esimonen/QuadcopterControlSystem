@@ -18,10 +18,16 @@ module ESC_interface(clk, rst_n, wrt, SPEED, PWM);
     reg [10:0] SPEED_ff; 	// flopped SPEED signal for pipelining
 
     // pipeline wrt and SPEED signals
-    always_ff @(posedge clk) begin
-	wrt_ff <= wrt;
-	SPEED_ff <= SPEED;
-    end;
+    always_ff @(posedge clk, negedge rst_n) begin
+	if (!rst_n) begin
+	    wrt_ff <= 0;
+	    SPEED_ff <= 0;
+        end
+	else begin 
+	    wrt_ff <= wrt;
+	    SPEED_ff <= SPEED;
+        end
+    end
 
     // intermediate calculation for num of clock cycles for PWM signal
     assign scaled_spd = SPEED_ff * 2'b11 + MIN_CLKS;
