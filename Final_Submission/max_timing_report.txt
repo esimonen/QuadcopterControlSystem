@@ -1,0 +1,76 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : QuadCopter
+Version: Q-2019.12-SP3
+Date   : Fri Apr 30 09:23:36 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: iNEMO/iINT/ax_avg_reg[1]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: iNEMO/iINT/roll_g_product_reg[24]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  QuadCopter         16000                 saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  iNEMO/iINT/ax_avg_reg[1]/CLK (DFFARX1_RVT)              0.00 #     0.00 r
+  iNEMO/iINT/ax_avg_reg[1]/QN (DFFARX1_RVT)               0.11       0.11 f
+  U1978/Y (NAND2X0_RVT)                                   0.07       0.18 r
+  U3302/Y (XNOR2X1_RVT)                                   0.17       0.36 r
+  iNEMO/iINT/mult_248/S2_2_1/CO (FADDX1_RVT)              0.17       0.53 r
+  iNEMO/iINT/mult_248/S2_3_1/CO (FADDX1_RVT)              0.14       0.66 r
+  iNEMO/iINT/mult_248/S2_4_1/CO (FADDX1_RVT)              0.14       0.80 r
+  iNEMO/iINT/mult_248/S2_5_1/CO (FADDX1_RVT)              0.13       0.93 r
+  iNEMO/iINT/mult_248/S2_6_1/CO (FADDX1_RVT)              0.13       1.07 r
+  iNEMO/iINT/mult_248/S2_7_1/CO (FADDX1_RVT)              0.13       1.20 r
+  iNEMO/iINT/mult_248/S2_8_1/CO (FADDX1_RVT)              0.13       1.34 r
+  iNEMO/iINT/mult_248/S2_9_1/CO (FADDX1_RVT)              0.13       1.47 r
+  iNEMO/iINT/mult_248/S2_10_1/CO (FADDX1_RVT)             0.13       1.61 r
+  iNEMO/iINT/mult_248/S2_11_1/CO (FADDX1_RVT)             0.13       1.74 r
+  iNEMO/iINT/mult_248/S2_12_1/CO (FADDX1_RVT)             0.13       1.87 r
+  iNEMO/iINT/mult_248/S2_13_1/CO (FADDX1_RVT)             0.13       2.01 r
+  iNEMO/iINT/mult_248/S2_14_1/CO (FADDX1_RVT)             0.13       2.14 r
+  iNEMO/iINT/mult_248/S2_15_1/CO (FADDX1_RVT)             0.13       2.27 r
+  U2951/Y (XOR2X1_RVT)                                    0.14       2.41 f
+  U2882/Y (XOR2X1_RVT)                                    0.14       2.55 r
+  U1959/Y (NAND3X0_RVT)                                   0.08       2.63 f
+  U1948/Y (OA21X1_RVT)                                    0.12       2.75 f
+  U1942/Y (OA21X1_RVT)                                    0.08       2.84 f
+  U1937/Y (OA21X1_RVT)                                    0.08       2.92 f
+  U1936/Y (OA21X1_RVT)                                    0.08       3.00 f
+  U2762/Y (AOI21X1_RVT)                                   0.11       3.11 r
+  U2790/Y (OAI21X1_RVT)                                   0.11       3.22 f
+  U3133/Y (XNOR3X1_RVT)                                   0.09       3.31 f
+  iNEMO/iINT/roll_g_product_reg[24]/D (DFFX1_RVT)         0.01       3.32 f
+  data arrival time                                                  3.32
+
+  clock clk (rise edge)                                   3.75       3.75
+  clock network delay (ideal)                             0.00       3.75
+  clock uncertainty                                      -0.20       3.55
+  iNEMO/iINT/roll_g_product_reg[24]/CLK (DFFX1_RVT)       0.00       3.55 r
+  library setup time                                     -0.07       3.48
+  data required time                                                 3.48
+  --------------------------------------------------------------------------
+  data required time                                                 3.48
+  data arrival time                                                 -3.32
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.16
+
+
+1

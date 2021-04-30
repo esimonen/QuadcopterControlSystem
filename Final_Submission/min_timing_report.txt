@@ -1,0 +1,53 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'QuadCopter' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 1
+Design : QuadCopter
+Version: Q-2019.12-SP3
+Date   : Fri Apr 30 09:23:36 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: tt0p85v25c   Library: saed32rvt_tt0p85v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: ifly/iPTCH/err_sat_reg[3]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: ifly/iPTCH/pterm_reg[0]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  QuadCopter         16000                 saed32rvt_tt0p85v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  ifly/iPTCH/err_sat_reg[3]/CLK (DFFARX1_RVT)             0.00 #     0.00 r
+  ifly/iPTCH/err_sat_reg[3]/QN (DFFARX1_RVT)              0.10       0.10 f
+  U3498/Y (XOR2X1_RVT)                                    0.07       0.17 r
+  ifly/iPTCH/pterm_reg[0]/D (DFFARX1_RVT)                 0.01       0.18 r
+  data arrival time                                                  0.18
+
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                       0.20       0.20
+  ifly/iPTCH/pterm_reg[0]/CLK (DFFARX1_RVT)               0.00       0.20 r
+  library hold time                                      -0.02       0.18
+  data required time                                                 0.18
+  --------------------------------------------------------------------------
+  data required time                                                 0.18
+  data arrival time                                                 -0.18
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
