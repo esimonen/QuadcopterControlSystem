@@ -1,3 +1,11 @@
+/*
+ * Team:            The Moorons
+ * Course:          ECE551
+ * Professor:       Eric Hoffman
+ * Team Members:    Ethan Simonen, Scott Woolf, Zach Berglund, Theo Hornung
+ * Date:            4/29/2021
+ */
+
 module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,FRNT,BCK,LFT,RGHT);
 
   input clk;			// 50MHz clock

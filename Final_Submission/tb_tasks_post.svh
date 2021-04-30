@@ -26,7 +26,7 @@ task send_packet;//(ref send_cmd, ref clk, ref resp_rdy, ref [7:0] resp);
         // wait for the response to be ready at RemoteComm from the DUT
         fork
             begin: timeout_resp_rdy
-                repeat (1000000) @(posedge clk);
+                repeat (100000000) @(posedge clk);
                 $error("Task 'send_packet' Failed: Waiting for response at RemoteComm to be ready");
                 $stop;
             end
