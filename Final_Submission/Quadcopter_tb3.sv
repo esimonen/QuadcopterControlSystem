@@ -16,7 +16,6 @@ reg [7:0] host_cmd;				// command host is sending to DUT
 reg [15:0] data;				// data associated with command
 reg send_cmd;					// asserted to initiate sending of command
 reg clr_resp_rdy;				// asserted to knock down resp_rdy
-wire [7:0] LED;
 
 //// Maybe define some localparams for command encoding ///
 
@@ -81,7 +80,7 @@ initial begin
 
     // at this point, all of the tests in this bench have passed
     $display("YAHOO!! Tests Passed!");
-    $stop;
+    $finish;
     
 end
 

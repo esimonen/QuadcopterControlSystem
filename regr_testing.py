@@ -18,14 +18,14 @@ for f in files:
 
 for m in modules:
     print("Compiling " + m)
-    subprocess.check_output(['vlog', '-work', 'work',  m])
+    subprocess.run(['vlog', '-work', 'work',  m])
     #errors_and_warnings = [line for line in open(working_dir + '/transcript') if re.match(r'Errors: [0-9]+ Warnings: [0-9]+', line)]
     #print(errors_and_warnings)
 
 for tb in test_benches:
     cmd = "vsim -c work." + tb + ' -do "run -all"'
     print("Simulating " + tb + " :: " + cmd)
-    subprocess.run(["vsim", "-c", "work." + tb, "-do", 'run -all'], stdout=subprocess.DEVNULL)
+    subprocess.run(["vsim", "-c", "work." + tb, "-do", 'run -all'])#, stdout=subprocess.DEVNULL)
     #errors_and_warnings = [line for line in open(working_dir + '/transcript') if re.match(r'Errors: [0-9]+ Warnings: [0-9]+', line)]
     #print(errors_and_warnings)
 
