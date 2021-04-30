@@ -9,11 +9,3 @@ Theo Hornung
 Ethan Simonen
 Scott Woolf
 
-## TODOs:
-
-- Post synthesis validation
-- videos
-  -post synth
-  -tb tour
-  -code coverage
-
