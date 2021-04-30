@@ -57,7 +57,8 @@ task check_cyclone_outputs;
     localparam EMER_LAND    = 8'h07;
     localparam MTRS_OFF     = 8'h08;
 
-    static reg [15:0] RANGE = 15'd20; // a coefficient that we use as part of the cutoff to check for our data
+    localparam RANGE = 15'd20; // a coefficient that we use as part of the cutoff to check for our data
+	
     reg signed [16:0] high;
     reg signed [16:0] low;
     reg thrust_in_range, yaw_in_range, pitch_in_range, roll_in_range;
