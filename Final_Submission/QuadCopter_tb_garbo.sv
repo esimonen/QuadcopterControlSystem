@@ -13,7 +13,6 @@ reg [7:0] host_cmd;				// command host is sending to DUT
 reg [15:0] data;				// data associated with command
 reg send_cmd;					// asserted to initiate sending of command
 reg clr_resp_rdy;				// asserted to knock down resp_rdy
-wire [7:0] LED;
 
 //// Maybe define some localparams for command encoding ///
 
@@ -74,8 +73,7 @@ initial begin
     fork
         begin: timeout_resp_rdy
             repeat (1000000) @(posedge clk);
-            $error("send_packet Failed: Waiting for response at RemoteComm to be ready");
-            $stop;
+            $fatal("send_packet Failed: Waiting for response at RemoteComm to be ready");
         end
         begin
             @(posedge resp_rdy);
@@ -87,10 +85,10 @@ initial begin
         $display("YAHOO, garbage was perceived as garbage");
     end
     else begin
-        $error("'send_packet' Failed: Received positive acknowledge with garbage command");
+        $fatal("'send_packet' Failed: Received positive acknowledge with garbage command");
     end
 
-    $stop;
+    $finish;
 
 end
 

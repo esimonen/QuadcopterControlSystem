@@ -98,7 +98,7 @@ initial begin
 
     // at this point, all of the tests in this bench have passed
     $display("YAHOO!! Tests Passed!");
-    $stop;
+    $finish;
     
 end
 
